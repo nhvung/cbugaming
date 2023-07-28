@@ -1,0 +1,34 @@
+{
+    "configurations": [
+        {
+            "name": "game2",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame2",
+            "program": "${workspaceFolder}/src/netcore/consoles/game2/bin/netcoreapp3.1/game2.dll",
+            "args": [
+                "sdf",
+                "c:/eiq/tools/capturetool.6.0.8/BallisticsIQCapture/ScannedImagesFolder"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game2",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "game3",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame3",
+            "program": "${workspaceFolder}/src/netcore/consoles/game3/bin/netcoreapp3.1/game3.dll",
+            "args": [
+                "-f",
+                "c:/code/temp/cbu/game3",
+                "-idx",
+                "-1",
+                "-plevel",
+                "1"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game3",
+            "console": "integratedTerminal"
+        }
+    ]
+}

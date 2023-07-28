@@ -1,0 +1,24 @@
+{
+    "tasks": [
+        {
+            "label": "buildgame2",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game2/game2.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "buildgame3",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game3/game3.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
+    ]
+}
