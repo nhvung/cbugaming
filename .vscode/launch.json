@@ -29,6 +29,23 @@
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game3",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "game4",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame4",
+            "program": "${workspaceFolder}/src/netcore/consoles/game4/bin/netcoreapp3.1/game4.dll",
+            "args": [
+                "-f",
+                "c:/code/temp/cbu/game4",
+                "-idx",
+                "2",
+                "-plevel",
+                "1"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game4",
+            "console": "integratedTerminal"
         }
     ]
 }
