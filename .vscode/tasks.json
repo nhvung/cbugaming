@@ -20,5 +20,15 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "buildgame4",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game4/game4.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }
