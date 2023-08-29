@@ -90,7 +90,8 @@ namespace game4
                             List<outputContent> kvFileContent = new List<outputContent>();
                             foreach (var file in files)
                             {
-                                FileInfo plateFile = new FileInfo($"{file.Directory.FullName}/{file.Name.Substring(0, file.Name.Length - 8)}_PLATE{file.Extension}");
+                                int carIndex = file.Name.IndexOf("_car", StringComparison.InvariantCultureIgnoreCase);
+                                FileInfo plateFile = new FileInfo($"{file.Directory.FullName}/{file.Name.Substring(0, carIndex)}_PLATE{file.Extension}");
                                 string txtFileName = $"ID_{Path.GetFileNameWithoutExtension(file.Name)}.txt";
                                 if (idIndex > 0)
                                 {
@@ -136,28 +137,37 @@ namespace game4
         }
         static void _WriteToFile(DirectoryInfo outputFolder, IEnumerable<outputContent> fileContentObjs)
         {
-            foreach (var file in fileContentObjs)
+            try
             {
-                try
+                if (!outputFolder.Exists)
                 {
-                    string outputCarImageFilePath = $"{outputFolder.FullName}/{file.CarImageFile.Name}";
-                    FileInfo outputCarImageFile = new FileInfo(outputCarImageFilePath);
-                    if (!file.CarImageFile.FullName.Equals(outputCarImageFile.FullName, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        file.CarImageFile.CopyTo($"{outputFolder.FullName}/{file.CarImageFile.Name}");
-                    }
-
-                    string outputPlateImageFilePath = $"{outputFolder.FullName}/{file.PlateImageFile.Name}";
-                    FileInfo outputPlateImageFile = new FileInfo(outputPlateImageFilePath);
-                    if (!file.PlateImageFile.FullName.Equals(outputPlateImageFile.FullName, StringComparison.InvariantCultureIgnoreCase))
-                    {
-                        file.PlateImageFile.CopyTo($"{outputFolder.FullName}/{file.PlateImageFile.Name}");
-                    }
-
-                    File.WriteAllText($"{outputFolder.FullName}/{file.IDFileName}", file.IDFileContent, System.Text.Encoding.UTF8);
+                    outputFolder.Create();
                 }
-                catch { }
+                foreach (var file in fileContentObjs)
+                {
+                    try
+                    {
+                        string outputCarImageFilePath = $"{outputFolder.FullName}/{file.CarImageFile.Name}";
+                        FileInfo outputCarImageFile = new FileInfo(outputCarImageFilePath);
+                        if (!file.CarImageFile.FullName.Equals(outputCarImageFile.FullName, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            file.CarImageFile.CopyTo(outputCarImageFile.FullName, true);
+                        }
+
+                        string outputPlateImageFilePath = $"{outputFolder.FullName}/{file.PlateImageFile.Name}";
+                        FileInfo outputPlateImageFile = new FileInfo(outputPlateImageFilePath);
+                        if (!file.PlateImageFile.FullName.Equals(outputPlateImageFile.FullName, StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            file.PlateImageFile.CopyTo(outputPlateImageFile.FullName, true);
+                        }
+
+                        File.WriteAllText($"{outputFolder.FullName}/{file.IDFileName}", file.IDFileContent, System.Text.Encoding.UTF8);
+                    }
+                    catch (Exception ex)
+                    { }
+                }
             }
+            catch { }
         }
 
     }
