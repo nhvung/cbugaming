@@ -38,11 +38,14 @@
             "program": "${workspaceFolder}/src/netcore/consoles/game4/bin/netcoreapp3.1/game4.dll",
             "args": [
                 "-f",
-                "c:/code/temp/cbu/game4",
+                "c:/code/temp/cbu/game4/yellow",
                 "-idx",
                 "2",
                 "-plevel",
-                "1"
+                "1",
+                "-rd",
+                "-o",
+                "c:/code/temp/cbu/game4/Yellow/rd"
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game4",
             "console": "integratedTerminal"
