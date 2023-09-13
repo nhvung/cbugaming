@@ -73,6 +73,16 @@ namespace game5.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap InstallFromSource_16x {
+            get {
+                object obj = ResourceManager.GetObject("InstallFromSource_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Run_16x {
             get {
                 object obj = ResourceManager.GetObject("Run_16x", resourceCulture);
@@ -96,6 +106,36 @@ namespace game5.Properties {
         internal static System.Drawing.Bitmap Stop_16x {
             get {
                 object obj = ResourceManager.GetObject("Stop_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Uninstall_16x {
+            get {
+                object obj = ResourceManager.GetObject("Uninstall_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UninstallFromSource_16x {
+            get {
+                object obj = ResourceManager.GetObject("UninstallFromSource_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UpdateDatabase_16x {
+            get {
+                object obj = ResourceManager.GetObject("UpdateDatabase_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

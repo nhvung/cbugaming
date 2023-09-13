@@ -29,14 +29,23 @@ namespace game5
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
             this.ts_menu = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ts_menu_prename = new System.Windows.Forms.ToolStripTextBox();
+            this.ts_menu_but_search = new System.Windows.Forms.ToolStripSplitButton();
+            this.ts_menu_but_search_auto_5s = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ts_menu_but_start = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_stop = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ts_menu_but_update = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.ts_menu_but_install = new System.Windows.Forms.ToolStripSplitButton();
+            this.ts_menu_but_install_multiple = new System.Windows.Forms.ToolStripMenuItem();
+            this.ts_menu_but_uninstall = new System.Windows.Forms.ToolStripButton();
             this.ss_menu = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.ss_menu_status = new System.Windows.Forms.ToolStripStatusLabel();
@@ -46,12 +55,9 @@ namespace game5
             this.dgv_services = new System.Windows.Forms.DataGridView();
             this.dgv_service_col_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_service_col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_service_col_status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_service_col_status = new System.Windows.Forms.DataGridViewStatusColumn();
             this.dgv_service_col_memory = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ts_menu_but_search = new System.Windows.Forms.ToolStripSplitButton();
-            this.ts_menu_but_search_auto_5s = new System.Windows.Forms.ToolStripMenuItem();
-            this.ts_menu_but_start = new System.Windows.Forms.ToolStripButton();
-            this.ts_menu_but_stop = new System.Windows.Forms.ToolStripButton();
+            this.dgv_service_col_cpu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ts_menu.SuspendLayout();
             this.ss_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -67,7 +73,12 @@ namespace game5
             this.ts_menu_but_search,
             this.toolStripSeparator1,
             this.ts_menu_but_start,
-            this.ts_menu_but_stop});
+            this.ts_menu_but_stop,
+            this.toolStripSeparator2,
+            this.ts_menu_but_update,
+            this.toolStripSeparator3,
+            this.ts_menu_but_install,
+            this.ts_menu_but_uninstall});
             this.ts_menu.Location = new System.Drawing.Point(0, 0);
             this.ts_menu.Name = "ts_menu";
             this.ts_menu.Size = new System.Drawing.Size(892, 25);
@@ -87,10 +98,91 @@ namespace game5
             this.ts_menu_prename.Name = "ts_menu_prename";
             this.ts_menu_prename.Size = new System.Drawing.Size(100, 25);
             // 
+            // ts_menu_but_search
+            // 
+            this.ts_menu_but_search.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_menu_but_search_auto_5s});
+            this.ts_menu_but_search.Image = global::game5.Properties.Resources.Search_16x;
+            this.ts_menu_but_search.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_search.Name = "ts_menu_but_search";
+            this.ts_menu_but_search.Size = new System.Drawing.Size(74, 22);
+            this.ts_menu_but_search.Text = "Search";
+            this.ts_menu_but_search.Click += new System.EventHandler(this.ts_menu_but_search_Click);
+            // 
+            // ts_menu_but_search_auto_5s
+            // 
+            this.ts_menu_but_search_auto_5s.Name = "ts_menu_but_search_auto_5s";
+            this.ts_menu_but_search_auto_5s.Size = new System.Drawing.Size(114, 22);
+            this.ts_menu_but_search_auto_5s.Text = "Auto 5s";
+            this.ts_menu_but_search_auto_5s.Click += new System.EventHandler(this.ts_menu_but_search_auto_5s_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // ts_menu_but_start
+            // 
+            this.ts_menu_but_start.Image = global::game5.Properties.Resources.Run_16x;
+            this.ts_menu_but_start.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_start.Name = "ts_menu_but_start";
+            this.ts_menu_but_start.Size = new System.Drawing.Size(51, 22);
+            this.ts_menu_but_start.Text = "Start";
+            this.ts_menu_but_start.Click += new System.EventHandler(this.ts_menu_but_start_Click);
+            // 
+            // ts_menu_but_stop
+            // 
+            this.ts_menu_but_stop.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_but_stop.Image")));
+            this.ts_menu_but_stop.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_stop.Name = "ts_menu_but_stop";
+            this.ts_menu_but_stop.Size = new System.Drawing.Size(51, 22);
+            this.ts_menu_but_stop.Text = "Stop";
+            this.ts_menu_but_stop.Click += new System.EventHandler(this.ts_menu_but_stop_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // ts_menu_but_update
+            // 
+            this.ts_menu_but_update.Image = global::game5.Properties.Resources.UpdateDatabase_16x;
+            this.ts_menu_but_update.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_update.Name = "ts_menu_but_update";
+            this.ts_menu_but_update.Size = new System.Drawing.Size(65, 22);
+            this.ts_menu_but_update.Text = "Update";
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // ts_menu_but_install
+            // 
+            this.ts_menu_but_install.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_menu_but_install_multiple});
+            this.ts_menu_but_install.Image = global::game5.Properties.Resources.InstallFromSource_16x;
+            this.ts_menu_but_install.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_install.Name = "ts_menu_but_install";
+            this.ts_menu_but_install.Size = new System.Drawing.Size(70, 22);
+            this.ts_menu_but_install.Text = "Install";
+            this.ts_menu_but_install.ButtonClick += new System.EventHandler(this.ts_menu_but_install_ButtonClick);
+            // 
+            // ts_menu_but_install_multiple
+            // 
+            this.ts_menu_but_install_multiple.Name = "ts_menu_but_install_multiple";
+            this.ts_menu_but_install_multiple.Size = new System.Drawing.Size(180, 22);
+            this.ts_menu_but_install_multiple.Text = "Multiple";
+            this.ts_menu_but_install_multiple.Click += new System.EventHandler(this.ts_menu_but_install_multiple_Click);
+            // 
+            // ts_menu_but_uninstall
+            // 
+            this.ts_menu_but_uninstall.Image = global::game5.Properties.Resources.UninstallFromSource_16x;
+            this.ts_menu_but_uninstall.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_uninstall.Name = "ts_menu_but_uninstall";
+            this.ts_menu_but_uninstall.Size = new System.Drawing.Size(73, 22);
+            this.ts_menu_but_uninstall.Text = "Uninstall";
+            this.ts_menu_but_uninstall.Click += new System.EventHandler(this.ts_menu_but_uninstall_Click);
             // 
             // ss_menu
             // 
@@ -165,7 +257,8 @@ namespace game5
             this.dgv_service_col_chk,
             this.dgv_service_col_name,
             this.dgv_service_col_status,
-            this.dgv_service_col_memory});
+            this.dgv_service_col_memory,
+            this.dgv_service_col_cpu});
             this.dgv_services.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_services.Location = new System.Drawing.Point(3, 17);
             this.dgv_services.MultiSelect = false;
@@ -194,58 +287,28 @@ namespace game5
             // 
             // dgv_service_col_status
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_service_col_status.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_service_col_status.HeaderText = "Status";
             this.dgv_service_col_status.MinimumWidth = 150;
             this.dgv_service_col_status.Name = "dgv_service_col_status";
             this.dgv_service_col_status.ReadOnly = true;
+            this.dgv_service_col_status.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_service_col_status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.dgv_service_col_status.Width = 150;
             // 
             // dgv_service_col_memory
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_service_col_memory.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_service_col_memory.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_service_col_memory.HeaderText = "Memory";
             this.dgv_service_col_memory.MinimumWidth = 100;
             this.dgv_service_col_memory.Name = "dgv_service_col_memory";
             this.dgv_service_col_memory.ReadOnly = true;
             // 
-            // ts_menu_but_search
+            // dgv_service_col_cpu
             // 
-            this.ts_menu_but_search.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ts_menu_but_search_auto_5s});
-            this.ts_menu_but_search.Image = global::game5.Properties.Resources.Search_16x;
-            this.ts_menu_but_search.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_search.Name = "ts_menu_but_search";
-            this.ts_menu_but_search.Size = new System.Drawing.Size(74, 22);
-            this.ts_menu_but_search.Text = "Search";
-            this.ts_menu_but_search.Click += new System.EventHandler(this.ts_menu_but_search_Click);
-            // 
-            // ts_menu_but_search_auto_5s
-            // 
-            this.ts_menu_but_search_auto_5s.Name = "ts_menu_but_search_auto_5s";
-            this.ts_menu_but_search_auto_5s.Size = new System.Drawing.Size(180, 22);
-            this.ts_menu_but_search_auto_5s.Text = "Auto 5s";
-            this.ts_menu_but_search_auto_5s.Click += new System.EventHandler(this.ts_menu_but_search_auto_5s_Click);
-            // 
-            // ts_menu_but_start
-            // 
-            this.ts_menu_but_start.Image = global::game5.Properties.Resources.Run_16x;
-            this.ts_menu_but_start.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_start.Name = "ts_menu_but_start";
-            this.ts_menu_but_start.Size = new System.Drawing.Size(51, 22);
-            this.ts_menu_but_start.Text = "Start";
-            this.ts_menu_but_start.Click += new System.EventHandler(this.ts_menu_but_start_Click);
-            // 
-            // ts_menu_but_stop
-            // 
-            this.ts_menu_but_stop.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_but_stop.Image")));
-            this.ts_menu_but_stop.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_stop.Name = "ts_menu_but_stop";
-            this.ts_menu_but_stop.Size = new System.Drawing.Size(51, 22);
-            this.ts_menu_but_stop.Text = "Stop";
-            this.ts_menu_but_stop.Click += new System.EventHandler(this.ts_menu_but_stop_Click);
+            this.dgv_service_col_cpu.HeaderText = "CPU";
+            this.dgv_service_col_cpu.MinimumWidth = 100;
+            this.dgv_service_col_cpu.Name = "dgv_service_col_cpu";
             // 
             // MainF
             // 
@@ -289,10 +352,17 @@ namespace game5
         private System.Windows.Forms.ToolStripStatusLabel ss_menu_status;
         private System.Windows.Forms.ToolStripSplitButton ts_menu_but_search;
         private System.Windows.Forms.ToolStripMenuItem ts_menu_but_search_auto_5s;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_update;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_uninstall;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_service_col_chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_status;
+        private System.Windows.Forms.DataGridViewStatusColumn dgv_service_col_status;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_memory;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_cpu;
+        private System.Windows.Forms.ToolStripSplitButton ts_menu_but_install;
+        private System.Windows.Forms.ToolStripMenuItem ts_menu_but_install_multiple;
     }
 }
 
