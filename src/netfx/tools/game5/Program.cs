@@ -17,6 +17,7 @@ namespace game5
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainF());
+            //Application.Run(new MultipleInstallF());
         }
     }
 }
