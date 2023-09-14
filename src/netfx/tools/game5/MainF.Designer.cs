@@ -30,8 +30,9 @@ namespace game5
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.ts_menu = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ts_menu_prename = new System.Windows.Forms.ToolStripTextBox();
@@ -55,9 +56,11 @@ namespace game5
             this.dgv_services = new System.Windows.Forms.DataGridView();
             this.dgv_service_col_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_service_col_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_service_col_folder = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_service_col_status = new System.Windows.Forms.DataGridViewStatusColumn();
             this.dgv_service_col_memory = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_service_col_cpu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ts_menu_but_search_auto_1s = new System.Windows.Forms.ToolStripMenuItem();
             this.ts_menu.SuspendLayout();
             this.ss_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -101,6 +104,7 @@ namespace game5
             // ts_menu_but_search
             // 
             this.ts_menu_but_search.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_menu_but_search_auto_1s,
             this.ts_menu_but_search_auto_5s});
             this.ts_menu_but_search.Image = global::game5.Properties.Resources.Search_16x;
             this.ts_menu_but_search.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -112,7 +116,7 @@ namespace game5
             // ts_menu_but_search_auto_5s
             // 
             this.ts_menu_but_search_auto_5s.Name = "ts_menu_but_search_auto_5s";
-            this.ts_menu_but_search_auto_5s.Size = new System.Drawing.Size(114, 22);
+            this.ts_menu_but_search_auto_5s.Size = new System.Drawing.Size(180, 22);
             this.ts_menu_but_search_auto_5s.Text = "Auto 5s";
             this.ts_menu_but_search_auto_5s.Click += new System.EventHandler(this.ts_menu_but_search_auto_5s_Click);
             // 
@@ -151,6 +155,7 @@ namespace game5
             this.ts_menu_but_update.Name = "ts_menu_but_update";
             this.ts_menu_but_update.Size = new System.Drawing.Size(65, 22);
             this.ts_menu_but_update.Text = "Update";
+            this.ts_menu_but_update.Click += new System.EventHandler(this.ts_menu_but_update_Click);
             // 
             // toolStripSeparator3
             // 
@@ -171,7 +176,7 @@ namespace game5
             // ts_menu_but_install_multiple
             // 
             this.ts_menu_but_install_multiple.Name = "ts_menu_but_install_multiple";
-            this.ts_menu_but_install_multiple.Size = new System.Drawing.Size(180, 22);
+            this.ts_menu_but_install_multiple.Size = new System.Drawing.Size(118, 22);
             this.ts_menu_but_install_multiple.Text = "Multiple";
             this.ts_menu_but_install_multiple.Click += new System.EventHandler(this.ts_menu_but_install_multiple_Click);
             // 
@@ -243,19 +248,20 @@ namespace game5
             this.dgv_services.AllowUserToDeleteRows = false;
             this.dgv_services.AllowUserToOrderColumns = true;
             this.dgv_services.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_services.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_services.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_services.ColumnHeadersHeight = 30;
             this.dgv_services.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_services.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_service_col_chk,
             this.dgv_service_col_name,
+            this.dgv_service_col_folder,
             this.dgv_service_col_status,
             this.dgv_service_col_memory,
             this.dgv_service_col_cpu});
@@ -285,6 +291,12 @@ namespace game5
             this.dgv_service_col_name.Name = "dgv_service_col_name";
             this.dgv_service_col_name.ReadOnly = true;
             // 
+            // dgv_service_col_folder
+            // 
+            this.dgv_service_col_folder.HeaderText = "Folder";
+            this.dgv_service_col_folder.Name = "dgv_service_col_folder";
+            this.dgv_service_col_folder.Visible = false;
+            // 
             // dgv_service_col_status
             // 
             this.dgv_service_col_status.HeaderText = "Status";
@@ -297,8 +309,8 @@ namespace game5
             // 
             // dgv_service_col_memory
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_service_col_memory.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_service_col_memory.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgv_service_col_memory.HeaderText = "Memory";
             this.dgv_service_col_memory.MinimumWidth = 100;
             this.dgv_service_col_memory.Name = "dgv_service_col_memory";
@@ -306,9 +318,18 @@ namespace game5
             // 
             // dgv_service_col_cpu
             // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_service_col_cpu.DefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_service_col_cpu.HeaderText = "CPU";
             this.dgv_service_col_cpu.MinimumWidth = 100;
             this.dgv_service_col_cpu.Name = "dgv_service_col_cpu";
+            // 
+            // ts_menu_but_search_auto_1s
+            // 
+            this.ts_menu_but_search_auto_1s.Name = "ts_menu_but_search_auto_1s";
+            this.ts_menu_but_search_auto_1s.Size = new System.Drawing.Size(180, 22);
+            this.ts_menu_but_search_auto_1s.Text = "Auto 1s";
+            this.ts_menu_but_search_auto_1s.Click += new System.EventHandler(this.ts_menu_but_search_auto_1s_Click);
             // 
             // MainF
             // 
@@ -356,13 +377,15 @@ namespace game5
         private System.Windows.Forms.ToolStripButton ts_menu_but_update;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton ts_menu_but_uninstall;
+        private System.Windows.Forms.ToolStripSplitButton ts_menu_but_install;
+        private System.Windows.Forms.ToolStripMenuItem ts_menu_but_install_multiple;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_service_col_chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_folder;
         private System.Windows.Forms.DataGridViewStatusColumn dgv_service_col_status;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_memory;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_service_col_cpu;
-        private System.Windows.Forms.ToolStripSplitButton ts_menu_but_install;
-        private System.Windows.Forms.ToolStripMenuItem ts_menu_but_install_multiple;
+        private System.Windows.Forms.ToolStripMenuItem ts_menu_but_search_auto_1s;
     }
 }
 

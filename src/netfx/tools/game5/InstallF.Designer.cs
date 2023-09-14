@@ -140,7 +140,7 @@ namespace game5
             this.MaximizeBox = false;
             this.Name = "InstallF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InstallF";
+            this.Text = "Install Service";
             this.ResumeLayout(false);
             this.PerformLayout();
 

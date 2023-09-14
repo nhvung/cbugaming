@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -20,6 +22,7 @@ namespace game5
         CheckBox _chkall;
         object _lockExecuteObj;
         Dictionary<string, DataGridViewStatusCell.StatusCell> _cellStatus;
+        Dictionary<int, KeyValuePair<DateTime, TimeSpan>> _mCpuProcessTime;
         public MainF()
         {
             InitializeComponent();
@@ -85,6 +88,8 @@ namespace game5
             {
                 lock (_lockExecuteObj)
                 {
+                    _stopTimerRefresh = true;
+                    _mCpuProcessTime = new Dictionary<int, KeyValuePair<DateTime, TimeSpan>>();
                     _updateStatus("Searching...");
                     _dlg.ClearDataGridViewRows(dgv_services);
                     _dlg.Execute(_chkall, () => _chkall.Checked = false);
@@ -110,8 +115,20 @@ namespace game5
                                 {
                                     statusCell = new DataGridViewStatusCell.StatusCell(status, _cellStatus[status].BackColor, _cellStatus[status].ForeColor);
                                 }
+                                _dlg.AddDataGridViewRow(dgv_services, false, serviceObj.Name, serviceObj.WorkingFolderPath, statusCell, serviceObj.WorkingSet, "-");
+                                if (serviceObj.Status == VSSystem.Management.Models.EStatus.Running)
+                                {
+                                    Process p = Process.GetProcessById(serviceObj.ProcessID);
+                                    if(p!=null)
+                                    {
+                                        _mCpuProcessTime[p.Id] = new KeyValuePair<DateTime, TimeSpan>(DateTime.UtcNow, p.TotalProcessorTime);
+                                    }
+                                }
+                                else
+                                {
+                                    
+                                }
                                 
-                                _dlg.AddDataGridViewRow(dgv_services, false, serviceObj.Name, statusCell, serviceObj.WorkingSet);
                             }
                         }
                     }
@@ -280,6 +297,11 @@ namespace game5
                                             }
                                             rowObj.Cells["dgv_service_col_status"].Value = statusCell;
                                             rowObj.Cells["dgv_service_col_memory"].Value = serviceObj.WorkingSet;
+                                            if (serviceObj.Status== VSSystem.Management.Models.EStatus.Running)
+                                            {
+                                                string cpuValue = _getCpuPercent(serviceObj.ProcessID);
+                                                rowObj.Cells["dgv_service_col_cpu"].Value = cpuValue;
+                                            }
                                         }
 
                                     }
@@ -305,14 +327,20 @@ namespace game5
         private void ts_menu_but_search_auto_5s_Click(object sender, EventArgs e)
         {
             Task.Run(() => {
-                _searchServices();                
+                _searchServices();
+                _autoRefresh(5);
             });
-            _stopTimerRefresh = false;
-            if (_tmrRefreshServices==null)
+            
+        }
+        void _autoRefresh(int interval)
+        {
+            try
             {
-                _tmrRefreshServices = new System.Timers.Timer(5000);
+                _stopTimerRefresh = false;
+                _tmrRefreshServices?.Stop();
+                _tmrRefreshServices = new System.Timers.Timer(interval*1000);
                 _tmrRefreshServices.Elapsed += (o, e2) => {
-                    _tmrRefreshServices.Stop();                    
+                    _tmrRefreshServices.Stop();
                     try
                     {
                         var rowObjs = _dlg.GetDataGridViewRows(dgv_services);
@@ -322,15 +350,18 @@ namespace game5
                     {
 
                     }
-                    if(!_stopTimerRefresh)
+                    if (!_stopTimerRefresh)
                     {
                         _tmrRefreshServices.Start();
                     }
-                    
+
                 };
-               
+                _tmrRefreshServices.Start();
             }
-            _tmrRefreshServices.Start();
+            catch
+            {
+            }
+           
         }
 
         private void ts_menu_but_uninstall_Click(object sender, EventArgs e)
@@ -395,8 +426,8 @@ namespace game5
                     {
                     }
                 }
+                Task.Run(_searchServices);
 
-                _searchServices();
             }
             catch (Exception ex)
             {
@@ -414,6 +445,7 @@ namespace game5
                     if (installF.ShowDialog() == DialogResult.OK)
                     {
                         Task.Run(_searchServices);
+
                     }
                 }
             }
@@ -428,6 +460,61 @@ namespace game5
                     Task.Run(_searchServices);
                 }
             }
+        }
+
+        string _getCpuPercent(int pid)
+        {
+            string result = "-";
+            try
+            {
+                DateTime utcNow = DateTime.UtcNow;
+                Process p = Process.GetProcessById(pid);
+                if (_mCpuProcessTime.ContainsKey(pid))
+                {
+                    var pLastValue = _mCpuProcessTime[pid];
+                    var timeDiff = (utcNow - pLastValue.Key).TotalMilliseconds;
+                    var cpuUsage = (p.TotalProcessorTime - pLastValue.Value).TotalMilliseconds;
+                    var cpuPercent = (cpuUsage * 100.0 / (Environment.ProcessorCount * timeDiff));
+                    result = cpuPercent.ToString("0.0")+"%";
+                }
+                _mCpuProcessTime[pid] = new KeyValuePair<DateTime, TimeSpan>(utcNow, p.TotalProcessorTime);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return result;
+            
+        }
+
+        private void ts_menu_but_search_auto_1s_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                _searchServices();
+                _autoRefresh(1);
+            });
+        }
+
+        private void ts_menu_but_update_Click(object sender, EventArgs e)
+        {
+            var rowObjs = _dlg.GetDataGridViewCheckedRows(dgv_services, "dgv_service_col_chk");
+            if (rowObjs.Count == 0)
+            {
+                rowObjs = _dlg.GetDataGridViewSelectedRows(dgv_services);
+            }
+            if (rowObjs?.Count > 0)
+            {
+                List<KeyValuePair<string, string>> serviceObjs = new List<KeyValuePair<string, string>>();
+                serviceObjs = rowObjs.Select(ite => new KeyValuePair<string, string>(ite.Cells["dgv_service_col_name"].Value.ToString(), ite.Cells["dgv_service_col_folder"].Value.ToString())).ToList();
+                using (UpdateF f = new UpdateF(serviceObjs))
+                {
+                    if (f.ShowDialog() == DialogResult.OK)
+                    {
+                    }
+                }
+            }
+            
         }
     }
 }

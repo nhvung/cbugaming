@@ -23,6 +23,16 @@ namespace game5
             if(ofd.ShowDialog()== DialogResult.OK)
             {
                 txt_exepath.Text = ofd.FileName;
+                try
+                {
+                    FileInfo file = new FileInfo(ofd.FileName);
+                    txt_name.Text = file.Directory.Name;
+                }
+                catch// (Exception)
+                {
+
+                }
+                
             }
         }
 
