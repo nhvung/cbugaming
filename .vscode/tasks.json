@@ -30,5 +30,15 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "buildgame6",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game6/game6.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }
