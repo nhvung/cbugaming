@@ -1,0 +1,23 @@
+type nul > "./temp/input/637230399660000000_M_1_3_Begin.jpg"
+
+type nul > "./temp/input/637230399660000000_M_2_3.jpg"
+
+type nul > "./temp/input/637230399670000000_M_3_3_End.jpg";
+type nul > "./temp/input/637230456710000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230456710000000_M_2_3.jpg"
+type nul > "./temp/input/637230456720000000_M_3_3_End.jpg"
+type nul > "./temp/input/637230487860000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230487870000000_M_2_3.jpg"
+type nul > "./temp/input/637230487870000000_M_3_3_End.jpg"
+type nul > "./temp/input/637230487900000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230487900000000_M_2_3.jpg"
+type nul > "./temp/input/637230487910000000_M_3_3_End.jpg"
+type nul > "./temp/input/637230492700000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230492700000000_M_2_3.jpg"
+type nul > "./temp/input/637230492700000000_M_3_3_End.jpg"
+type nul > "./temp/input/637230492730000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230492730000000_M_2_3.jpg"
+type nul > "./temp/input/637230492730000000_M_3_3_End.jpg"
+type nul > "./temp/input/637230507910000000_M_1_3_Begin.jpg"
+type nul > "./temp/input/637230507910000000_M_2_3.jpg"
+type nul > "./temp/input/637230507910000000_M_3_3_End.jpg"

@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>bin</OutputPath>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>game6</AssemblyName>
+    <FileVersion>1.2</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+</Project>

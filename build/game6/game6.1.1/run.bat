@@ -1,0 +1,1 @@
+game6 -f "c:\custom-data\code\cbugaming\src\netcore\consoles\game6\temp\input\level1\level2\level3" -plevel=1 --prefixName="l5q_{0:000}" -o "./output/l5q1" 

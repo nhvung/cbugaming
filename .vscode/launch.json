@@ -49,6 +49,23 @@
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game4",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "game6",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame6",
+            "program": "${workspaceFolder}/src/netcore/consoles/game6/bin/netcoreapp3.1/game6.dll",
+            "args": [
+                "-f",
+                "./temp/input/level1/level2/level3",
+                "--prefixName=L5Q_{0:000}",
+                "-o",
+                "./temp/output/L5Q_",
+                "--deltaTimeMs=3000"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game6",
+            "console": "integratedTerminal"
         }
     ]
 }
