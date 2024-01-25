@@ -113,6 +113,7 @@ namespace game6
                                 itemRecord recordObj = new itemRecord();
 
                                 var temp = file.Name.Split(new char[] { '_' });
+                                recordObj.SplitPathNames = temp;
                                 long ticks = 0;
 
 
@@ -146,9 +147,30 @@ namespace game6
                             }
 
 
-                            var comparer = TComparer.Create<itemRecord>((i1, i2) => (i2.Time - i1.Time).TotalMilliseconds < deltaTimeMs);
+                            var comparer = TComparer.Create<itemRecord>((i1, i2) =>
+                                {
+                                    bool result = (i2.Time - i1.Time).TotalMilliseconds < deltaTimeMs;
+                                    int pCount = i1.SplitPathNames?.Length ?? 0;
+                                    if (i2.SplitPathNames?.Length < pCount)
+                                    {
+                                        pCount = i2.SplitPathNames.Length;
+                                    }
+                                    int pIdx = 0;
+                                    while (pIdx < pCount && pIdx < idIndex)
+                                    {
+                                        if (!i2.SplitPathNames[pIdx].Equals(i1.SplitPathNames[pIdx], StringComparison.InvariantCultureIgnoreCase))
+                                        {
+                                            result = false;
+                                            break;
+                                        }
+                                        pIdx++;
+                                    }
+                                    return result;
+                                }
+                            );
 
-                            var grpItemObjs = recordObjs.GroupBy(ite => ite, comparer).ToList();
+                            var grpItemObjs = recordObjs
+                            .GroupBy(ite => ite, comparer).ToList();
 
 
 

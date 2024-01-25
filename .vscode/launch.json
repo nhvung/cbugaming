@@ -62,7 +62,8 @@
                 "--prefixName=L5Q_{0:000}",
                 "-o",
                 "./temp/output/L5Q_",
-                "--deltaTimeMs=3000"
+                "--deltaTimeMs=3000",
+                "-idx=1"
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game6",
             "console": "integratedTerminal"
