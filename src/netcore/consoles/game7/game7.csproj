@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>bin</OutputPath>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>game7</AssemblyName>
+    <FileVersion>1.0</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../../../share/src/Selenium/VSSystem.ThirdParty.Selenium/VSSystem.ThirdParty.Selenium.csproj" />
+  </ItemGroup>
+
+</Project>
