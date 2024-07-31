@@ -12,6 +12,8 @@ namespace game7
     {
         static Task Main(string[] args)
         {
+            // vm-processing-panel
+            // vm-processing-bg
             try
             {
                 Dictionary<string, string> mArgs = CommandLine.GetCommandLineArgs(new string[]
