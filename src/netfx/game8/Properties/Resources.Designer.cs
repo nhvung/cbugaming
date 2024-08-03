@@ -93,6 +93,16 @@ namespace game8.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CloneToDesktop_16x {
+            get {
+                object obj = ResourceManager.GetObject("CloneToDesktop_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap DeleteUser_16x {
             get {
                 object obj = ResourceManager.GetObject("DeleteUser_16x", resourceCulture);
@@ -113,6 +123,16 @@ namespace game8.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Path_16x {
+            get {
+                object obj = ResourceManager.GetObject("Path_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Search_16x {
             get {
                 object obj = ResourceManager.GetObject("Search_16x", resourceCulture);
@@ -126,6 +146,16 @@ namespace game8.Properties {
         internal static System.Drawing.Bitmap ShowHideComparisonData_16x {
             get {
                 object obj = ResourceManager.GetObject("ShowHideComparisonData_16x", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap UpdateAnimation_16x {
+            get {
+                object obj = ResourceManager.GetObject("UpdateAnimation_16x", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

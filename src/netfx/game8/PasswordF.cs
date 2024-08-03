@@ -18,6 +18,7 @@ namespace game8
         public PasswordF()
         {
             InitializeComponent();
+            txt_password.Select();
         }
 
         private void chk_showpassword_CheckedChanged(object sender, EventArgs e)
