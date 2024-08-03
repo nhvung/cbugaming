@@ -30,6 +30,7 @@ namespace game8
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lab_title = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -47,24 +48,34 @@ namespace game8
             this.but_ok = new System.Windows.Forms.Button();
             this.chk_showpassword = new System.Windows.Forms.CheckBox();
             this.but_close = new System.Windows.Forms.Button();
-            this.lab_title = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.lab_title);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(707, 50);
+            this.panel1.Size = new System.Drawing.Size(707, 30);
             this.panel1.TabIndex = 1;
+            // 
+            // lab_title
+            // 
+            this.lab_title.AutoSize = true;
+            this.lab_title.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lab_title.ForeColor = System.Drawing.Color.White;
+            this.lab_title.Location = new System.Drawing.Point(12, 5);
+            this.lab_title.Name = "lab_title";
+            this.lab_title.Size = new System.Drawing.Size(44, 19);
+            this.lab_title.TabIndex = 1;
+            this.lab_title.Text = "ADD";
             // 
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(10, 50);
+            this.panel5.Location = new System.Drawing.Point(10, 30);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(687, 10);
             this.panel5.TabIndex = 8;
@@ -72,17 +83,17 @@ namespace game8
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(697, 50);
+            this.panel4.Location = new System.Drawing.Point(697, 30);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 417);
+            this.panel4.Size = new System.Drawing.Size(10, 437);
             this.panel4.TabIndex = 7;
             // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 50);
+            this.panel3.Location = new System.Drawing.Point(0, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 417);
+            this.panel3.Size = new System.Drawing.Size(10, 437);
             this.panel3.TabIndex = 6;
             // 
             // panel2
@@ -203,20 +214,9 @@ namespace game8
             this.but_close.Name = "but_close";
             this.but_close.Size = new System.Drawing.Size(75, 23);
             this.but_close.TabIndex = 21;
-            this.but_close.Text = "Close";
+            this.but_close.Text = "CLOSE";
             this.but_close.UseVisualStyleBackColor = true;
             this.but_close.Click += new System.EventHandler(this.but_close_Click);
-            // 
-            // lab_title
-            // 
-            this.lab_title.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lab_title.AutoSize = true;
-            this.lab_title.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lab_title.Location = new System.Drawing.Point(333, 9);
-            this.lab_title.Name = "lab_title";
-            this.lab_title.Size = new System.Drawing.Size(51, 22);
-            this.lab_title.TabIndex = 1;
-            this.lab_title.Text = "ADD";
             // 
             // AddF
             // 

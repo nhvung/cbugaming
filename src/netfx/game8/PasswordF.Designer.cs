@@ -81,7 +81,7 @@ namespace game8
             this.but_cancel.Name = "but_cancel";
             this.but_cancel.Size = new System.Drawing.Size(75, 23);
             this.but_cancel.TabIndex = 4;
-            this.but_cancel.Text = "Cancel";
+            this.but_cancel.Text = "CANCEL";
             this.but_cancel.UseVisualStyleBackColor = true;
             this.but_cancel.Click += new System.EventHandler(this.but_cancel_Click);
             // 

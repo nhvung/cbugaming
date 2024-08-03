@@ -32,12 +32,20 @@ namespace game8
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountListF));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.ts_status = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel4 = new System.Windows.Forms.ToolStripButton();
+            this.ts_status_lab_filepath = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.ts_status_lab_password = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.ts_status_lab_row = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel5 = new System.Windows.Forms.ToolStripLabel();
+            this.ts_status_lab_column = new System.Windows.Forms.ToolStripLabel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -45,12 +53,15 @@ namespace game8
             this.ts_menu_but_retypepassword = new System.Windows.Forms.ToolStripButton();
             this.ts_menu_but_add = new System.Windows.Forms.ToolStripButton();
             this.ts_menu_but_edit = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_clone = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ts_menu_com_url = new System.Windows.Forms.ToolStripComboBox();
             this.ts_menu_but_view = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_showhide = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ts_menu_but_delete = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_updatepassword = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_account = new System.Windows.Forms.DataGridView();
             this.dgv_account_col_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -65,31 +76,47 @@ namespace game8
             this.dgv_account_col_password_hidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_account_col_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_account_col_description_hidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ts_menu_but_showhide = new System.Windows.Forms.ToolStripButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.but_qs_clear = new System.Windows.Forms.Button();
+            this.txt_qs_username = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txt_qs_name = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.ts_status.SuspendLayout();
             this.ts_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_account)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1184, 50);
+            this.panel1.Size = new System.Drawing.Size(1184, 30);
             this.panel1.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 19);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "ACCOUNT LIST";
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.ts_status);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 489);
+            this.panel2.Location = new System.Drawing.Point(0, 650);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1184, 30);
             this.panel2.TabIndex = 1;
@@ -99,18 +126,43 @@ namespace game8
             this.ts_status.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.ts_status.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel4,
+            this.ts_status_lab_filepath,
             this.toolStripLabel2,
-            this.ts_status_lab_password});
+            this.ts_status_lab_password,
+            this.toolStripLabel3,
+            this.ts_status_lab_row,
+            this.toolStripLabel5,
+            this.ts_status_lab_column});
             this.ts_status.Location = new System.Drawing.Point(0, 5);
             this.ts_status.Name = "ts_status";
             this.ts_status.Size = new System.Drawing.Size(1184, 25);
             this.ts_status.TabIndex = 0;
             this.ts_status.Text = "toolStrip1";
             // 
+            // toolStripLabel4
+            // 
+            this.toolStripLabel4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel4.ForeColor = System.Drawing.Color.DarkRed;
+            this.toolStripLabel4.Image = global::game8.Properties.Resources.Path_16x;
+            this.toolStripLabel4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripLabel4.Name = "toolStripLabel4";
+            this.toolStripLabel4.Size = new System.Drawing.Size(55, 22);
+            this.toolStripLabel4.Text = "Path:";
+            this.toolStripLabel4.Click += new System.EventHandler(this.toolStripLabel4_Click);
+            // 
+            // ts_status_lab_filepath
+            // 
+            this.ts_status_lab_filepath.Name = "ts_status_lab_filepath";
+            this.ts_status_lab_filepath.Size = new System.Drawing.Size(12, 22);
+            this.ts_status_lab_filepath.Text = "-";
+            // 
             // toolStripLabel2
             // 
+            this.toolStripLabel2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel2.ForeColor = System.Drawing.Color.DarkRed;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(83, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(88, 22);
             this.toolStripLabel2.Text = "Password-256:";
             // 
             // ts_status_lab_password
@@ -119,45 +171,76 @@ namespace game8
             this.ts_status_lab_password.Size = new System.Drawing.Size(12, 22);
             this.ts_status_lab_password.Text = "-";
             // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel3.ForeColor = System.Drawing.Color.DarkRed;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(35, 22);
+            this.toolStripLabel3.Text = "Row:";
+            // 
+            // ts_status_lab_row
+            // 
+            this.ts_status_lab_row.Name = "ts_status_lab_row";
+            this.ts_status_lab_row.Size = new System.Drawing.Size(12, 22);
+            this.ts_status_lab_row.Text = "-";
+            // 
+            // toolStripLabel5
+            // 
+            this.toolStripLabel5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabel5.ForeColor = System.Drawing.Color.DarkRed;
+            this.toolStripLabel5.Name = "toolStripLabel5";
+            this.toolStripLabel5.Size = new System.Drawing.Size(52, 22);
+            this.toolStripLabel5.Text = "Column:";
+            // 
+            // ts_status_lab_column
+            // 
+            this.ts_status_lab_column.Name = "ts_status_lab_column";
+            this.ts_status_lab_column.Size = new System.Drawing.Size(12, 22);
+            this.ts_status_lab_column.Text = "-";
+            // 
             // panel3
             // 
             this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 50);
+            this.panel3.Location = new System.Drawing.Point(0, 30);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 439);
+            this.panel3.Size = new System.Drawing.Size(10, 620);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1174, 50);
+            this.panel4.Location = new System.Drawing.Point(1174, 30);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(10, 439);
+            this.panel4.Size = new System.Drawing.Size(10, 620);
             this.panel4.TabIndex = 3;
             // 
             // panel5
             // 
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(10, 50);
+            this.panel5.Location = new System.Drawing.Point(10, 30);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1164, 10);
             this.panel5.TabIndex = 4;
             // 
             // ts_menu
             // 
+            this.ts_menu.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ts_menu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.ts_menu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ts_menu_but_retypepassword,
             this.ts_menu_but_add,
             this.ts_menu_but_edit,
+            this.ts_menu_but_clone,
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.ts_menu_com_url,
             this.ts_menu_but_view,
             this.ts_menu_but_showhide,
             this.toolStripSeparator2,
-            this.ts_menu_but_delete});
-            this.ts_menu.Location = new System.Drawing.Point(10, 60);
+            this.ts_menu_but_delete,
+            this.ts_menu_but_updatepassword});
+            this.ts_menu.Location = new System.Drawing.Point(10, 40);
             this.ts_menu.Name = "ts_menu";
             this.ts_menu.Size = new System.Drawing.Size(1164, 25);
             this.ts_menu.TabIndex = 6;
@@ -169,7 +252,7 @@ namespace game8
             this.ts_menu_but_retypepassword.Image = global::game8.Properties.Resources.PasswordBox_16x;
             this.ts_menu_but_retypepassword.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_retypepassword.Name = "ts_menu_but_retypepassword";
-            this.ts_menu_but_retypepassword.Size = new System.Drawing.Size(121, 22);
+            this.ts_menu_but_retypepassword.Size = new System.Drawing.Size(133, 22);
             this.ts_menu_but_retypepassword.Text = "Re-type Password";
             this.ts_menu_but_retypepassword.Click += new System.EventHandler(this.ts_menu_but_retypepassword_Click);
             // 
@@ -179,7 +262,7 @@ namespace game8
             this.ts_menu_but_add.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_add.Margin = new System.Windows.Forms.Padding(5, 1, 0, 2);
             this.ts_menu_but_add.Name = "ts_menu_but_add";
-            this.ts_menu_but_add.Size = new System.Drawing.Size(49, 22);
+            this.ts_menu_but_add.Size = new System.Drawing.Size(52, 22);
             this.ts_menu_but_add.Text = "Add";
             this.ts_menu_but_add.Click += new System.EventHandler(this.ts_menu_but_add_Click);
             // 
@@ -188,9 +271,18 @@ namespace game8
             this.ts_menu_but_edit.Image = global::game8.Properties.Resources.ASX_Edit_grey_16x;
             this.ts_menu_but_edit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_edit.Name = "ts_menu_but_edit";
-            this.ts_menu_but_edit.Size = new System.Drawing.Size(47, 22);
+            this.ts_menu_but_edit.Size = new System.Drawing.Size(50, 22);
             this.ts_menu_but_edit.Text = "Edit";
             this.ts_menu_but_edit.Click += new System.EventHandler(this.ts_menu_but_edit_Click);
+            // 
+            // ts_menu_but_clone
+            // 
+            this.ts_menu_but_clone.Image = global::game8.Properties.Resources.CloneToDesktop_16x;
+            this.ts_menu_but_clone.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_clone.Name = "ts_menu_but_clone";
+            this.ts_menu_but_clone.Size = new System.Drawing.Size(61, 22);
+            this.ts_menu_but_clone.Text = "Clone";
+            this.ts_menu_but_clone.Click += new System.EventHandler(this.ts_menu_but_clone_Click);
             // 
             // toolStripSeparator1
             // 
@@ -218,9 +310,18 @@ namespace game8
             this.ts_menu_but_view.Image = global::game8.Properties.Resources.Search_16x;
             this.ts_menu_but_view.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_view.Name = "ts_menu_but_view";
-            this.ts_menu_but_view.Size = new System.Drawing.Size(52, 22);
+            this.ts_menu_but_view.Size = new System.Drawing.Size(55, 22);
             this.ts_menu_but_view.Text = "View";
             this.ts_menu_but_view.Click += new System.EventHandler(this.ts_menu_but_view_Click);
+            // 
+            // ts_menu_but_showhide
+            // 
+            this.ts_menu_but_showhide.Image = global::game8.Properties.Resources.ShowHideComparisonData_16x;
+            this.ts_menu_but_showhide.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_showhide.Name = "ts_menu_but_showhide";
+            this.ts_menu_but_showhide.Size = new System.Drawing.Size(59, 22);
+            this.ts_menu_but_showhide.Text = "Show";
+            this.ts_menu_but_showhide.Click += new System.EventHandler(this.ts_menu_but_showhide_Click);
             // 
             // toolStripSeparator2
             // 
@@ -232,25 +333,39 @@ namespace game8
             this.ts_menu_but_delete.Image = global::game8.Properties.Resources.DeleteUser_16x;
             this.ts_menu_but_delete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_delete.Name = "ts_menu_but_delete";
-            this.ts_menu_but_delete.Size = new System.Drawing.Size(60, 22);
+            this.ts_menu_but_delete.Size = new System.Drawing.Size(65, 22);
             this.ts_menu_but_delete.Text = "Delete";
             this.ts_menu_but_delete.Click += new System.EventHandler(this.ts_menu_but_delete_Click);
             // 
+            // ts_menu_but_updatepassword
+            // 
+            this.ts_menu_but_updatepassword.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ts_menu_but_updatepassword.Image = global::game8.Properties.Resources.UpdateAnimation_16x;
+            this.ts_menu_but_updatepassword.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_updatepassword.Name = "ts_menu_but_updatepassword";
+            this.ts_menu_but_updatepassword.Size = new System.Drawing.Size(131, 22);
+            this.ts_menu_but_updatepassword.Text = "Update Password";
+            this.ts_menu_but_updatepassword.Click += new System.EventHandler(this.ts_menu_but_updatepassword_Click);
+            // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dgv_account);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(10, 85);
+            this.groupBox1.Location = new System.Drawing.Point(10, 218);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1164, 404);
+            this.groupBox1.Size = new System.Drawing.Size(1164, 426);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Account List";
+            this.groupBox1.Text = "Account List - If the PASSWORD is INCORRECT, the list has been hidden";
             // 
             // dgv_account
             // 
             this.dgv_account.AllowUserToAddRows = false;
             this.dgv_account.AllowUserToDeleteRows = false;
+            this.dgv_account.BackgroundColor = System.Drawing.Color.White;
+            this.dgv_account.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -281,7 +396,7 @@ namespace game8
             this.dgv_account.RowHeadersVisible = false;
             this.dgv_account.RowTemplate.Height = 30;
             this.dgv_account.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgv_account.Size = new System.Drawing.Size(1158, 384);
+            this.dgv_account.Size = new System.Drawing.Size(1158, 406);
             this.dgv_account.TabIndex = 0;
             // 
             // dgv_account_col_chk
@@ -345,6 +460,8 @@ namespace game8
             // 
             // dgv_account_col_password
             // 
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Wingdings", 8F);
+            this.dgv_account_col_password.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_account_col_password.HeaderText = "Password";
             this.dgv_account_col_password.MinimumWidth = 200;
             this.dgv_account_col_password.Name = "dgv_account_col_password";
@@ -360,8 +477,8 @@ namespace game8
             // dgv_account_col_description
             // 
             this.dgv_account_col_description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_account_col_description.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_account_col_description.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_account_col_description.HeaderText = "Description";
             this.dgv_account_col_description.MinimumWidth = 200;
             this.dgv_account_col_description.Name = "dgv_account_col_description";
@@ -373,31 +490,72 @@ namespace game8
             this.dgv_account_col_description_hidden.Name = "dgv_account_col_description_hidden";
             this.dgv_account_col_description_hidden.Visible = false;
             // 
-            // ts_menu_but_showhide
+            // groupBox2
             // 
-            this.ts_menu_but_showhide.Image = global::game8.Properties.Resources.ShowHideComparisonData_16x;
-            this.ts_menu_but_showhide.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_showhide.Name = "ts_menu_but_showhide";
-            this.ts_menu_but_showhide.Size = new System.Drawing.Size(56, 22);
-            this.ts_menu_but_showhide.Text = "Show";
-            this.ts_menu_but_showhide.Click += new System.EventHandler(this.ts_menu_but_showhide_Click);
+            this.groupBox2.Controls.Add(this.but_qs_clear);
+            this.groupBox2.Controls.Add(this.txt_qs_username);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.txt_qs_name);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(10, 65);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(1164, 127);
+            this.groupBox2.TabIndex = 8;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Quick Search";
             // 
-            // label1
+            // but_qs_clear
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(1019, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ACCOUNT LIST";
+            this.but_qs_clear.Location = new System.Drawing.Point(110, 88);
+            this.but_qs_clear.Name = "but_qs_clear";
+            this.but_qs_clear.Size = new System.Drawing.Size(75, 23);
+            this.but_qs_clear.TabIndex = 4;
+            this.but_qs_clear.Text = "Clear";
+            this.but_qs_clear.UseVisualStyleBackColor = true;
+            this.but_qs_clear.Click += new System.EventHandler(this.but_qs_clear_Click);
+            // 
+            // txt_qs_username
+            // 
+            this.txt_qs_username.Location = new System.Drawing.Point(110, 52);
+            this.txt_qs_username.Name = "txt_qs_username";
+            this.txt_qs_username.Size = new System.Drawing.Size(225, 21);
+            this.txt_qs_username.TabIndex = 3;
+            this.txt_qs_username.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(35, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 15);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Username:";
+            // 
+            // txt_qs_name
+            // 
+            this.txt_qs_name.Location = new System.Drawing.Point(110, 25);
+            this.txt_qs_name.Name = "txt_qs_name";
+            this.txt_qs_name.Size = new System.Drawing.Size(225, 21);
+            this.txt_qs_name.TabIndex = 1;
+            this.txt_qs_name.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(60, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(44, 15);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Name:";
             // 
             // AccountListF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1184, 519);
+            this.ClientSize = new System.Drawing.Size(1184, 680);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ts_menu);
             this.Controls.Add(this.panel5);
@@ -420,6 +578,8 @@ namespace game8
             this.ts_menu.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_account)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -447,6 +607,8 @@ namespace game8
         private System.Windows.Forms.ToolStripLabel toolStripLabel2;
         private System.Windows.Forms.ToolStripLabel ts_status_lab_password;
         private System.Windows.Forms.ToolStripButton ts_menu_but_retypepassword;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_showhide;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_account_col_chk;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_id;
@@ -459,8 +621,20 @@ namespace game8
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_password_hidden;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description_hidden;
-        private System.Windows.Forms.ToolStripButton ts_menu_but_showhide;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_clone;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_updatepassword;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txt_qs_username;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txt_qs_name;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button but_qs_clear;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripLabel ts_status_lab_row;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel5;
+        private System.Windows.Forms.ToolStripLabel ts_status_lab_column;
+        private System.Windows.Forms.ToolStripButton toolStripLabel4;
+        private System.Windows.Forms.ToolStripLabel ts_status_lab_filepath;
     }
 }
 

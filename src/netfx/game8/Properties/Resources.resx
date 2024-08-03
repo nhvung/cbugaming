@@ -118,14 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="AddFriend_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\AddFriend_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ASX_Edit_grey_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ASX_Edit_grey_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Search_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Search_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CloneToDesktop_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CloneToDesktop_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ShowHideComparisonData_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ShowHideComparisonData_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,10 +127,25 @@
   <data name="DeleteUser_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteUser_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="PasswordBox_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\PasswordBox_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="AddFriend_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\AddFriend_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpdateAnimation_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\UpdateAnimation_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="AddUser_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\AddUser_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ASX_Edit_grey_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ASX_Edit_grey_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PasswordBox_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PasswordBox_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Search_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Search_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Path_16x" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Path_16x.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

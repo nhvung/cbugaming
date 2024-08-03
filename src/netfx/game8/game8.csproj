@@ -55,6 +55,26 @@
   <PropertyGroup>
     <ApplicationIcon>mainIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -86,6 +106,7 @@
       <DependentUpon>AddF.cs</DependentUpon>
     </Compile>
     <Compile Include="DelegateProcess.cs" />
+    <Compile Include="Modules.cs" />
     <Compile Include="PasswordF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +115,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToolConfigs.cs" />
     <EmbeddedResource Include="AccountListF.resx">
       <DependentUpon>AccountListF.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +157,9 @@
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\Newtonsoft.Json.xml" />
     <Content Include="mainIcon.ico" />
+    <None Include="Resources\Path_16x.png" />
+    <None Include="Resources\UpdateAnimation_16x.png" />
+    <None Include="Resources\CloneToDesktop_16x.png" />
     <None Include="Resources\AddUser_16x.png" />
     <None Include="Resources\PasswordBox_16x.png" />
     <None Include="Resources\DeleteUser_16x.png" />

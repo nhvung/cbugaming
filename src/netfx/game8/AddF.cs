@@ -30,7 +30,7 @@ namespace game8
                 txt_name.Text = _accountInfo.Name;
                 rtxt_description.Text = _accountInfo.Description;
             }
-            but_ok.Text = lab_title.Text = Text = "Add";
+            but_ok.Text = lab_title.Text = Text = "ADD";
             
             if (urls?.Count > 0)
             {
@@ -40,20 +40,30 @@ namespace game8
                 }
             }
         }
-        public AddF(AccountInfo accountInfo, List<string> urls)
+        public AddF(AccountInfo accountInfo, List<string> urls, bool isClone)
         {
             InitializeComponent();
             _accountInfo = accountInfo;
             if(_accountInfo != null)
             {
-                _account_ID = accountInfo.ID;
+                if(isClone)
+                {
+                    but_ok.Text = lab_title.Text = Text = "ADD";
+                    _account_ID = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                }
+                else
+                {
+                    but_ok.Text = lab_title.Text = Text = "UPDATE";
+                    _account_ID = accountInfo.ID;
+                }
+                
                 com_url.Text = _accountInfo.Url;
                 txt_username.Text = _accountInfo.Username;
                 txt_password.Text = _accountInfo.Password;
                 txt_name.Text = _accountInfo.Name;
                 rtxt_description.Text = _accountInfo.Description;
             }
-            but_ok.Text = lab_title.Text = Text = "Update";
+            
             if(urls?.Count > 0)
             {
                 foreach(var url in urls)

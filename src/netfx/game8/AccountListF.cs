@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -21,8 +22,14 @@ namespace game8
         string _password;
         DelegateProcess _dlg;
         byte[] _keyBytes;
+
         CheckBox _chkall;
         List<string> _urls;
+        string _selectedUrl;
+        FileInfo _configFile;
+        long _fileTicks;
+
+        System.Timers.Timer _tmrCheckFileChange;
         
         public AccountListF()
         {
@@ -30,172 +37,130 @@ namespace game8
             _dlg = new DelegateProcess();
             _chkall = _dlg.AddDataGridViewCheckBoxAll(dgv_account, "dgv_account_col_chk");
             _accountFile = new FileInfo($"{Application.StartupPath}/accounts.json");
+            _fileTicks = 0;
+            _configFile = new FileInfo($"{Application.StartupPath}/config.json");
             _urls = new List<string>();
             var colPassword = dgv_account.Columns["dgv_account_col_password"] as DataGridViewTextBoxColumn;
             
             this.Load += AccountListF_Load;
-            dgv_account.CellContentClick += Dgv_account_CellContentClick;
+            dgv_account.CellClick += Dgv_account_CellClick;
             _selectedRowIndex = 0;
-        }
 
-        int _selectedRowIndex;
-        private void Dgv_account_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            _selectedRowIndex = e.RowIndex;
-        }
-
-        private void AccountListF_Load(object sender, EventArgs e)
-        {
-            Task.Run(() =>
+            if (!SystemInformation.TerminalServerSession)
             {
-                _loadPasswordAsync(true,()=>_RefreshList(null));
-            });
-        }
-
-        #region encrypt / decrypt
-        string sha256(string value, long tick)
-        {
-            byte[] valueBytes = Encoding.UTF8.GetBytes(value);
-            if (tick > 0)
-            {
-                byte[] fileTimeBytes = BitConverter.GetBytes(tick);
-                valueBytes = valueBytes.Union(fileTimeBytes).ToArray();
+                Type dgvType = dgv_account.GetType();
+                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+                pi.SetValue(dgv_account, true, null);
             }
-            _keyBytes = SHA256.Create().ComputeHash(valueBytes);
-
-            return BitConverter.ToString(_keyBytes).Replace("-", "");
+            _tmrCheckFileChange = new System.Timers.Timer(1000);
+            _tmrCheckFileChange.Enabled = true;
+            _tmrCheckFileChange.Elapsed += _tmrCheckFileChange_Elapsed;
         }
-        byte[] EncryptBinary(byte[] binInput)
+
+        private void _tmrCheckFileChange_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            byte[] result = new byte[0];
+            _tmrCheckFileChange.Stop();
             try
             {
-                byte[] binKey = _keyBytes, binIV = Guid.NewGuid().ToByteArray();
-                using (var eAlg = Aes.Create())
+                _accountFile = new FileInfo(_accountFile.FullName);
+                if(_accountFile.LastWriteTimeUtc.Ticks > _fileTicks)
                 {
-                    eAlg.Key = binKey;
-                    eAlg.IV = binIV;
-
-                    using (var msEncrypt = new MemoryStream())
-                    {
-                        msEncrypt.Write(binIV, 0, 8);
-                        using (var encryptor = eAlg.CreateEncryptor())
-                        {
-                            var binEncrypt = encryptor.TransformFinalBlock(binInput, 0, binInput.Length);
-                            encryptor.Dispose();
-                            msEncrypt.Write(binEncrypt, 0, binEncrypt.Length);
-                        }
-                        msEncrypt.Write(binIV, 8, 8);
-                        msEncrypt.Close();
-                        msEncrypt.Dispose();
-
-                        result = msEncrypt.ToArray();
-                    }
-                    eAlg.Dispose();
+                    _fileTicks = _accountFile.LastWriteTimeUtc.Ticks;
+                    txt_qs_TextChanged(null, null);
+                   
                 }
-            }
-            catch //(Exception ex)
-            {
-            }
-            return result;
-        }
-        byte[] DecryptBinary(byte[] binInput)
-        {
-            byte[] result = new byte[0];
-            try
-            {
-                byte[] binKey = _keyBytes, binIV = new byte[16], binEncrypt = new byte[binInput.Length - 16];
-                using (var msEncrypt = new MemoryStream(binInput))
-                {
-                    msEncrypt.Read(binIV, 0, 8);
-                    msEncrypt.Seek(-8, SeekOrigin.End);
-                    msEncrypt.Read(binIV, 8, 8);
-
-                    msEncrypt.Seek(8, SeekOrigin.Begin);
-
-                    msEncrypt.Read(binEncrypt, 0, binEncrypt.Length);
-
-                    msEncrypt.Close();
-                    msEncrypt.Dispose();
-                }
-
-                using (var eAlg = Aes.Create())
-                {
-                    eAlg.Key = binKey;
-                    eAlg.IV = binIV;
-
-                    using (var descryptor = eAlg.CreateDecryptor())
-                    {
-                        try
-                        {
-                            result = descryptor.TransformFinalBlock(binEncrypt, 0, binEncrypt.Length);
-                        }
-                        catch
-                        {
-                            result = Encoding.UTF8.GetBytes($"<encrypted>");
-                        }
-                        descryptor.Dispose();
-                    }
-                    eAlg.Dispose();
-                }
-            }
-            catch //(Exception ex)
-            {
-
-            }
-            return result;
-        }
-
-        byte[] Hex2Bytes(string input)
-        {
-            byte[] result = new byte[0];
-            try
-            {
-                result = new byte[input.Length / 2];
-                for (int i = 0; i < input.Length; i += 2)
-                {
-                    string hexChar = input[i] + "" + input[i + 1];
-                    result[i / 2] = Convert.ToByte(hexChar, 16);
-                }
-            }
-            catch { }
-            return result;
-        }
-        string EncryptToHexString(string clearTextInput)
-        {
-            string result = string.Empty;
-            try
-            {
-                if (string.IsNullOrEmpty(clearTextInput))
-                {
-                    return clearTextInput;
-                }
-                byte[] binInput = Encoding.UTF8.GetBytes(clearTextInput);
-                var binOutput = EncryptBinary(binInput);
-                result = BitConverter.ToString(binOutput).Replace("-", "");
             }
             catch
             {
+
             }
-            return result;
+            _tmrCheckFileChange.Start();
         }
-        string DecryptFromHexString(string hexInput)
+
+        private void Dgv_account_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            string result = default;
+            _selectedRowIndex = e.RowIndex;
+            ts_status_lab_row.Text = $"{e.RowIndex + 1}";
+            ts_status_lab_column.Text = $"{e.ColumnIndex + 1}";
+        }
+
+        int _selectedRowIndex;
+
+        ToolConfigs _toolConfigs;
+        private void AccountListF_Load(object sender, EventArgs e)
+        {
+            if(_configFile.Exists)
+            {
+                string jsonConfigs = File.ReadAllText(_configFile.FullName, Encoding.UTF8);
+                if(!string.IsNullOrWhiteSpace(jsonConfigs))
+                {
+                    _toolConfigs = JsonConvert.DeserializeObject<ToolConfigs>(jsonConfigs);
+                }
+            }
+            if(_toolConfigs==null)
+            {
+                _toolConfigs = new ToolConfigs();
+            }
+            if(_toolConfigs!=null)
+            {
+                if (string.IsNullOrWhiteSpace(_toolConfigs.SharedAccountFilePath))
+                {
+                    OpenFileDialog ofd = new OpenFileDialog
+                    {
+                        Title = "Open shared accounts file",
+                        Filter = "Json File|*.json",
+                        CheckFileExists = false
+                    };
+                    if (ofd.ShowDialog() == DialogResult.OK)
+                    {
+                        _toolConfigs.SharedAccountFilePath = ofd.FileName;
+                        _accountFile = new FileInfo(ofd.FileName);
+                        
+                        _SaveConfigs();
+                    }
+                }
+                else
+                {
+                    _accountFile = new FileInfo(_toolConfigs.SharedAccountFilePath);
+                    if(!_accountFile.Exists)
+                    {
+                        OpenFileDialog ofd = new OpenFileDialog
+                        {
+                            Title = "Open shared accounts file",
+                            Filter = "Json File|*.json",
+                            CheckFileExists = false
+                        };
+                        if (ofd.ShowDialog() == DialogResult.OK)
+                        {
+                            _toolConfigs.SharedAccountFilePath = ofd.FileName;
+                            _accountFile = new FileInfo(ofd.FileName);
+                            _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = ofd.FileName; });
+                            _SaveConfigs();
+                        }
+                    }
+                }
+                _fileTicks = _accountFile.LastWriteTimeUtc.Ticks;
+                _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = _accountFile.FullName; });
+            }
+
+            Task.Run(delegate { _loadPasswordAsync(true, delegate {
+                txt_qs_TextChanged(null, null);
+                _tmrCheckFileChange.Start();
+            }); });
+        }
+
+        void _SaveConfigs()
+        {
             try
             {
-                if (string.IsNullOrEmpty(hexInput))
-                {
-                    return default;
-                }
-                byte[] binInput = Hex2Bytes(hexInput);
-                var binOutput = DecryptBinary(binInput);
-                result = Encoding.UTF8.GetString(binOutput);
+                string json = JsonConvert.SerializeObject(_toolConfigs);
+                File.WriteAllText(_configFile.FullName, json, Encoding.UTF8);
             }
-            catch { }
-            return result;
+            catch //(Exception)
+            {
+
+            }
         }
-        #endregion
 
 
         Task _loadPasswordAsync(bool closeApp=false, Action additionalAction=default)
@@ -205,7 +170,8 @@ namespace game8
             if (passwordF.ShowDialog() == DialogResult.OK)
             {
                 _password = passwordF.Password;
-                string hashPassword = sha256(_password,_accountFile?.LastWriteTimeUtc.Ticks??0);
+                _keyBytes= Modules.Sha256(_password);
+                string hashPassword = BitConverter.ToString(_keyBytes).Replace("-", "");
                 _dlg.Execute(ts_status, () => ts_status_lab_password.Text = $"{hashPassword}");
 
                 additionalAction?.Invoke();
@@ -245,19 +211,19 @@ namespace game8
                                     urls.Add(accountObj.Url);
                                     _urls.Add(accountObj.Url);
                                 }
-                                string username = DecryptFromHexString(accountObj.Username);
-                                if (username?.Equals("<encrypted>", StringComparison.InvariantCultureIgnoreCase) ?? false)
+                                string password = Modules.DecryptFromHexString(accountObj.Password, _keyBytes);
+                                if (password?.Equals("<encrypted>", StringComparison.InvariantCultureIgnoreCase) ?? false)
                                 {
                                     accountObj.CanModify = false;
                                 }
                                 else
                                 {
                                     accountObj.CanModify = true;
-                                    accountObj.Username = username;
-                                    accountObj.Password = DecryptFromHexString(accountObj.Password);
-                                    accountObj.Name = DecryptFromHexString(accountObj.Name);
-                                    accountObj.Description = DecryptFromHexString(accountObj.Description);
-                                    
+                                    accountObj.Password = password;
+                                    accountObj.Username = Modules.DecryptFromHexString(accountObj.Username, _keyBytes);
+                                    accountObj.Name = Modules.DecryptFromHexString(accountObj.Name, _keyBytes);
+                                    accountObj.Description = Modules.DecryptFromHexString(accountObj.Description, _keyBytes);
+
                                 }
 
 
@@ -270,12 +236,19 @@ namespace game8
                 }
                 if (urls.Count > 0)
                 {
+                    int idx = 0, selectedUrlIdx=0;
                     foreach (var url in urls.OrderBy(ite => ite, StringComparer.InvariantCultureIgnoreCase))
                     {
                         
                         _dlg.Execute(ts_menu, () => ts_menu_com_url.Items.Add(url));
+                        if(url==_selectedUrl)
+                        {
+                            _selectedUrl = url;
+                            selectedUrlIdx = idx;
+                        }
+                        idx++;
                     }
-                    _dlg.Execute(ts_menu, () => ts_menu_com_url.SelectedIndex = 0);
+                    _dlg.Execute(ts_menu, () => ts_menu_com_url.SelectedIndex = selectedUrlIdx);
                 }
             }
             catch (Exception ex)
@@ -284,48 +257,78 @@ namespace game8
             }
             return _accounts.Values.ToList();
         }
-        void _RefreshList(string url="")
+        object _lockObj = new object();
+        void _RefreshList(string url, string nameLike, string userNameLike)
         {
-            _dlg.Execute(_chkall, delegate { _chkall.Checked = false; });
-            _dlg.ClearDataGridViewRows(dgv_account);
-            var accountObjs = _GetAccounts();
-            if(!string.IsNullOrWhiteSpace(url) && !url.Equals("-- All --"))
+            lock (_lockObj)
             {
-                accountObjs = accountObjs?.Where(ite => url.Equals(ite.Url, StringComparison.InvariantCultureIgnoreCase))?.ToList();
-            }
-           
-            if (accountObjs?.Count > 0)
-            {
-                int idx = 1;
-                foreach(var accountObj in accountObjs.OrderBy(ite=>ite.Url,StringComparer.InvariantCultureIgnoreCase)
-                    .ThenBy(ite=>ite.Name,StringComparer.InvariantCultureIgnoreCase)
-                    .ThenBy(ite=>ite.Username,StringComparer.InvariantCultureIgnoreCase)
-                    )
+                _selectedUrl = url;
+                _isShown = false;
+                _dlg.Execute(ts_menu, delegate { ts_menu_but_showhide.Text = "Show"; });
+                _dlg.Execute(_chkall, delegate { _chkall.Checked = false; });
+                _dlg.Execute(dgv_account, delegate {
+                    dgv_account.Columns["dgv_account_col_password"].DefaultCellStyle.Font= new Font("Wingdings", 8);
+                });
+                _dlg.ClearDataGridViewRows(dgv_account);
+                var accountObjs = _GetAccounts();
+                if (!string.IsNullOrWhiteSpace(url) && !url.Equals("-- All --"))
                 {
-                    if(accountObj.CanModify)
-                    {
-                        _dlg.AddDataGridViewRow(dgv_account, false, idx
-                            ,accountObj.ID
-                            , accountObj.Url
-                            , _isShown? accountObj.Name:string.Join("", accountObj.Name.Select(c => "*"))
-                            , accountObj.Name
-                            , _isShown? accountObj.Username : string.Join("", accountObj.Username.Select(c => "*"))
-                            , accountObj.Username
-                            , _isShown? accountObj.Password : string.Join("", accountObj.Password.Select(c=>"*"))
-                            , accountObj.Password
-                            , _isShown? accountObj.Description:string.Join("", accountObj.Description.Select(c => "*"))
-                            , accountObj.Description
-                            );
-                    }
-                    else
-                    {
-                        _dlg.AddDataGridViewRow(dgv_account, false, idx, accountObj.ID, accountObj.Url, "<encrypted>", accountObj.Name, "<encrypted>", accountObj.Username, "<encrypted>", accountObj.Password, "<encrypted>", accountObj.Description);
-                    }
-                    
-                    idx++;
+                    accountObjs = accountObjs?.Where(ite => url.Equals(ite.Url, StringComparison.InvariantCultureIgnoreCase))?.ToList();
+                }
+                if (!string.IsNullOrWhiteSpace(nameLike))
+                {
+                    accountObjs = accountObjs?.Where(ite => ite.Name.IndexOf(nameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                }
+                if (!string.IsNullOrWhiteSpace(userNameLike))
+                {
+                    accountObjs = accountObjs?.Where(ite => ite.Username.IndexOf(userNameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                 }
 
+                if (accountObjs?.Count > 0)
+                {
+                    int idx = 1;
+                    foreach (var accountObj in accountObjs.OrderBy(ite => ite.Url, StringComparer.InvariantCultureIgnoreCase)
+                        .ThenBy(ite => ite.Name, StringComparer.InvariantCultureIgnoreCase)
+                        .ThenBy(ite => ite.Username, StringComparer.InvariantCultureIgnoreCase)
+                        )
+                    {
+                        if (accountObj.CanModify)
+                        {
+                          int rIdx=  _dlg.AddDataGridViewRow(dgv_account, false, idx
+                                , accountObj.ID
+                                , accountObj.Url
+                                , accountObj.Name
+                                , accountObj.Name
+                                , accountObj.Username
+                                , accountObj.Username
+                                , _isShown ? accountObj.Password : Modules.Hidden(accountObj.Password)
+                                , accountObj.Password
+                                , accountObj.Description
+                                , accountObj.Description
+                                );
+                            _dlg.Execute(dgv_account, delegate {
+                                if(_isShown)
+                                {
+                                    dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Arail", 9);
+                                }
+                                else
+                                {
+                                    dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Wingdings", 8);
+                                }
+                                
+                            });
+                        }
+                        //else
+                        //{
+                        //    _dlg.AddDataGridViewRow(dgv_account, false, idx, accountObj.ID, accountObj.Url, accountObj.Name, accountObj.Name, accountObj.Username, accountObj.Username, "<encrypted>", accountObj.Password, accountObj.Description, accountObj.Description);
+                        //}
+
+                        idx++;
+                    }
+
+                }
             }
+            
         }
        async private void ts_menu_but_add_Click(object sender, EventArgs e)
         {
@@ -352,28 +355,22 @@ namespace game8
             try
             {
                 DateTime utcNow = DateTime.UtcNow;
-                string newHashPassword = sha256(_password, utcNow.Ticks);
-                _dlg.Execute(ts_status, () => ts_status_lab_password.Text = $"{newHashPassword}");
                 if (_accounts?.Count > 0)
                 {
                     foreach(var accountObj in _accounts)
                     {
                         if(accountObj.Value.CanModify)
                         {
-                            accountObj.Value.Username = EncryptToHexString(accountObj.Value.Username);
-                            accountObj.Value.Password = EncryptToHexString(accountObj.Value.Password);
-                            accountObj.Value.Name = EncryptToHexString(accountObj.Value.Name);
-                            accountObj.Value.Description = EncryptToHexString(accountObj.Value.Description);
+                            accountObj.Value.Username = Modules.EncryptToHexString(accountObj.Value.Username, _keyBytes);
+                            accountObj.Value.Name = Modules.EncryptToHexString(accountObj.Value.Name, _keyBytes);
+                            accountObj.Value.Description = Modules.EncryptToHexString(accountObj.Value.Description, _keyBytes);
+                            accountObj.Value.Password = Modules.EncryptToHexString(accountObj.Value.Password, _keyBytes);
                         }
                     }
                     
                 }
                 string json = JsonConvert.SerializeObject(_accounts.Values, Formatting.Indented);
                 File.WriteAllText(_accountFile.FullName, json, Encoding.UTF8);
-                File.SetLastWriteTimeUtc(_accountFile.FullName, utcNow);
-
-                _accountFile = new FileInfo(_accountFile.FullName);
-                _RefreshList();
             }
             catch// (Exception)
             {
@@ -385,14 +382,14 @@ namespace game8
         private void ts_menu_but_view_Click(object sender, EventArgs e)
         {
             string url = ts_menu_com_url.Text;
-            Task.Run(()=> _RefreshList(url));
+            Task.Run(()=> _RefreshList(url,null,null));
         }
 
         private void ts_menu_but_retypepassword_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
             {
-                _loadPasswordAsync(false,() => _RefreshList(null));
+                _loadPasswordAsync(false,() => _RefreshList(null,null,null));
             });
         }
 
@@ -419,7 +416,7 @@ namespace game8
                     _accounts.TryGetValue(id, out accountInfo);
                     if(accountInfo?.CanModify??false)
                     {
-                        AddF addF = new AddF(accountInfo, _urls);
+                        AddF addF = new AddF(accountInfo, _urls, false);
                         if(addF.ShowDialog()== DialogResult.OK)
                         {
                             _accounts[addF.AccountInfo.ID] = addF.AccountInfo;
@@ -443,8 +440,26 @@ namespace game8
         {
             try
             {
+                if(!_isShown)
+                {
+                    PasswordF passwordF = new PasswordF();
+                    if (passwordF.ShowDialog() == DialogResult.OK)
+                    {
+                        if (passwordF.Password != _password)
+                        {
+                            MessageBox.Show("Password is incorrect.");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                
                 _isShown = false;
-                if (ts_menu_but_showhide.Text=="Show")
+
+                if (ts_menu_but_showhide.Text == "Show")
                 {
                     ts_menu_but_showhide.Text = "Hide";
                     _isShown = true;
@@ -457,7 +472,6 @@ namespace game8
                 if (rows?.Count > 0)
                 {
                     Task.Run(() => _showHideContentAsync(rows, _isShown));
-                    
                 }
 
             }
@@ -480,17 +494,13 @@ namespace game8
                     {
                         if (isShown)
                         {
-                            row.Cells["dgv_account_col_username"].Value = row.Cells["dgv_account_col_username_hidden"].Value;
-                            row.Cells["dgv_account_col_name"].Value = row.Cells["dgv_account_col_name_hidden"].Value;
+                            row.Cells["dgv_account_col_password"].Style.Font = new Font("Arial", 9);
                             row.Cells["dgv_account_col_password"].Value = row.Cells["dgv_account_col_password_hidden"].Value;
-                            row.Cells["dgv_account_col_description"].Value = row.Cells["dgv_account_col_description_hidden"].Value;
                         }
                         else
                         {
-                            row.Cells["dgv_account_col_username"].Value = string.Join("", row.Cells["dgv_account_col_username_hidden"].Value.ToString().Select(c => "*"));
-                            row.Cells["dgv_account_col_name"].Value = string.Join("", row.Cells["dgv_account_col_name_hidden"].Value.ToString().Select(c => "*"));
-                            row.Cells["dgv_account_col_password"].Value = string.Join("", row.Cells["dgv_account_col_password_hidden"].Value.ToString().Select(c => "*"));
-                            row.Cells["dgv_account_col_description"].Value = string.Join("", row.Cells["dgv_account_col_description_hidden"].Value.ToString().Select(c => "*"));
+                            row.Cells["dgv_account_col_password"].Style.Font = new Font("Wingdings", 8);
+                            row.Cells["dgv_account_col_password"].Value = Modules.Hidden(row.Cells["dgv_account_col_password"].Value.ToString());
                         }
                     }
                 }
@@ -519,6 +529,104 @@ namespace game8
                     }
                     Task.Run(_SaveAccountAsync);
                 }
+            }
+        }
+
+        private void ts_menu_but_clone_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow selectedRow = null;
+                var rows = _dlg.GetDataGridViewRows(dgv_account);
+                if (rows?.Count > 0)
+                {
+                    selectedRow = rows.FirstOrDefault(ite => ite.Index == _selectedRowIndex);
+
+                }
+                if (selectedRow == null)
+                {
+                    rows = _dlg.GetDataGridViewCheckedRows(dgv_account, "dgv_account_col_chk");
+                    selectedRow = rows?.FirstOrDefault();
+                }
+                if (selectedRow != null)
+                {
+                    long id = Convert.ToInt64(selectedRow.Cells["dgv_account_col_id"].Value);
+                    AccountInfo accountInfo;
+                    _accounts.TryGetValue(id, out accountInfo);
+                    if (accountInfo != null)
+                    {
+                        AddF addF = new AddF(accountInfo, _urls, true);
+                        if (addF.ShowDialog() == DialogResult.OK)
+                        {
+                            _accounts[addF.AccountInfo.ID] = addF.AccountInfo;
+                            Task.Run(_SaveAccountAsync);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void ts_menu_but_updatepassword_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(MessageBox.Show("Do you want to change the password?","Change password", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    PasswordF passwordF = new PasswordF();
+                    if (passwordF.ShowDialog() == DialogResult.OK)
+                    {
+                        string newPassword = passwordF.Password;
+                        var accounts = _GetAccounts();
+                        _keyBytes = Modules.Sha256(newPassword);
+                        _password = newPassword;
+                        string hashPassword = BitConverter.ToString(_keyBytes).Replace("-", "");
+                        _dlg.Execute(ts_status, () => ts_status_lab_password.Text = $"{hashPassword}");
+                        Task.Run(_SaveAccountAsync);
+                    }
+                }
+                
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void txt_qs_TextChanged(object sender, EventArgs e)
+        {
+
+            _dlg.Execute(this, delegate {
+                string nameLike = txt_qs_name.Text;
+                string userNameLike = txt_qs_username.Text;
+                string url = ts_menu_com_url.Text;
+                _RefreshList(url, nameLike, userNameLike);
+            });
+        }
+
+        private void but_qs_clear_Click(object sender, EventArgs e)
+        {
+            txt_qs_name.Text = txt_qs_username.Text = "";
+            txt_qs_TextChanged(sender, e);
+        }
+
+        private void toolStripLabel4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog
+            {
+                Title = "Open shared accounts file",
+                Filter = "Json File|*.json",
+                CheckFileExists = false
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                _toolConfigs.SharedAccountFilePath = ofd.FileName;
+                _accountFile = new FileInfo(ofd.FileName);
+                _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = ofd.FileName; });
+                _SaveConfigs();
             }
         }
     }
