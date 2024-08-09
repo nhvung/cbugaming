@@ -57,11 +57,11 @@ namespace game8
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.ts_menu_com_url = new System.Windows.Forms.ToolStripComboBox();
-            this.ts_menu_but_view = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_updatepassword = new System.Windows.Forms.ToolStripButton();
             this.ts_menu_but_showhide = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ts_menu_but_delete = new System.Windows.Forms.ToolStripButton();
-            this.ts_menu_but_updatepassword = new System.Windows.Forms.ToolStripButton();
+            this.ts_menu_but_view = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_account = new System.Windows.Forms.DataGridView();
             this.dgv_account_col_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -77,6 +77,10 @@ namespace game8
             this.dgv_account_col_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_account_col_description_hidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txt_qs_description = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_qs_url = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.but_qs_clear = new System.Windows.Forms.Button();
             this.txt_qs_username = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -98,7 +102,7 @@ namespace game8
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1184, 30);
+            this.panel1.Size = new System.Drawing.Size(1236, 30);
             this.panel1.TabIndex = 0;
             // 
             // label1
@@ -118,7 +122,7 @@ namespace game8
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 650);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1184, 30);
+            this.panel2.Size = new System.Drawing.Size(1236, 30);
             this.panel2.TabIndex = 1;
             // 
             // ts_status
@@ -136,7 +140,7 @@ namespace game8
             this.ts_status_lab_column});
             this.ts_status.Location = new System.Drawing.Point(0, 5);
             this.ts_status.Name = "ts_status";
-            this.ts_status.Size = new System.Drawing.Size(1184, 25);
+            this.ts_status.Size = new System.Drawing.Size(1236, 25);
             this.ts_status.TabIndex = 0;
             this.ts_status.Text = "toolStrip1";
             // 
@@ -210,7 +214,7 @@ namespace game8
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel4.Location = new System.Drawing.Point(1174, 30);
+            this.panel4.Location = new System.Drawing.Point(1226, 30);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(10, 620);
             this.panel4.TabIndex = 3;
@@ -220,7 +224,7 @@ namespace game8
             this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel5.Location = new System.Drawing.Point(10, 30);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1164, 10);
+            this.panel5.Size = new System.Drawing.Size(1216, 10);
             this.panel5.TabIndex = 4;
             // 
             // ts_menu
@@ -235,14 +239,14 @@ namespace game8
             this.toolStripSeparator1,
             this.toolStripLabel1,
             this.ts_menu_com_url,
-            this.ts_menu_but_view,
+            this.ts_menu_but_updatepassword,
             this.ts_menu_but_showhide,
             this.toolStripSeparator2,
             this.ts_menu_but_delete,
-            this.ts_menu_but_updatepassword});
+            this.ts_menu_but_view});
             this.ts_menu.Location = new System.Drawing.Point(10, 40);
             this.ts_menu.Name = "ts_menu";
-            this.ts_menu.Size = new System.Drawing.Size(1164, 25);
+            this.ts_menu.Size = new System.Drawing.Size(1216, 25);
             this.ts_menu.TabIndex = 6;
             this.ts_menu.Text = "toolStrip1";
             // 
@@ -299,43 +303,14 @@ namespace game8
             // 
             // ts_menu_com_url
             // 
+            this.ts_menu_com_url.AutoToolTip = true;
             this.ts_menu_com_url.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ts_menu_com_url.Items.AddRange(new object[] {
             "-- All --"});
+            this.ts_menu_com_url.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
+            this.ts_menu_com_url.MaxDropDownItems = 10;
             this.ts_menu_com_url.Name = "ts_menu_com_url";
-            this.ts_menu_com_url.Size = new System.Drawing.Size(250, 25);
-            // 
-            // ts_menu_but_view
-            // 
-            this.ts_menu_but_view.Image = global::game8.Properties.Resources.Search_16x;
-            this.ts_menu_but_view.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_view.Name = "ts_menu_but_view";
-            this.ts_menu_but_view.Size = new System.Drawing.Size(55, 22);
-            this.ts_menu_but_view.Text = "View";
-            this.ts_menu_but_view.Click += new System.EventHandler(this.ts_menu_but_view_Click);
-            // 
-            // ts_menu_but_showhide
-            // 
-            this.ts_menu_but_showhide.Image = global::game8.Properties.Resources.ShowHideComparisonData_16x;
-            this.ts_menu_but_showhide.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_showhide.Name = "ts_menu_but_showhide";
-            this.ts_menu_but_showhide.Size = new System.Drawing.Size(59, 22);
-            this.ts_menu_but_showhide.Text = "Show";
-            this.ts_menu_but_showhide.Click += new System.EventHandler(this.ts_menu_but_showhide_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // ts_menu_but_delete
-            // 
-            this.ts_menu_but_delete.Image = global::game8.Properties.Resources.DeleteUser_16x;
-            this.ts_menu_but_delete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_delete.Name = "ts_menu_but_delete";
-            this.ts_menu_but_delete.Size = new System.Drawing.Size(65, 22);
-            this.ts_menu_but_delete.Text = "Delete";
-            this.ts_menu_but_delete.Click += new System.EventHandler(this.ts_menu_but_delete_Click);
+            this.ts_menu_com_url.Size = new System.Drawing.Size(500, 25);
             // 
             // ts_menu_but_updatepassword
             // 
@@ -347,15 +322,51 @@ namespace game8
             this.ts_menu_but_updatepassword.Text = "Update Password";
             this.ts_menu_but_updatepassword.Click += new System.EventHandler(this.ts_menu_but_updatepassword_Click);
             // 
+            // ts_menu_but_showhide
+            // 
+            this.ts_menu_but_showhide.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ts_menu_but_showhide.Image = global::game8.Properties.Resources.ShowHideComparisonData_16x;
+            this.ts_menu_but_showhide.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_showhide.Name = "ts_menu_but_showhide";
+            this.ts_menu_but_showhide.Size = new System.Drawing.Size(59, 22);
+            this.ts_menu_but_showhide.Text = "Show";
+            this.ts_menu_but_showhide.Click += new System.EventHandler(this.ts_menu_but_showhide_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // ts_menu_but_delete
+            // 
+            this.ts_menu_but_delete.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ts_menu_but_delete.Image = global::game8.Properties.Resources.DeleteUser_16x;
+            this.ts_menu_but_delete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_delete.Name = "ts_menu_but_delete";
+            this.ts_menu_but_delete.Size = new System.Drawing.Size(65, 22);
+            this.ts_menu_but_delete.Text = "Delete";
+            this.ts_menu_but_delete.Click += new System.EventHandler(this.ts_menu_but_delete_Click);
+            // 
+            // ts_menu_but_view
+            // 
+            this.ts_menu_but_view.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ts_menu_but_view.Image = global::game8.Properties.Resources.Search_16x;
+            this.ts_menu_but_view.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_view.Name = "ts_menu_but_view";
+            this.ts_menu_but_view.Size = new System.Drawing.Size(55, 22);
+            this.ts_menu_but_view.Text = "View";
+            this.ts_menu_but_view.Click += new System.EventHandler(this.ts_menu_but_view_Click);
+            // 
             // groupBox1
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.dgv_account);
-            this.groupBox1.Location = new System.Drawing.Point(10, 218);
+            this.groupBox1.Location = new System.Drawing.Point(10, 258);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1164, 426);
+            this.groupBox1.Size = new System.Drawing.Size(1216, 386);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Account List - If the PASSWORD is INCORRECT, the list has been hidden";
@@ -396,7 +407,7 @@ namespace game8
             this.dgv_account.RowHeadersVisible = false;
             this.dgv_account.RowTemplate.Height = 30;
             this.dgv_account.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgv_account.Size = new System.Drawing.Size(1158, 406);
+            this.dgv_account.Size = new System.Drawing.Size(1210, 366);
             this.dgv_account.TabIndex = 0;
             // 
             // dgv_account_col_chk
@@ -492,6 +503,10 @@ namespace game8
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txt_qs_description);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.txt_qs_url);
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.but_qs_clear);
             this.groupBox2.Controls.Add(this.txt_qs_username);
             this.groupBox2.Controls.Add(this.label3);
@@ -500,14 +515,48 @@ namespace game8
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(10, 65);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1164, 127);
+            this.groupBox2.Size = new System.Drawing.Size(1216, 187);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Quick Search";
             // 
+            // txt_qs_description
+            // 
+            this.txt_qs_description.Location = new System.Drawing.Point(133, 101);
+            this.txt_qs_description.Name = "txt_qs_description";
+            this.txt_qs_description.Size = new System.Drawing.Size(615, 21);
+            this.txt_qs_description.TabIndex = 8;
+            this.txt_qs_description.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(30, 104);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(73, 15);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Description:";
+            // 
+            // txt_qs_url
+            // 
+            this.txt_qs_url.Location = new System.Drawing.Point(133, 20);
+            this.txt_qs_url.Name = "txt_qs_url";
+            this.txt_qs_url.Size = new System.Drawing.Size(615, 21);
+            this.txt_qs_url.TabIndex = 6;
+            this.txt_qs_url.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(30, 23);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(26, 15);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Url:";
+            // 
             // but_qs_clear
             // 
-            this.but_qs_clear.Location = new System.Drawing.Point(110, 88);
+            this.but_qs_clear.Location = new System.Drawing.Point(133, 142);
             this.but_qs_clear.Name = "but_qs_clear";
             this.but_qs_clear.Size = new System.Drawing.Size(75, 23);
             this.but_qs_clear.TabIndex = 4;
@@ -517,16 +566,16 @@ namespace game8
             // 
             // txt_qs_username
             // 
-            this.txt_qs_username.Location = new System.Drawing.Point(110, 52);
+            this.txt_qs_username.Location = new System.Drawing.Point(133, 74);
             this.txt_qs_username.Name = "txt_qs_username";
-            this.txt_qs_username.Size = new System.Drawing.Size(225, 21);
+            this.txt_qs_username.Size = new System.Drawing.Size(615, 21);
             this.txt_qs_username.TabIndex = 3;
             this.txt_qs_username.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(35, 55);
+            this.label3.Location = new System.Drawing.Point(30, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
             this.label3.TabIndex = 2;
@@ -534,16 +583,16 @@ namespace game8
             // 
             // txt_qs_name
             // 
-            this.txt_qs_name.Location = new System.Drawing.Point(110, 25);
+            this.txt_qs_name.Location = new System.Drawing.Point(133, 47);
             this.txt_qs_name.Name = "txt_qs_name";
-            this.txt_qs_name.Size = new System.Drawing.Size(225, 21);
+            this.txt_qs_name.Size = new System.Drawing.Size(615, 21);
             this.txt_qs_name.TabIndex = 1;
             this.txt_qs_name.TextChanged += new System.EventHandler(this.txt_qs_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 28);
+            this.label2.Location = new System.Drawing.Point(30, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 15);
             this.label2.TabIndex = 0;
@@ -554,7 +603,7 @@ namespace game8
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1184, 680);
+            this.ClientSize = new System.Drawing.Size(1236, 680);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.ts_menu);
@@ -635,6 +684,10 @@ namespace game8
         private System.Windows.Forms.ToolStripLabel ts_status_lab_column;
         private System.Windows.Forms.ToolStripButton toolStripLabel4;
         private System.Windows.Forms.ToolStripLabel ts_status_lab_filepath;
+        private System.Windows.Forms.TextBox txt_qs_description;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_qs_url;
+        private System.Windows.Forms.Label label4;
     }
 }
 

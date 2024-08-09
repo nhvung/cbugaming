@@ -34,27 +34,39 @@ namespace game8
         public AccountListF()
         {
             InitializeComponent();
-            _dlg = new DelegateProcess();
-            _chkall = _dlg.AddDataGridViewCheckBoxAll(dgv_account, "dgv_account_col_chk");
-            _accountFile = new FileInfo($"{Application.StartupPath}/accounts.json");
-            _fileTicks = 0;
-            _configFile = new FileInfo($"{Application.StartupPath}/config.json");
-            _urls = new List<string>();
-            var colPassword = dgv_account.Columns["dgv_account_col_password"] as DataGridViewTextBoxColumn;
-            
-            this.Load += AccountListF_Load;
-            dgv_account.CellClick += Dgv_account_CellClick;
-            _selectedRowIndex = 0;
-
-            if (!SystemInformation.TerminalServerSession)
+            try
             {
-                Type dgvType = dgv_account.GetType();
-                PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
-                pi.SetValue(dgv_account, true, null);
+                _dlg = new DelegateProcess();
+                _chkall = _dlg.AddDataGridViewCheckBoxAll(dgv_account, "dgv_account_col_chk");
+                _accountFile = new FileInfo($"{Application.StartupPath}/accounts.json");
+                _fileTicks = 0;
+                _configFile = new FileInfo($"{Application.StartupPath}/config.json");
+                _urls = new List<string>();
+                var colPassword = dgv_account.Columns["dgv_account_col_password"] as DataGridViewTextBoxColumn;
+
+                this.Load += AccountListF_Load;
+                dgv_account.CellClick += Dgv_account_CellClick;
+                _selectedRowIndex = 0;
+
+                if (!SystemInformation.TerminalServerSession)
+                {
+                    Type dgvType = dgv_account.GetType();
+                    PropertyInfo pi = dgvType.GetProperty("DoubleBuffered", BindingFlags.Instance | BindingFlags.NonPublic);
+                    pi.SetValue(dgv_account, true, null);
+                }
+                _tmrCheckFileChange = new System.Timers.Timer(1000);
+                _tmrCheckFileChange.Enabled = true;
+                _tmrCheckFileChange.Elapsed += _tmrCheckFileChange_Elapsed;
+                FormClosed += (o, e) => {
+                    Application.Exit();
+                    Environment.Exit(0);
+                };
             }
-            _tmrCheckFileChange = new System.Timers.Timer(1000);
-            _tmrCheckFileChange.Enabled = true;
-            _tmrCheckFileChange.Elapsed += _tmrCheckFileChange_Elapsed;
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
+            
         }
 
         private void _tmrCheckFileChange_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
@@ -62,26 +74,35 @@ namespace game8
             _tmrCheckFileChange.Stop();
             try
             {
+
                 _accountFile = new FileInfo(_accountFile.FullName);
                 if(_accountFile.LastWriteTimeUtc.Ticks > _fileTicks)
                 {
                     _fileTicks = _accountFile.LastWriteTimeUtc.Ticks;
                     txt_qs_TextChanged(null, null);
-                   
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
+            Thread.Sleep(3000);
             _tmrCheckFileChange.Start();
         }
 
         private void Dgv_account_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            _selectedRowIndex = e.RowIndex;
-            ts_status_lab_row.Text = $"{e.RowIndex + 1}";
-            ts_status_lab_column.Text = $"{e.ColumnIndex + 1}";
+            try
+            {
+                _selectedRowIndex = e.RowIndex;
+                ts_status_lab_row.Text = $"{e.RowIndex + 1}";
+                ts_status_lab_column.Text = $"{e.ColumnIndex + 1}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
+            
         }
 
         int _selectedRowIndex;
@@ -89,40 +110,24 @@ namespace game8
         ToolConfigs _toolConfigs;
         private void AccountListF_Load(object sender, EventArgs e)
         {
-            if(_configFile.Exists)
+            try
             {
-                string jsonConfigs = File.ReadAllText(_configFile.FullName, Encoding.UTF8);
-                if(!string.IsNullOrWhiteSpace(jsonConfigs))
+
+                if (_configFile.Exists)
                 {
-                    _toolConfigs = JsonConvert.DeserializeObject<ToolConfigs>(jsonConfigs);
-                }
-            }
-            if(_toolConfigs==null)
-            {
-                _toolConfigs = new ToolConfigs();
-            }
-            if(_toolConfigs!=null)
-            {
-                if (string.IsNullOrWhiteSpace(_toolConfigs.SharedAccountFilePath))
-                {
-                    OpenFileDialog ofd = new OpenFileDialog
+                    string jsonConfigs = File.ReadAllText(_configFile.FullName, Encoding.UTF8);
+                    if (!string.IsNullOrWhiteSpace(jsonConfigs))
                     {
-                        Title = "Open shared accounts file",
-                        Filter = "Json File|*.json",
-                        CheckFileExists = false
-                    };
-                    if (ofd.ShowDialog() == DialogResult.OK)
-                    {
-                        _toolConfigs.SharedAccountFilePath = ofd.FileName;
-                        _accountFile = new FileInfo(ofd.FileName);
-                        
-                        _SaveConfigs();
+                        _toolConfigs = JsonConvert.DeserializeObject<ToolConfigs>(jsonConfigs);
                     }
                 }
-                else
+                if (_toolConfigs == null)
                 {
-                    _accountFile = new FileInfo(_toolConfigs.SharedAccountFilePath);
-                    if(!_accountFile.Exists)
+                    _toolConfigs = new ToolConfigs();
+                }
+                if (_toolConfigs != null)
+                {
+                    if (string.IsNullOrWhiteSpace(_toolConfigs.SharedAccountFilePath))
                     {
                         OpenFileDialog ofd = new OpenFileDialog
                         {
@@ -134,19 +139,47 @@ namespace game8
                         {
                             _toolConfigs.SharedAccountFilePath = ofd.FileName;
                             _accountFile = new FileInfo(ofd.FileName);
-                            _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = ofd.FileName; });
+
                             _SaveConfigs();
                         }
                     }
+                    else
+                    {
+                        _accountFile = new FileInfo(_toolConfigs.SharedAccountFilePath);
+                        if (!_accountFile.Exists)
+                        {
+                            OpenFileDialog ofd = new OpenFileDialog
+                            {
+                                Title = "Open shared accounts file",
+                                Filter = "Json File|*.json",
+                                CheckFileExists = false
+                            };
+                            if (ofd.ShowDialog() == DialogResult.OK)
+                            {
+                                _toolConfigs.SharedAccountFilePath = ofd.FileName;
+                                _accountFile = new FileInfo(ofd.FileName);
+                                _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = ofd.FileName; });
+                                _SaveConfigs();
+                            }
+                        }
+                    }
+                    _fileTicks = _accountFile.LastWriteTimeUtc.Ticks;
+                    _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = _accountFile.FullName; });
                 }
-                _fileTicks = _accountFile.LastWriteTimeUtc.Ticks;
-                _dlg.Execute(ts_status, delegate { ts_status_lab_filepath.Text = _accountFile.FullName; });
-            }
 
-            Task.Run(delegate { _loadPasswordAsync(true, delegate {
-                txt_qs_TextChanged(null, null);
-                _tmrCheckFileChange.Start();
-            }); });
+                Task.Run(delegate {
+                    Thread.Sleep(100);
+                    _loadPasswordAsync(true, delegate {
+                        txt_qs_TextChanged(null, null);
+                        _tmrCheckFileChange.Start();
+                    });
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
+            
         }
 
         void _SaveConfigs()
@@ -156,34 +189,41 @@ namespace game8
                 string json = JsonConvert.SerializeObject(_toolConfigs);
                 File.WriteAllText(_configFile.FullName, json, Encoding.UTF8);
             }
-            catch //(Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
 
         Task _loadPasswordAsync(bool closeApp=false, Action additionalAction=default)
         {
-            
-            PasswordF passwordF = new PasswordF();
-            if (passwordF.ShowDialog() == DialogResult.OK)
+            try
             {
-                _password = passwordF.Password;
-                _keyBytes= Modules.Sha256(_password);
-                string hashPassword = BitConverter.ToString(_keyBytes).Replace("-", "");
-                _dlg.Execute(ts_status, () => ts_status_lab_password.Text = $"{hashPassword}");
-
-                additionalAction?.Invoke();
-            }
-            else
-            {
-                if (closeApp)
+                PasswordF passwordF = new PasswordF();
+                if (passwordF.ShowDialog() == DialogResult.OK)
                 {
-                    _dlg.Execute(this, Close);
+                    _password = passwordF.Password;
+                    _keyBytes = Modules.Sha256(_password);
+                    string hashPassword = BitConverter.ToString(_keyBytes).Replace("-", "");
+                    _dlg.Execute(ts_status, () => ts_status_lab_password.Text = $"{hashPassword}");
+
+                    additionalAction?.Invoke();
                 }
-               
+                else
+                {
+                    if (closeApp)
+                    {
+                        _dlg.Execute(this, Close);
+                    }
+
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
+            
             return Task.CompletedTask;
         }
 
@@ -195,9 +235,20 @@ namespace game8
             {
                 _urls = new List<string>();
                 List<string> urls = new List<string>() {"-- All --"};
+                _accountFile = new FileInfo(_accountFile.FullName);
                 if (_accountFile.Exists)
                 {
-                    string json = File.ReadAllText(_accountFile.FullName, Encoding.UTF8);
+
+                    string json = string.Empty;
+                    using(var fs = _accountFile.Open(FileMode.OpenOrCreate, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        using(var stream = new StreamReader(fs,Encoding.UTF8))
+                        {
+                            json = stream.ReadToEnd();
+                            stream.Close();
+                        }
+                        fs.Close();
+                    }
                     if(!string.IsNullOrWhiteSpace(json))
                     {
                         var accountObjs = JsonConvert.DeserializeObject<List<AccountInfo>>(json);
@@ -253,27 +304,34 @@ namespace game8
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
             return _accounts.Values.ToList();
         }
         object _lockObj = new object();
-        void _RefreshList(string url, string nameLike, string userNameLike)
+        void _RefreshList(string url, string nameLike, string userNameLike, string urlLike, string descriptionLike)
         {
-            lock (_lockObj)
+            try
             {
                 _selectedUrl = url;
                 _isShown = false;
                 _dlg.Execute(ts_menu, delegate { ts_menu_but_showhide.Text = "Show"; });
                 _dlg.Execute(_chkall, delegate { _chkall.Checked = false; });
                 _dlg.Execute(dgv_account, delegate {
-                    dgv_account.Columns["dgv_account_col_password"].DefaultCellStyle.Font= new Font("Wingdings", 8);
+                    dgv_account.Columns["dgv_account_col_password"].DefaultCellStyle.Font = new Font("Wingdings", 8);
                 });
                 _dlg.ClearDataGridViewRows(dgv_account);
                 var accountObjs = _GetAccounts();
                 if (!string.IsNullOrWhiteSpace(url) && !url.Equals("-- All --"))
                 {
                     accountObjs = accountObjs?.Where(ite => url.Equals(ite.Url, StringComparison.InvariantCultureIgnoreCase))?.ToList();
+                }
+                else
+                {
+                    if (!string.IsNullOrWhiteSpace(urlLike))
+                    {
+                        accountObjs = accountObjs?.Where(ite => ite.Url.IndexOf(urlLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                    }
                 }
                 if (!string.IsNullOrWhiteSpace(nameLike))
                 {
@@ -283,52 +341,63 @@ namespace game8
                 {
                     accountObjs = accountObjs?.Where(ite => ite.Username.IndexOf(userNameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                 }
+                if (!string.IsNullOrWhiteSpace(descriptionLike))
+                {
+                    accountObjs = accountObjs?.Where(ite => ite.Description.IndexOf(descriptionLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                }
 
                 if (accountObjs?.Count > 0)
                 {
-                    int idx = 1;
-                    foreach (var accountObj in accountObjs.OrderBy(ite => ite.Url, StringComparer.InvariantCultureIgnoreCase)
-                        .ThenBy(ite => ite.Name, StringComparer.InvariantCultureIgnoreCase)
-                        .ThenBy(ite => ite.Username, StringComparer.InvariantCultureIgnoreCase)
-                        )
+                    lock(_lockObj)
                     {
-                        if (accountObj.CanModify)
+                        int idx = 1;
+                        foreach (var accountObj in accountObjs.OrderBy(ite => ite.Url, StringComparer.InvariantCultureIgnoreCase)
+                            .ThenBy(ite => ite.Name, StringComparer.InvariantCultureIgnoreCase)
+                            .ThenBy(ite => ite.Username, StringComparer.InvariantCultureIgnoreCase)
+                            )
                         {
-                          int rIdx=  _dlg.AddDataGridViewRow(dgv_account, false, idx
-                                , accountObj.ID
-                                , accountObj.Url
-                                , accountObj.Name
-                                , accountObj.Name
-                                , accountObj.Username
-                                , accountObj.Username
-                                , _isShown ? accountObj.Password : Modules.Hidden(accountObj.Password)
-                                , accountObj.Password
-                                , accountObj.Description
-                                , accountObj.Description
-                                );
-                            _dlg.Execute(dgv_account, delegate {
-                                if(_isShown)
-                                {
-                                    dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Arail", 9);
-                                }
-                                else
-                                {
-                                    dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Wingdings", 8);
-                                }
-                                
-                            });
-                        }
-                        //else
-                        //{
-                        //    _dlg.AddDataGridViewRow(dgv_account, false, idx, accountObj.ID, accountObj.Url, accountObj.Name, accountObj.Name, accountObj.Username, accountObj.Username, "<encrypted>", accountObj.Password, accountObj.Description, accountObj.Description);
-                        //}
+                            if (accountObj.CanModify)
+                            {
+                                int rIdx = _dlg.AddDataGridViewRow(dgv_account, false, idx
+                                      , accountObj.ID
+                                      , accountObj.Url
+                                      , accountObj.Name
+                                      , accountObj.Name
+                                      , accountObj.Username
+                                      , accountObj.Username
+                                      , _isShown ? accountObj.Password : Modules.Hidden(accountObj.Password)
+                                      , accountObj.Password
+                                      , accountObj.Description
+                                      , accountObj.Description
+                                      );
+                                _dlg.Execute(dgv_account, delegate {
+                                    if (_isShown)
+                                    {
+                                        dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Arail", 9);
+                                    }
+                                    else
+                                    {
+                                        dgv_account["dgv_account_col_password", rIdx].Style.Font = new Font("Wingdings", 8);
+                                    }
 
-                        idx++;
+                                });
+                            }
+                            //else
+                            //{
+                            //    _dlg.AddDataGridViewRow(dgv_account, false, idx, accountObj.ID, accountObj.Url, accountObj.Name, accountObj.Name, accountObj.Username, accountObj.Username, "<encrypted>", accountObj.Password, accountObj.Description, accountObj.Description);
+                            //}
+
+                            idx++;
+                        }
                     }
+                    
 
                 }
             }
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
         }
        async private void ts_menu_but_add_Click(object sender, EventArgs e)
         {
@@ -346,7 +415,7 @@ namespace game8
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -372,9 +441,9 @@ namespace game8
                 string json = JsonConvert.SerializeObject(_accounts.Values, Formatting.Indented);
                 File.WriteAllText(_accountFile.FullName, json, Encoding.UTF8);
             }
-            catch// (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
             return Task.CompletedTask;
         }
@@ -382,14 +451,14 @@ namespace game8
         private void ts_menu_but_view_Click(object sender, EventArgs e)
         {
             string url = ts_menu_com_url.Text;
-            Task.Run(()=> _RefreshList(url,null,null));
+            Task.Run(()=> _RefreshList(url,null,null,null,null));
         }
 
         private void ts_menu_but_retypepassword_Click(object sender, EventArgs e)
         {
             Task.Run(() =>
             {
-                _loadPasswordAsync(false,() => _RefreshList(null,null,null));
+                _loadPasswordAsync(false,() => _RefreshList(null,null,null, null, null));
             });
         }
 
@@ -429,9 +498,9 @@ namespace game8
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -477,9 +546,9 @@ namespace game8
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
-            
+
         }
         Task _showHideContentAsync(List<DataGridViewRow> rows, bool isShown)
         {
@@ -507,29 +576,37 @@ namespace game8
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
             return Task.CompletedTask;
         }
 
         private void ts_menu_but_delete_Click(object sender, EventArgs e)
         {
-            var rows = _dlg.GetDataGridViewCheckedRows(dgv_account, "dgv_account_col_chk");
-            if(rows?.Count > 0)
+            try
             {
-                if(MessageBox.Show("Do you want to do this?","Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
+                var rows = _dlg.GetDataGridViewCheckedRows(dgv_account, "dgv_account_col_chk");
+                if (rows?.Count > 0)
                 {
-                    foreach (var row in rows)
+                    if (MessageBox.Show("Do you want to do this?", "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        long id = Convert.ToInt64(row.Cells["dgv_account_col_id"].Value);
-                        if(_accounts.ContainsKey(id))
+                        foreach (var row in rows)
                         {
-                            _accounts.Remove(id);
+                            long id = Convert.ToInt64(row.Cells["dgv_account_col_id"].Value);
+                            if (_accounts.ContainsKey(id))
+                            {
+                                _accounts.Remove(id);
+                            }
                         }
+                        Task.Run(_SaveAccountAsync);
                     }
-                    Task.Run(_SaveAccountAsync);
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
+            }
+           
         }
 
         private void ts_menu_but_clone_Click(object sender, EventArgs e)
@@ -566,7 +643,7 @@ namespace game8
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
@@ -590,26 +667,30 @@ namespace game8
                 }
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show($"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
         private void txt_qs_TextChanged(object sender, EventArgs e)
         {
-
-            _dlg.Execute(this, delegate {
-                string nameLike = txt_qs_name.Text;
-                string userNameLike = txt_qs_username.Text;
-                string url = ts_menu_com_url.Text;
-                _RefreshList(url, nameLike, userNameLike);
+            Task.Run(delegate {
+                _dlg.Execute(this, delegate {
+                    string nameLike = txt_qs_name.Text;
+                    string userNameLike = txt_qs_username.Text;
+                    string url = ts_menu_com_url.Text;
+                    string urlLike = txt_qs_url.Text;
+                    string descriptionLike = txt_qs_description.Text;
+                    _RefreshList(url, nameLike, userNameLike, urlLike, descriptionLike);
+                });
             });
+            
         }
 
         private void but_qs_clear_Click(object sender, EventArgs e)
         {
-            txt_qs_name.Text = txt_qs_username.Text = "";
+            txt_qs_name.Text = txt_qs_username.Text = txt_qs_description.Text = txt_qs_url.Text = "" ;
             txt_qs_TextChanged(sender, e);
         }
 
