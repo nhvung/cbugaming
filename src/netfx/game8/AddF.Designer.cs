@@ -155,28 +155,28 @@ namespace game8
             this.com_url.Location = new System.Drawing.Point(192, 106);
             this.com_url.Name = "com_url";
             this.com_url.Size = new System.Drawing.Size(411, 23);
-            this.com_url.TabIndex = 14;
+            this.com_url.TabIndex = 1;
             // 
             // txt_name
             // 
             this.txt_name.Location = new System.Drawing.Point(192, 214);
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(411, 21);
-            this.txt_name.TabIndex = 15;
+            this.txt_name.TabIndex = 5;
             // 
             // txt_username
             // 
             this.txt_username.Location = new System.Drawing.Point(192, 135);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(411, 21);
-            this.txt_username.TabIndex = 16;
+            this.txt_username.TabIndex = 2;
             // 
             // txt_password
             // 
             this.txt_password.Location = new System.Drawing.Point(192, 162);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(411, 21);
-            this.txt_password.TabIndex = 17;
+            this.txt_password.TabIndex = 3;
             this.txt_password.UseSystemPasswordChar = true;
             // 
             // rtxt_description
@@ -184,7 +184,7 @@ namespace game8
             this.rtxt_description.Location = new System.Drawing.Point(192, 241);
             this.rtxt_description.Name = "rtxt_description";
             this.rtxt_description.Size = new System.Drawing.Size(411, 130);
-            this.rtxt_description.TabIndex = 18;
+            this.rtxt_description.TabIndex = 6;
             this.rtxt_description.Text = "";
             // 
             // but_ok
@@ -192,7 +192,7 @@ namespace game8
             this.but_ok.Location = new System.Drawing.Point(256, 403);
             this.but_ok.Name = "but_ok";
             this.but_ok.Size = new System.Drawing.Size(75, 23);
-            this.but_ok.TabIndex = 19;
+            this.but_ok.TabIndex = 7;
             this.but_ok.Text = "button1";
             this.but_ok.UseVisualStyleBackColor = true;
             this.but_ok.Click += new System.EventHandler(this.but_ok_Click);
@@ -203,7 +203,7 @@ namespace game8
             this.chk_showpassword.Location = new System.Drawing.Point(192, 189);
             this.chk_showpassword.Name = "chk_showpassword";
             this.chk_showpassword.Size = new System.Drawing.Size(112, 19);
-            this.chk_showpassword.TabIndex = 20;
+            this.chk_showpassword.TabIndex = 4;
             this.chk_showpassword.Text = "Show Passwod";
             this.chk_showpassword.UseVisualStyleBackColor = true;
             this.chk_showpassword.CheckedChanged += new System.EventHandler(this.chk_showpassword_CheckedChanged);
@@ -213,7 +213,7 @@ namespace game8
             this.but_close.Location = new System.Drawing.Point(337, 403);
             this.but_close.Name = "but_close";
             this.but_close.Size = new System.Drawing.Size(75, 23);
-            this.but_close.TabIndex = 21;
+            this.but_close.TabIndex = 8;
             this.but_close.Text = "CLOSE";
             this.but_close.UseVisualStyleBackColor = true;
             this.but_close.Click += new System.EventHandler(this.but_close_Click);
