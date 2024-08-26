@@ -29,8 +29,12 @@ namespace game9
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViewChartF));
             this.main_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.but_exporttoimage = new System.Windows.Forms.Button();
             this.but_close = new System.Windows.Forms.Button();
@@ -44,8 +48,17 @@ namespace game9
             this.com_xaxislabelangle = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.com_charttitle = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgv_detail = new System.Windows.Forms.DataGridView();
+            this.panel_overview = new System.Windows.Forms.Panel();
+            this.but_setbackgroundcolor = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.main_chart)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_detail)).BeginInit();
+            this.panel_overview.SuspendLayout();
             this.SuspendLayout();
             // 
             // main_chart
@@ -53,30 +66,35 @@ namespace game9
             this.main_chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea2.Name = "ChartArea1";
-            this.main_chart.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.main_chart.Legends.Add(legend2);
-            this.main_chart.Location = new System.Drawing.Point(12, 167);
+            this.main_chart.BackColor = System.Drawing.SystemColors.Control;
+            this.main_chart.BorderlineColor = System.Drawing.SystemColors.Control;
+            chartArea1.BorderColor = System.Drawing.Color.DimGray;
+            chartArea1.Name = "ChartArea1";
+            this.main_chart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.main_chart.Legends.Add(legend1);
+            this.main_chart.Location = new System.Drawing.Point(6, 20);
             this.main_chart.Name = "main_chart";
-            this.main_chart.Size = new System.Drawing.Size(909, 241);
+            this.main_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
+            this.main_chart.Size = new System.Drawing.Size(885, 278);
             this.main_chart.TabIndex = 0;
             this.main_chart.Text = "chart1";
             // 
             // but_exporttoimage
             // 
             this.but_exporttoimage.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.but_exporttoimage.Location = new System.Drawing.Point(361, 609);
+            this.but_exporttoimage.Location = new System.Drawing.Point(361, 752);
             this.but_exporttoimage.Name = "but_exporttoimage";
             this.but_exporttoimage.Size = new System.Drawing.Size(142, 23);
             this.but_exporttoimage.TabIndex = 1;
             this.but_exporttoimage.Text = "Export Image...";
             this.but_exporttoimage.UseVisualStyleBackColor = true;
+            this.but_exporttoimage.Click += new System.EventHandler(this.but_exporttoimage_Click);
             // 
             // but_close
             // 
             this.but_close.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.but_close.Location = new System.Drawing.Point(509, 609);
+            this.but_close.Location = new System.Drawing.Point(509, 752);
             this.but_close.Name = "but_close";
             this.but_close.Size = new System.Drawing.Size(75, 23);
             this.but_close.TabIndex = 2;
@@ -130,6 +148,9 @@ namespace game9
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.but_setbackgroundcolor);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.com_charttitle);
             this.groupBox1.Controls.Add(this.label3);
@@ -139,12 +160,12 @@ namespace game9
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.com_yaxislabel);
             this.groupBox1.Controls.Add(this.com_xaxislabel);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(12, 575);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(909, 149);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Configurations";
+            this.groupBox1.Text = "Custom Configurations";
             // 
             // label3
             // 
@@ -180,22 +201,115 @@ namespace game9
             this.com_charttitle.Size = new System.Drawing.Size(697, 23);
             this.com_charttitle.TabIndex = 11;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.main_chart);
+            this.groupBox2.Location = new System.Drawing.Point(9, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(897, 304);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox3.Controls.Add(this.dgv_detail);
+            this.groupBox3.Location = new System.Drawing.Point(3, 313);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(903, 241);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            // 
+            // dgv_detail
+            // 
+            this.dgv_detail.AllowUserToAddRows = false;
+            this.dgv_detail.AllowUserToDeleteRows = false;
+            this.dgv_detail.AllowUserToResizeColumns = false;
+            this.dgv_detail.AllowUserToResizeRows = false;
+            this.dgv_detail.BackgroundColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_detail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_detail.ColumnHeadersHeight = 30;
+            this.dgv_detail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.DimGray;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_detail.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_detail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_detail.GridColor = System.Drawing.Color.White;
+            this.dgv_detail.Location = new System.Drawing.Point(3, 17);
+            this.dgv_detail.Name = "dgv_detail";
+            this.dgv_detail.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_detail.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_detail.RowHeadersVisible = false;
+            this.dgv_detail.RowTemplate.Height = 30;
+            this.dgv_detail.Size = new System.Drawing.Size(897, 221);
+            this.dgv_detail.TabIndex = 0;
+            // 
+            // panel_overview
+            // 
+            this.panel_overview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel_overview.Controls.Add(this.groupBox3);
+            this.panel_overview.Controls.Add(this.groupBox2);
+            this.panel_overview.Location = new System.Drawing.Point(12, 12);
+            this.panel_overview.Name = "panel_overview";
+            this.panel_overview.Size = new System.Drawing.Size(909, 557);
+            this.panel_overview.TabIndex = 11;
+            // 
+            // but_setbackgroundcolor
+            // 
+            this.but_setbackgroundcolor.Location = new System.Drawing.Point(414, 84);
+            this.but_setbackgroundcolor.Name = "but_setbackgroundcolor";
+            this.but_setbackgroundcolor.Size = new System.Drawing.Size(221, 23);
+            this.but_setbackgroundcolor.TabIndex = 12;
+            this.but_setbackgroundcolor.Text = "Set Background Color";
+            this.but_setbackgroundcolor.UseVisualStyleBackColor = true;
+            this.but_setbackgroundcolor.Click += new System.EventHandler(this.but_setbackgroundcolor_Click);
+            // 
             // ViewChartF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(933, 644);
+            this.ClientSize = new System.Drawing.Size(933, 787);
+            this.Controls.Add(this.panel_overview);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.but_close);
             this.Controls.Add(this.but_exporttoimage);
-            this.Controls.Add(this.main_chart);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ViewChartF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ViewChartF";
+            this.Text = "View Chart";
             ((System.ComponentModel.ISupportInitialize)(this.main_chart)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_detail)).EndInit();
+            this.panel_overview.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -215,5 +329,10 @@ namespace game9
         private System.Windows.Forms.ComboBox com_charttitle;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox com_xaxislabelangle;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dgv_detail;
+        private System.Windows.Forms.Panel panel_overview;
+        private System.Windows.Forms.Button but_setbackgroundcolor;
     }
 }

@@ -25,6 +25,12 @@ namespace game9
 #endif
 
             dgv_summary.CellContentClick += Dgv_summary_CellContentClick;
+            FormClosed += DataBindingF_FormClosed;
+        }
+
+        private void DataBindingF_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Environment.Exit(0);
         }
 
         private void Dgv_summary_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -67,7 +73,7 @@ namespace game9
                 string filePath = ts_menu_txt_filepath.Text;
                 if(!string.IsNullOrWhiteSpace(filePath))
                 {
-                    Task.Run(()=> _ViewDataAsync(filePath));
+                    Task.Run(()=> _ViewData(filePath));
                 }
             }
             catch (Exception ex)
@@ -77,7 +83,7 @@ namespace game9
         }
 
         Dictionary<string, List<DataInfo>> _groupDataObjs;
-        async Task _ViewDataAsync(string filePath)
+        void _ViewData(string filePath)
         {
             try
             {
@@ -92,6 +98,22 @@ namespace game9
                     {
                         _dlg.AddDataGridViewRow(dgv_summary, rowIdx + 1, grp.Key, grp.Value.Count, "View");
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void ts_menu_viewallcharts_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                foreach(var grp in _groupDataObjs)
+                {
+                    ViewChartF viewChartF = new ViewChartF(grp.Value, $"chart {grp.Key}");
+                    viewChartF.Show();
                 }
             }
             catch (Exception ex)

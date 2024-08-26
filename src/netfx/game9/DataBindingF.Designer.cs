@@ -29,10 +29,10 @@ namespace game9
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBindingF));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBindingF));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -49,6 +49,10 @@ namespace game9
             this.dgv_summary_col_modulename = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_summary_col_totalrecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_summary_col_viewchart = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ts_menu_viewallcharts = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.ts_menu.SuspendLayout();
             this.grp_summary.SuspendLayout();
@@ -57,6 +61,8 @@ namespace game9
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.SteelBlue;
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
@@ -104,7 +110,9 @@ namespace game9
             this.toolStripLabel1,
             this.ts_menu_txt_filepath,
             this.ts_menu_but_browsefilepath,
-            this.ts_menu_view});
+            this.ts_menu_view,
+            this.toolStripSeparator1,
+            this.ts_menu_viewallcharts});
             this.ts_menu.Location = new System.Drawing.Point(0, 0);
             this.ts_menu.Name = "ts_menu";
             this.ts_menu.Size = new System.Drawing.Size(974, 25);
@@ -125,7 +133,7 @@ namespace game9
             // 
             // ts_menu_but_browsefilepath
             // 
-            this.ts_menu_but_browsefilepath.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_but_browsefilepath.Image")));
+            this.ts_menu_but_browsefilepath.Image = global::game9.Properties.Resources.BrowseData_16x;
             this.ts_menu_but_browsefilepath.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_but_browsefilepath.Name = "ts_menu_but_browsefilepath";
             this.ts_menu_but_browsefilepath.Size = new System.Drawing.Size(65, 22);
@@ -134,7 +142,7 @@ namespace game9
             // 
             // ts_menu_view
             // 
-            this.ts_menu_view.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_view.Image")));
+            this.ts_menu_view.Image = global::game9.Properties.Resources.View_16x;
             this.ts_menu_view.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ts_menu_view.Name = "ts_menu_view";
             this.ts_menu_view.Size = new System.Drawing.Size(52, 22);
@@ -158,6 +166,8 @@ namespace game9
             // 
             this.dgv_summary.AllowUserToAddRows = false;
             this.dgv_summary.AllowUserToDeleteRows = false;
+            this.dgv_summary.AllowUserToResizeColumns = false;
+            this.dgv_summary.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -212,6 +222,31 @@ namespace game9
             this.dgv_summary_col_viewchart.Name = "dgv_summary_col_viewchart";
             this.dgv_summary_col_viewchart.Width = 200;
             // 
+            // ts_menu_viewallcharts
+            // 
+            this.ts_menu_viewallcharts.Image = global::game9.Properties.Resources.ViewFull_16x;
+            this.ts_menu_viewallcharts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_viewallcharts.Name = "ts_menu_viewallcharts";
+            this.ts_menu_viewallcharts.Size = new System.Drawing.Size(106, 22);
+            this.ts_menu_viewallcharts.Text = "View All Charts";
+            this.ts_menu_viewallcharts.Click += new System.EventHandler(this.ts_menu_viewallcharts_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(144, 22);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "DATA BINDING";
+            // 
             // DataBindingF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -223,9 +258,12 @@ namespace game9
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DataBindingF";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "DataBindingF";
+            this.Text = "Data Binding";
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.ts_menu.ResumeLayout(false);
@@ -254,5 +292,8 @@ namespace game9
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_summary_col_modulename;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_summary_col_totalrecords;
         private System.Windows.Forms.DataGridViewButtonColumn dgv_summary_col_viewchart;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton ts_menu_viewallcharts;
+        private System.Windows.Forms.Label label1;
     }
 }
