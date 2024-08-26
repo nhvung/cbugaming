@@ -52,6 +52,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mainIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ExcelDataReader, Version=3.7.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
       <HintPath>packages\ExcelDataReader.3.7.0\lib\net462\ExcelDataReader.dll</HintPath>
@@ -82,12 +85,6 @@
     </Compile>
     <Compile Include="DelegateProcess.cs" />
     <Compile Include="Extensions\ExcelExtension.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\ChartConfig.cs" />
     <Compile Include="Models\DataInfo.cs" />
     <Compile Include="Program.cs" />
@@ -101,9 +98,6 @@
     <EmbeddedResource Include="DataBindingF.resx">
       <DependentUpon>DataBindingF.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -112,6 +106,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="ViewChartF.resx">
       <DependentUpon>ViewChartF.cs</DependentUpon>
@@ -130,6 +125,17 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\BrowseData_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\View_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ViewFull_16x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mainIcon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

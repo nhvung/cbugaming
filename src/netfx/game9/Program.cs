@@ -20,7 +20,7 @@ namespace game9
 #if DEBUG
             Application.Run(new DataBindingF());
 #else
- new ViewChartF().Show();
+ new DataBindingF().Show();
             Application.Run();
 #endif
 
