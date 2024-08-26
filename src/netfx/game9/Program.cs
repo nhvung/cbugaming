@@ -16,7 +16,14 @@ namespace game9
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+#if DEBUG
+            Application.Run(new DataBindingF());
+#else
+ new ViewChartF().Show();
+            Application.Run();
+#endif
+
         }
     }
 }
