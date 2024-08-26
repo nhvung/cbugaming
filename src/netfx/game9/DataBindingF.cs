@@ -26,6 +26,9 @@ namespace game9
 
             dgv_summary.CellContentClick += Dgv_summary_CellContentClick;
             FormClosed += DataBindingF_FormClosed;
+#if DEBUG
+            ts_menu_view_Click(null, null);
+#endif
         }
 
         private void DataBindingF_FormClosed(object sender, FormClosedEventArgs e)
@@ -35,18 +38,28 @@ namespace game9
 
         private void Dgv_summary_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex==3)
+            try
             {
-                string moduleName = dgv_summary["dgv_summary_col_modulename", e.RowIndex].Value.ToString();
-                if(_groupDataObjs?.ContainsKey(moduleName)??false)
+                if (e.RowIndex >= 0)
                 {
-                    var dataObjs = _groupDataObjs[moduleName];
-                    if(dataObjs?.Count > 0)
+                    if (e.ColumnIndex == 3)
                     {
-                        ViewChartF viewChartF = new ViewChartF(dataObjs,$"chart {moduleName}");
-                        viewChartF.Show();
+                        string moduleName = dgv_summary["dgv_summary_col_modulename", e.RowIndex].Value.ToString();
+                        if (_groupDataObjs?.ContainsKey(moduleName) ?? false)
+                        {
+                            var dataObjs = _groupDataObjs[moduleName];
+                            if (dataObjs?.Count > 0)
+                            {
+                                ViewChartF viewChartF = new ViewChartF(dataObjs, $"chart {moduleName}");
+                                viewChartF.Show();
+                            }
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

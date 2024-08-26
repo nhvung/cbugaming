@@ -20,6 +20,8 @@ namespace game9
         List<DataInfo> _dataObjs;
         DelegateProcess _dlg;
         string _title;
+
+        Color _runColor, _passedColor, _failedColor, _errorColor;
         public ViewChartF()
         {
             InitializeComponent();
@@ -38,6 +40,16 @@ namespace game9
             LoadConfig();
             InitChart();
             but_apply_Click(null,null);
+            sp_panel.SizeChanged += Sp_panel_SizeChanged;
+        }
+
+        private void Sp_panel_SizeChanged(object sender, EventArgs e)
+        {
+            if(sp_panel.Width>0)
+            {
+                sp_panel.SplitterDistance = Convert.ToInt32(Math.Floor(0.7 * sp_panel.Width));
+            }
+            
         }
 
         void LoadConfig()
@@ -99,7 +111,10 @@ namespace game9
         {           
             try
             {
-               
+                _runColor = Color.DeepSkyBlue;
+                _passedColor = Color.LightGreen;
+                _failedColor = Color.Orange;
+                _errorColor = Color.DarkRed;
                 main_chart.ChartAreas[0].AxisX.Interval = 1;               
                 //main_chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.White;
                 //main_chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
@@ -146,6 +161,8 @@ namespace game9
                 int iXAxisLabelAngle;
                 int.TryParse(xAxisLabelAngle, out iXAxisLabelAngle);                
                 main_chart.ChartAreas[0].AxisX.LabelStyle.Angle = iXAxisLabelAngle;
+
+                ratio_chart.BackColor = ratio_chart.ChartAreas[0].BackColor = Color.DimGray;
 
                 LoadData();
             }
@@ -194,19 +211,19 @@ namespace game9
 
                             System.Windows.Forms.DataVisualization.Charting.Series totalRunSeriesObj = main_chart.Series.Add("TotalRun");
                             totalRunSeriesObj.LegendText = totalRunSeriesObj.Name;
-                            totalRunSeriesObj.Color = Color.Blue;
+                            totalRunSeriesObj.Color = _runColor;
 
                             System.Windows.Forms.DataVisualization.Charting.Series totalPassedSeriesObj = main_chart.Series.Add("TotalPassed");
                             totalPassedSeriesObj.LegendText = totalPassedSeriesObj.Name;
-                            totalPassedSeriesObj.Color = Color.Orange;
+                            totalPassedSeriesObj.Color = _passedColor;
 
                             System.Windows.Forms.DataVisualization.Charting.Series totalFailedSeriesObj = main_chart.Series.Add("TotalFailed");
                             totalFailedSeriesObj.LegendText = totalFailedSeriesObj.Name;
-                            totalFailedSeriesObj.Color = Color.WhiteSmoke;
+                            totalFailedSeriesObj.Color =_failedColor;
 
                             System.Windows.Forms.DataVisualization.Charting.Series totalErrorSeriesObj = main_chart.Series.Add("TotalError");
                             totalErrorSeriesObj.LegendText = totalErrorSeriesObj.Name;
-                            totalErrorSeriesObj.Color = Color.Yellow;
+                            totalErrorSeriesObj.Color = _errorColor;
 
                             foreach (var dataObj in _dataObjs)
                             {
@@ -219,20 +236,98 @@ namespace game9
 
                             totalRunSeriesObj.ChartType = totalPassedSeriesObj.ChartType = totalFailedSeriesObj.ChartType = totalErrorSeriesObj.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
                             totalRunSeriesObj.IsValueShownAsLabel = totalPassedSeriesObj.IsValueShownAsLabel = totalFailedSeriesObj.IsValueShownAsLabel = totalErrorSeriesObj.IsValueShownAsLabel = true;
-                            totalRunSeriesObj.BorderWidth = totalPassedSeriesObj.BorderWidth= totalFailedSeriesObj.BorderWidth= totalErrorSeriesObj.BorderWidth= 2;
+                            totalRunSeriesObj.BorderWidth = totalPassedSeriesObj.BorderWidth= totalFailedSeriesObj.BorderWidth= totalErrorSeriesObj.BorderWidth= 3;
                             totalRunSeriesObj.LabelForeColor= totalPassedSeriesObj.LabelForeColor= totalFailedSeriesObj.LabelForeColor= totalErrorSeriesObj.LabelForeColor = Color.White;
 
-                            main_chart.Series.Add(totalRunSeriesObj);
-                            main_chart.Series.Add(totalPassedSeriesObj);
-                            main_chart.Series.Add(totalFailedSeriesObj);
-                            main_chart.Series.Add(totalErrorSeriesObj);
-                        });                        
+
+                            //main_chart.Series.Add(totalRunSeriesObj);
+                            //main_chart.Series.Add(totalPassedSeriesObj);
+                            //main_chart.Series.Add(totalFailedSeriesObj);
+                            //main_chart.Series.Add(totalErrorSeriesObj);
+                        });
+
+                        _dlg.Execute(ratio_chart, () => {
+
+                            ratio_chart.Series.Clear();
+
+                            System.Windows.Forms.DataVisualization.Charting.Series ratioSeriesObj = ratio_chart.Series.Add("TotalRun");
+
+                            double summaryTotal = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalRun, out iVal); return iVal; });
+                            try
+                            {
+                                double total = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalPassed, out iVal); return iVal; });
+                                if(total > 0)
+                                {
+                                    double percent = summaryTotal > 0 ? total*100 / summaryTotal : 0;
+                                    var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+                                    {
+                                        YValues = new double[] { total },
+                                        Color = _passedColor,
+                                        Label = $"Passed ({percent:0.00})%",
+                                        LabelForeColor = Color.Black
+                                    };
+
+                                    ratioSeriesObj.Points.Add(pts);
+                                }
+                                
+                            }
+                            catch
+                            {
+                            }
+
+
+                            try
+                            {
+                                double total = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalError, out iVal); return iVal; });
+                                if (total > 0)
+                                {
+                                    double percent = summaryTotal > 0 ? total * 100 / summaryTotal : 0;
+                                    var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+                                    {
+                                        YValues = new double[] { total },
+                                        Color =_errorColor,
+                                        Label = $"Error ({percent:0.00})%",
+                                        LabelForeColor = Color.White
+                                    };
+                                    ratioSeriesObj.Points.Add(pts);
+                                }
+
+                            }
+                            catch
+                            {
+                            }
+                            try
+                            {
+                                double total = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalFailed, out iVal); return iVal; });
+                                if (total > 0)
+                                {
+                                    double percent = summaryTotal > 0 ? total * 100 / summaryTotal : 0;
+                                    var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+                                    {
+                                        YValues = new double[] { total },
+                                        Color =_failedColor,
+                                        Label = $"Failed ({percent:0.00})%",
+                                        LabelForeColor = Color.White
+                                    };
+                                    ratioSeriesObj.Points.Add(pts);
+                                }
+
+                            }
+                            catch
+                            {
+                            }
+
+                            ratioSeriesObj.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+                            ratioSeriesObj.IsVisibleInLegend = false;
+
+                            // ratio_chart.Series.Add(ratioSeriesObj);
+                        });
                     }
                     catch (Exception ex)
                     {
-
+                        MessageBox.Show(ex.Message);
                     }
-                    
+
                 }
             }
             catch (Exception ex)
