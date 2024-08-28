@@ -29,6 +29,21 @@ namespace game9
 #if DEBUG
             ts_menu_view_Click(null, null);
 #endif
+            dgv_raw.CellMouseClick += Dgv_raw_CellMouseClick;
+        }
+
+        int _dgv_raw_column_index;
+        private void Dgv_raw_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if(e.RowIndex == -1)
+                {  
+                    cms_rawdata.Show(Cursor.Position);
+                    _dgv_raw_column_index = e.ColumnIndex;
+                }
+                
+            }
         }
 
         private void DataBindingF_FormClosed(object sender, FormClosedEventArgs e)
@@ -138,6 +153,7 @@ namespace game9
                     {
                         _dlg.AddDataGridViewRow(dgv_raw, row.ToArray());
                     }
+                   
                 }
             }
             catch (Exception ex)
@@ -159,6 +175,14 @@ namespace game9
             catch (Exception ex)
             {
 
+            }
+        }
+
+        private void cms_rawdata_addtolinechart_Click(object sender, EventArgs e)
+        {
+            if(_dgv_raw_column_index>=0)
+            {
+                var header = dgv_raw.Columns[_dgv_raw_column_index].HeaderText;
             }
         }
     }
