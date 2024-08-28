@@ -30,10 +30,10 @@ namespace game9
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBindingF));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -41,6 +41,18 @@ namespace game9
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.tabc_main = new System.Windows.Forms.TabControl();
+            this.tab_manual = new System.Windows.Forms.TabPage();
+            this.sp_raw = new System.Windows.Forms.SplitContainer();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.sp_chart_parent = new System.Windows.Forms.SplitContainer();
+            this.sp_chart = new System.Windows.Forms.SplitContainer();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.dgv_config_linechart = new System.Windows.Forms.DataGridView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgv_config_piechart = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
+            this.tab_auto = new System.Windows.Forms.TabPage();
             this.grp_summary = new System.Windows.Forms.GroupBox();
             this.dgv_summary = new System.Windows.Forms.DataGridView();
             this.dgv_summary_col_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,36 +66,47 @@ namespace game9
             this.ts_menu_view = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ts_menu_viewallcharts = new System.Windows.Forms.ToolStripButton();
-            this.tabc_main = new System.Windows.Forms.TabControl();
-            this.tab_auto = new System.Windows.Forms.TabPage();
-            this.tab_manual = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.sp_raw = new System.Windows.Forms.SplitContainer();
-            this.sp_chart = new System.Windows.Forms.SplitContainer();
             this.cms_rawdata = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cms_rawdata_addtolinechart = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.cms_rawdata_addtopiechart = new System.Windows.Forms.ToolStripMenuItem();
-            this.ss_raw = new System.Windows.Forms.StatusStrip();
+            this.dgv_config_linechart_col_header = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_config_linechart_col_newheader = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_config_linechart_col_drawline = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgv_config_linechart_col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.ts_raw = new System.Windows.Forms.ToolStrip();
             this.dgv_raw = new System.Windows.Forms.DataGridView();
-            this.ss_raw_mousepos = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.ts_raw_com_filtercolumn = new System.Windows.Forms.ToolStripComboBox();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.ts_raw_com_groupcolumn = new System.Windows.Forms.ToolStripComboBox();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.grp_summary.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).BeginInit();
-            this.ts_menu.SuspendLayout();
             this.tabc_main.SuspendLayout();
-            this.tab_auto.SuspendLayout();
             this.tab_manual.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_raw)).BeginInit();
             this.sp_raw.Panel1.SuspendLayout();
             this.sp_raw.Panel2.SuspendLayout();
             this.sp_raw.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_chart_parent)).BeginInit();
+            this.sp_chart_parent.Panel1.SuspendLayout();
+            this.sp_chart_parent.Panel2.SuspendLayout();
+            this.sp_chart_parent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_chart)).BeginInit();
+            this.sp_chart.Panel1.SuspendLayout();
+            this.sp_chart.Panel2.SuspendLayout();
             this.sp_chart.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_config_linechart)).BeginInit();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_config_piechart)).BeginInit();
+            this.tab_auto.SuspendLayout();
+            this.grp_summary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).BeginInit();
+            this.ts_menu.SuspendLayout();
             this.cms_rawdata.SuspendLayout();
-            this.ss_raw.SuspendLayout();
+            this.ts_raw.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,7 +136,7 @@ namespace game9
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 40);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(10, 533);
+            this.panel2.Size = new System.Drawing.Size(10, 615);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -121,13 +144,13 @@ namespace game9
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel3.Location = new System.Drawing.Point(984, 40);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(10, 533);
+            this.panel3.Size = new System.Drawing.Size(10, 615);
             this.panel3.TabIndex = 2;
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(10, 563);
+            this.panel4.Location = new System.Drawing.Point(10, 645);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(974, 10);
             this.panel4.TabIndex = 3;
@@ -139,8 +162,164 @@ namespace game9
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(10, 40);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(974, 523);
+            this.panel5.Size = new System.Drawing.Size(974, 605);
             this.panel5.TabIndex = 4;
+            // 
+            // tabc_main
+            // 
+            this.tabc_main.Controls.Add(this.tab_manual);
+            this.tabc_main.Controls.Add(this.tab_auto);
+            this.tabc_main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabc_main.Location = new System.Drawing.Point(0, 25);
+            this.tabc_main.Name = "tabc_main";
+            this.tabc_main.SelectedIndex = 0;
+            this.tabc_main.Size = new System.Drawing.Size(974, 580);
+            this.tabc_main.TabIndex = 2;
+            // 
+            // tab_manual
+            // 
+            this.tab_manual.Controls.Add(this.sp_raw);
+            this.tab_manual.Location = new System.Drawing.Point(4, 24);
+            this.tab_manual.Name = "tab_manual";
+            this.tab_manual.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_manual.Size = new System.Drawing.Size(966, 552);
+            this.tab_manual.TabIndex = 1;
+            this.tab_manual.Text = "Manual";
+            this.tab_manual.UseVisualStyleBackColor = true;
+            // 
+            // sp_raw
+            // 
+            this.sp_raw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_raw.Location = new System.Drawing.Point(3, 3);
+            this.sp_raw.Name = "sp_raw";
+            this.sp_raw.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // sp_raw.Panel1
+            // 
+            this.sp_raw.Panel1.Controls.Add(this.groupBox1);
+            // 
+            // sp_raw.Panel2
+            // 
+            this.sp_raw.Panel2.Controls.Add(this.sp_chart_parent);
+            this.sp_raw.Size = new System.Drawing.Size(960, 546);
+            this.sp_raw.SplitterDistance = 273;
+            this.sp_raw.TabIndex = 1;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgv_raw);
+            this.groupBox1.Controls.Add(this.ts_raw);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(960, 273);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "RAW - Data";
+            // 
+            // sp_chart_parent
+            // 
+            this.sp_chart_parent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_chart_parent.Location = new System.Drawing.Point(0, 0);
+            this.sp_chart_parent.Name = "sp_chart_parent";
+            this.sp_chart_parent.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // sp_chart_parent.Panel1
+            // 
+            this.sp_chart_parent.Panel1.Controls.Add(this.sp_chart);
+            // 
+            // sp_chart_parent.Panel2
+            // 
+            this.sp_chart_parent.Panel2.Controls.Add(this.button1);
+            this.sp_chart_parent.Size = new System.Drawing.Size(960, 269);
+            this.sp_chart_parent.SplitterDistance = 201;
+            this.sp_chart_parent.TabIndex = 1;
+            // 
+            // sp_chart
+            // 
+            this.sp_chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_chart.Location = new System.Drawing.Point(0, 0);
+            this.sp_chart.Name = "sp_chart";
+            // 
+            // sp_chart.Panel1
+            // 
+            this.sp_chart.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // sp_chart.Panel2
+            // 
+            this.sp_chart.Panel2.Controls.Add(this.groupBox3);
+            this.sp_chart.Size = new System.Drawing.Size(960, 201);
+            this.sp_chart.SplitterDistance = 601;
+            this.sp_chart.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgv_config_linechart);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(601, 201);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Line Chart";
+            // 
+            // dgv_config_linechart
+            // 
+            this.dgv_config_linechart.AllowUserToAddRows = false;
+            this.dgv_config_linechart.AllowUserToDeleteRows = false;
+            this.dgv_config_linechart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_config_linechart.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_config_linechart_col_header,
+            this.dgv_config_linechart_col_newheader,
+            this.dgv_config_linechart_col_drawline,
+            this.dgv_config_linechart_col_remove});
+            this.dgv_config_linechart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_config_linechart.Location = new System.Drawing.Point(3, 17);
+            this.dgv_config_linechart.Name = "dgv_config_linechart";
+            this.dgv_config_linechart.Size = new System.Drawing.Size(595, 181);
+            this.dgv_config_linechart.TabIndex = 0;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.dgv_config_piechart);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox3.Location = new System.Drawing.Point(0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(355, 201);
+            this.groupBox3.TabIndex = 0;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Pie Chart";
+            // 
+            // dgv_config_piechart
+            // 
+            this.dgv_config_piechart.AllowUserToAddRows = false;
+            this.dgv_config_piechart.AllowUserToDeleteRows = false;
+            this.dgv_config_piechart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_config_piechart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_config_piechart.Location = new System.Drawing.Point(3, 17);
+            this.dgv_config_piechart.Name = "dgv_config_piechart";
+            this.dgv_config_piechart.Size = new System.Drawing.Size(349, 181);
+            this.dgv_config_piechart.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(16, 26);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(136, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // tab_auto
+            // 
+            this.tab_auto.Controls.Add(this.grp_summary);
+            this.tab_auto.Location = new System.Drawing.Point(4, 24);
+            this.tab_auto.Name = "tab_auto";
+            this.tab_auto.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_auto.Size = new System.Drawing.Size(966, 552);
+            this.tab_auto.TabIndex = 0;
+            this.tab_auto.Text = "Automatic";
+            this.tab_auto.UseVisualStyleBackColor = true;
             // 
             // grp_summary
             // 
@@ -148,7 +327,7 @@ namespace game9
             this.grp_summary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grp_summary.Location = new System.Drawing.Point(3, 3);
             this.grp_summary.Name = "grp_summary";
-            this.grp_summary.Size = new System.Drawing.Size(960, 464);
+            this.grp_summary.Size = new System.Drawing.Size(960, 546);
             this.grp_summary.TabIndex = 1;
             this.grp_summary.TabStop = false;
             // 
@@ -158,14 +337,14 @@ namespace game9
             this.dgv_summary.AllowUserToDeleteRows = false;
             this.dgv_summary.AllowUserToResizeColumns = false;
             this.dgv_summary.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_summary.ColumnHeadersHeight = 30;
             this.dgv_summary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_summary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -178,13 +357,13 @@ namespace game9
             this.dgv_summary.Name = "dgv_summary";
             this.dgv_summary.RowHeadersVisible = false;
             this.dgv_summary.RowTemplate.Height = 30;
-            this.dgv_summary.Size = new System.Drawing.Size(954, 444);
+            this.dgv_summary.Size = new System.Drawing.Size(954, 526);
             this.dgv_summary.TabIndex = 0;
             // 
             // dgv_summary_col_no
             // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_summary_col_no.HeaderText = "No.";
             this.dgv_summary_col_no.MinimumWidth = 50;
             this.dgv_summary_col_no.Name = "dgv_summary_col_no";
@@ -198,8 +377,8 @@ namespace game9
             // 
             // dgv_summary_col_totalrecords
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_summary_col_totalrecords.HeaderText = "Total Records";
             this.dgv_summary_col_totalrecords.MinimumWidth = 200;
             this.dgv_summary_col_totalrecords.Name = "dgv_summary_col_totalrecords";
@@ -272,78 +451,6 @@ namespace game9
             this.ts_menu_viewallcharts.Text = "View All Charts";
             this.ts_menu_viewallcharts.Click += new System.EventHandler(this.ts_menu_viewallcharts_Click);
             // 
-            // tabc_main
-            // 
-            this.tabc_main.Controls.Add(this.tab_manual);
-            this.tabc_main.Controls.Add(this.tab_auto);
-            this.tabc_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabc_main.Location = new System.Drawing.Point(0, 25);
-            this.tabc_main.Name = "tabc_main";
-            this.tabc_main.SelectedIndex = 0;
-            this.tabc_main.Size = new System.Drawing.Size(974, 498);
-            this.tabc_main.TabIndex = 2;
-            // 
-            // tab_auto
-            // 
-            this.tab_auto.Controls.Add(this.grp_summary);
-            this.tab_auto.Location = new System.Drawing.Point(4, 24);
-            this.tab_auto.Name = "tab_auto";
-            this.tab_auto.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_auto.Size = new System.Drawing.Size(966, 470);
-            this.tab_auto.TabIndex = 0;
-            this.tab_auto.Text = "Automatic";
-            this.tab_auto.UseVisualStyleBackColor = true;
-            // 
-            // tab_manual
-            // 
-            this.tab_manual.Controls.Add(this.sp_raw);
-            this.tab_manual.Location = new System.Drawing.Point(4, 24);
-            this.tab_manual.Name = "tab_manual";
-            this.tab_manual.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_manual.Size = new System.Drawing.Size(966, 470);
-            this.tab_manual.TabIndex = 1;
-            this.tab_manual.Text = "Manual";
-            this.tab_manual.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.dgv_raw);
-            this.groupBox1.Controls.Add(this.ss_raw);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Location = new System.Drawing.Point(0, 0);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(960, 232);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "RAW - Data";
-            // 
-            // sp_raw
-            // 
-            this.sp_raw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sp_raw.Location = new System.Drawing.Point(3, 3);
-            this.sp_raw.Name = "sp_raw";
-            this.sp_raw.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // sp_raw.Panel1
-            // 
-            this.sp_raw.Panel1.Controls.Add(this.groupBox1);
-            // 
-            // sp_raw.Panel2
-            // 
-            this.sp_raw.Panel2.Controls.Add(this.sp_chart);
-            this.sp_raw.Size = new System.Drawing.Size(960, 464);
-            this.sp_raw.SplitterDistance = 232;
-            this.sp_raw.TabIndex = 1;
-            // 
-            // sp_chart
-            // 
-            this.sp_chart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sp_chart.Location = new System.Drawing.Point(0, 0);
-            this.sp_chart.Name = "sp_chart";
-            this.sp_chart.Size = new System.Drawing.Size(960, 228);
-            this.sp_chart.SplitterDistance = 604;
-            this.sp_chart.TabIndex = 0;
-            // 
             // cms_rawdata
             // 
             this.cms_rawdata.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -351,12 +458,12 @@ namespace game9
             this.toolStripSeparator2,
             this.cms_rawdata_addtopiechart});
             this.cms_rawdata.Name = "cms_rawdata";
-            this.cms_rawdata.Size = new System.Drawing.Size(181, 76);
+            this.cms_rawdata.Size = new System.Drawing.Size(169, 54);
             // 
             // cms_rawdata_addtolinechart
             // 
             this.cms_rawdata_addtolinechart.Name = "cms_rawdata_addtolinechart";
-            this.cms_rawdata_addtolinechart.Size = new System.Drawing.Size(180, 22);
+            this.cms_rawdata_addtolinechart.Size = new System.Drawing.Size(168, 22);
             this.cms_rawdata_addtolinechart.Text = "Add To Line Chart";
             this.cms_rawdata_addtolinechart.Click += new System.EventHandler(this.cms_rawdata_addtolinechart_Click);
             // 
@@ -370,16 +477,42 @@ namespace game9
             this.cms_rawdata_addtopiechart.Name = "cms_rawdata_addtopiechart";
             this.cms_rawdata_addtopiechart.Size = new System.Drawing.Size(168, 22);
             this.cms_rawdata_addtopiechart.Text = "Add To Pie Chart";
+            this.cms_rawdata_addtopiechart.Click += new System.EventHandler(this.cms_rawdata_addtopiechart_Click);
             // 
-            // ss_raw
+            // dgv_config_linechart_col_header
             // 
-            this.ss_raw.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ss_raw_mousepos});
-            this.ss_raw.Location = new System.Drawing.Point(3, 207);
-            this.ss_raw.Name = "ss_raw";
-            this.ss_raw.Size = new System.Drawing.Size(954, 22);
-            this.ss_raw.TabIndex = 1;
-            this.ss_raw.Text = "-";
+            this.dgv_config_linechart_col_header.HeaderText = "Header";
+            this.dgv_config_linechart_col_header.Name = "dgv_config_linechart_col_header";
+            // 
+            // dgv_config_linechart_col_newheader
+            // 
+            this.dgv_config_linechart_col_newheader.HeaderText = "New Header";
+            this.dgv_config_linechart_col_newheader.Name = "dgv_config_linechart_col_newheader";
+            // 
+            // dgv_config_linechart_col_drawline
+            // 
+            this.dgv_config_linechart_col_drawline.HeaderText = "Draw Line";
+            this.dgv_config_linechart_col_drawline.Name = "dgv_config_linechart_col_drawline";
+            // 
+            // dgv_config_linechart_col_remove
+            // 
+            this.dgv_config_linechart_col_remove.HeaderText = "";
+            this.dgv_config_linechart_col_remove.Name = "dgv_config_linechart_col_remove";
+            // 
+            // ts_raw
+            // 
+            this.ts_raw.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ts_raw.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ts_raw.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel2,
+            this.ts_raw_com_filtercolumn,
+            this.toolStripLabel3,
+            this.ts_raw_com_groupcolumn});
+            this.ts_raw.Location = new System.Drawing.Point(3, 245);
+            this.ts_raw.Name = "ts_raw";
+            this.ts_raw.Size = new System.Drawing.Size(954, 25);
+            this.ts_raw.TabIndex = 3;
+            this.ts_raw.Text = "toolStrip1";
             // 
             // dgv_raw
             // 
@@ -388,14 +521,14 @@ namespace game9
             this.dgv_raw.AllowUserToResizeColumns = false;
             this.dgv_raw.AllowUserToResizeRows = false;
             this.dgv_raw.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_raw.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_raw.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_raw.ColumnHeadersHeight = 30;
             this.dgv_raw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_raw.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -404,20 +537,38 @@ namespace game9
             this.dgv_raw.RowHeadersVisible = false;
             this.dgv_raw.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dgv_raw.RowTemplate.Height = 40;
-            this.dgv_raw.Size = new System.Drawing.Size(954, 190);
-            this.dgv_raw.TabIndex = 2;
+            this.dgv_raw.Size = new System.Drawing.Size(954, 228);
+            this.dgv_raw.TabIndex = 4;
             // 
-            // ss_raw_mousepos
+            // toolStripLabel2
             // 
-            this.ss_raw_mousepos.Name = "ss_raw_mousepos";
-            this.ss_raw_mousepos.Size = new System.Drawing.Size(12, 17);
-            this.ss_raw_mousepos.Text = "-";
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(82, 22);
+            this.toolStripLabel2.Text = "Filter Column:";
+            // 
+            // ts_raw_com_filtercolumn
+            // 
+            this.ts_raw_com_filtercolumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ts_raw_com_filtercolumn.Name = "ts_raw_com_filtercolumn";
+            this.ts_raw_com_filtercolumn.Size = new System.Drawing.Size(200, 25);
+            // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(89, 22);
+            this.toolStripLabel3.Text = "Group Column:";
+            // 
+            // ts_raw_com_groupcolumn
+            // 
+            this.ts_raw_com_groupcolumn.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ts_raw_com_groupcolumn.Name = "ts_raw_com_groupcolumn";
+            this.ts_raw_com_groupcolumn.Size = new System.Drawing.Size(200, 25);
             // 
             // DataBindingF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 573);
+            this.ClientSize = new System.Drawing.Size(994, 655);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -433,24 +584,34 @@ namespace game9
             this.panel1.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.grp_summary.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).EndInit();
-            this.ts_menu.ResumeLayout(false);
-            this.ts_menu.PerformLayout();
             this.tabc_main.ResumeLayout(false);
-            this.tab_auto.ResumeLayout(false);
             this.tab_manual.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.sp_raw.Panel1.ResumeLayout(false);
             this.sp_raw.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_raw)).EndInit();
             this.sp_raw.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.sp_chart_parent.Panel1.ResumeLayout(false);
+            this.sp_chart_parent.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sp_chart_parent)).EndInit();
+            this.sp_chart_parent.ResumeLayout(false);
+            this.sp_chart.Panel1.ResumeLayout(false);
+            this.sp_chart.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_chart)).EndInit();
             this.sp_chart.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_config_linechart)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_config_piechart)).EndInit();
+            this.tab_auto.ResumeLayout(false);
+            this.grp_summary.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).EndInit();
+            this.ts_menu.ResumeLayout(false);
+            this.ts_menu.PerformLayout();
             this.cms_rawdata.ResumeLayout(false);
-            this.ss_raw.ResumeLayout(false);
-            this.ss_raw.PerformLayout();
+            this.ts_raw.ResumeLayout(false);
+            this.ts_raw.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).EndInit();
             this.ResumeLayout(false);
 
@@ -487,8 +648,21 @@ namespace game9
         private System.Windows.Forms.ToolStripMenuItem cms_rawdata_addtolinechart;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem cms_rawdata_addtopiechart;
+        private System.Windows.Forms.SplitContainer sp_chart_parent;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.DataGridView dgv_config_linechart;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.DataGridView dgv_config_piechart;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_header;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_newheader;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_config_linechart_col_drawline;
+        private System.Windows.Forms.DataGridViewButtonColumn dgv_config_linechart_col_remove;
         private System.Windows.Forms.DataGridView dgv_raw;
-        private System.Windows.Forms.StatusStrip ss_raw;
-        private System.Windows.Forms.ToolStripStatusLabel ss_raw_mousepos;
+        private System.Windows.Forms.ToolStrip ts_raw;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel2;
+        private System.Windows.Forms.ToolStripComboBox ts_raw_com_filtercolumn;
+        private System.Windows.Forms.ToolStripLabel toolStripLabel3;
+        private System.Windows.Forms.ToolStripComboBox ts_raw_com_groupcolumn;
     }
 }

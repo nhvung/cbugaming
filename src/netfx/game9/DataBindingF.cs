@@ -142,17 +142,49 @@ namespace game9
             try
             {
                 _dlg.ClearDataGridViewRows(dgv_raw);
+                _dlg.Execute(ts_raw, () => {
+                    ts_raw_com_filtercolumn.Items.Clear();
+                    ts_raw_com_filtercolumn.Items.Add("ModuleName");
+                    ts_raw_com_filtercolumn.SelectedIndex = 0;
+
+                    ts_raw_com_groupcolumn.Items.Clear();
+                    ts_raw_com_groupcolumn.Items.Add("DateStart");
+                    ts_raw_com_groupcolumn.Items.Add("DateEnd");
+                    ts_raw_com_groupcolumn.SelectedIndex = 0;
+                });
                 var dataObj = ExcelExtension.LoadDataRaw(filePath);
                 if (dataObj?.IsValid()??false)
                 {
+                    List<int> timeColIdxes = new List<int>();
                    foreach(var header in dataObj.Headers)
                     {
                         _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}", header.Key);
+                        if(header.Key.IndexOf("timestart",StringComparison.InvariantCultureIgnoreCase)>=0)
+                        {
+                            timeColIdxes.Add(header.Value);
+                            _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}_date", $"Date{header.Key.Substring(4)}");
+                        }
+                        else if (header.Key.IndexOf("timeend", StringComparison.InvariantCultureIgnoreCase) >= 0)
+                        {
+                            timeColIdxes.Add(header.Value);
+                            _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}_date", $"Date{header.Key.Substring(4)}");
+                        }
                     }
                     foreach(var row in dataObj.Rows)
                     {
-                        _dlg.AddDataGridViewRow(dgv_raw, row.ToArray());
+                        List<object> objs = new List<object>();
+                       for(int i =0;i<row.Count;i++)
+                        {
+                            objs.Add(row[i]);
+                            if(timeColIdxes.Contains(i))
+                            {
+                                objs.Add(row[i].Substring(0, 10).Trim());
+                            }
+                        }
+                        _dlg.AddDataGridViewRow(dgv_raw, objs.ToArray());
                     }
+
+
                    
                 }
             }
@@ -183,6 +215,16 @@ namespace game9
             if(_dgv_raw_column_index>=0)
             {
                 var header = dgv_raw.Columns[_dgv_raw_column_index].HeaderText;
+                _dlg.AddDataGridViewRow(dgv_config_linechart, header, "", true, "Remove");
+            }
+        }
+
+        private void cms_rawdata_addtopiechart_Click(object sender, EventArgs e)
+        {
+            if (_dgv_raw_column_index >= 0)
+            {
+                var header = dgv_raw.Columns[_dgv_raw_column_index].HeaderText;
+
             }
         }
     }
