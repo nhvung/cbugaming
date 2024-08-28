@@ -17,12 +17,9 @@ namespace game9
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-#if DEBUG
-            Application.Run(new DataBindingF());
-#else
- new DataBindingF().Show();
+            PasswordF passwordF = new PasswordF();
+            passwordF.Show();
             Application.Run();
-#endif
 
         }
     }
