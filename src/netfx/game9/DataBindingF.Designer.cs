@@ -29,10 +29,11 @@ namespace game9
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBindingF));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,10 +56,17 @@ namespace game9
             this.ts_menu_viewallcharts = new System.Windows.Forms.ToolStripButton();
             this.tabc_main = new System.Windows.Forms.TabControl();
             this.tab_auto = new System.Windows.Forms.TabPage();
-            this.lab_manual = new System.Windows.Forms.TabPage();
+            this.tab_manual = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dgv_raw = new System.Windows.Forms.DataGridView();
             this.sp_raw = new System.Windows.Forms.SplitContainer();
+            this.sp_chart = new System.Windows.Forms.SplitContainer();
+            this.cms_rawdata = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_rawdata_addtolinechart = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cms_rawdata_addtopiechart = new System.Windows.Forms.ToolStripMenuItem();
+            this.ss_raw = new System.Windows.Forms.StatusStrip();
+            this.dgv_raw = new System.Windows.Forms.DataGridView();
+            this.ss_raw_mousepos = new System.Windows.Forms.ToolStripStatusLabel();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.grp_summary.SuspendLayout();
@@ -66,12 +74,17 @@ namespace game9
             this.ts_menu.SuspendLayout();
             this.tabc_main.SuspendLayout();
             this.tab_auto.SuspendLayout();
-            this.lab_manual.SuspendLayout();
+            this.tab_manual.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sp_raw)).BeginInit();
             this.sp_raw.Panel1.SuspendLayout();
+            this.sp_raw.Panel2.SuspendLayout();
             this.sp_raw.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_chart)).BeginInit();
+            this.sp_chart.SuspendLayout();
+            this.cms_rawdata.SuspendLayout();
+            this.ss_raw.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -145,14 +158,14 @@ namespace game9
             this.dgv_summary.AllowUserToDeleteRows = false;
             this.dgv_summary.AllowUserToResizeColumns = false;
             this.dgv_summary.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_summary.ColumnHeadersHeight = 30;
             this.dgv_summary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_summary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -170,8 +183,8 @@ namespace game9
             // 
             // dgv_summary_col_no
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_summary_col_no.HeaderText = "No.";
             this.dgv_summary_col_no.MinimumWidth = 50;
             this.dgv_summary_col_no.Name = "dgv_summary_col_no";
@@ -185,8 +198,8 @@ namespace game9
             // 
             // dgv_summary_col_totalrecords
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_summary_col_totalrecords.HeaderText = "Total Records";
             this.dgv_summary_col_totalrecords.MinimumWidth = 200;
             this.dgv_summary_col_totalrecords.Name = "dgv_summary_col_totalrecords";
@@ -261,8 +274,8 @@ namespace game9
             // 
             // tabc_main
             // 
+            this.tabc_main.Controls.Add(this.tab_manual);
             this.tabc_main.Controls.Add(this.tab_auto);
-            this.tabc_main.Controls.Add(this.lab_manual);
             this.tabc_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabc_main.Location = new System.Drawing.Point(0, 25);
             this.tabc_main.Name = "tabc_main";
@@ -281,20 +294,21 @@ namespace game9
             this.tab_auto.Text = "Automatic";
             this.tab_auto.UseVisualStyleBackColor = true;
             // 
-            // lab_manual
+            // tab_manual
             // 
-            this.lab_manual.Controls.Add(this.sp_raw);
-            this.lab_manual.Location = new System.Drawing.Point(4, 24);
-            this.lab_manual.Name = "lab_manual";
-            this.lab_manual.Padding = new System.Windows.Forms.Padding(3);
-            this.lab_manual.Size = new System.Drawing.Size(966, 470);
-            this.lab_manual.TabIndex = 1;
-            this.lab_manual.Text = "Manual";
-            this.lab_manual.UseVisualStyleBackColor = true;
+            this.tab_manual.Controls.Add(this.sp_raw);
+            this.tab_manual.Location = new System.Drawing.Point(4, 24);
+            this.tab_manual.Name = "tab_manual";
+            this.tab_manual.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_manual.Size = new System.Drawing.Size(966, 470);
+            this.tab_manual.TabIndex = 1;
+            this.tab_manual.Text = "Manual";
+            this.tab_manual.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgv_raw);
+            this.groupBox1.Controls.Add(this.ss_raw);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -302,32 +316,6 @@ namespace game9
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "RAW - Data";
-            // 
-            // dgv_raw
-            // 
-            this.dgv_raw.AllowUserToAddRows = false;
-            this.dgv_raw.AllowUserToDeleteRows = false;
-            this.dgv_raw.AllowUserToResizeColumns = false;
-            this.dgv_raw.AllowUserToResizeRows = false;
-            this.dgv_raw.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_raw.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_raw.ColumnHeadersHeight = 30;
-            this.dgv_raw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgv_raw.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_raw.Location = new System.Drawing.Point(3, 17);
-            this.dgv_raw.Name = "dgv_raw";
-            this.dgv_raw.RowHeadersVisible = false;
-            this.dgv_raw.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgv_raw.RowTemplate.Height = 40;
-            this.dgv_raw.Size = new System.Drawing.Size(954, 212);
-            this.dgv_raw.TabIndex = 0;
             // 
             // sp_raw
             // 
@@ -339,9 +327,91 @@ namespace game9
             // sp_raw.Panel1
             // 
             this.sp_raw.Panel1.Controls.Add(this.groupBox1);
+            // 
+            // sp_raw.Panel2
+            // 
+            this.sp_raw.Panel2.Controls.Add(this.sp_chart);
             this.sp_raw.Size = new System.Drawing.Size(960, 464);
             this.sp_raw.SplitterDistance = 232;
             this.sp_raw.TabIndex = 1;
+            // 
+            // sp_chart
+            // 
+            this.sp_chart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_chart.Location = new System.Drawing.Point(0, 0);
+            this.sp_chart.Name = "sp_chart";
+            this.sp_chart.Size = new System.Drawing.Size(960, 228);
+            this.sp_chart.SplitterDistance = 604;
+            this.sp_chart.TabIndex = 0;
+            // 
+            // cms_rawdata
+            // 
+            this.cms_rawdata.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cms_rawdata_addtolinechart,
+            this.toolStripSeparator2,
+            this.cms_rawdata_addtopiechart});
+            this.cms_rawdata.Name = "cms_rawdata";
+            this.cms_rawdata.Size = new System.Drawing.Size(181, 76);
+            // 
+            // cms_rawdata_addtolinechart
+            // 
+            this.cms_rawdata_addtolinechart.Name = "cms_rawdata_addtolinechart";
+            this.cms_rawdata_addtolinechart.Size = new System.Drawing.Size(180, 22);
+            this.cms_rawdata_addtolinechart.Text = "Add To Line Chart";
+            this.cms_rawdata_addtolinechart.Click += new System.EventHandler(this.cms_rawdata_addtolinechart_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(165, 6);
+            // 
+            // cms_rawdata_addtopiechart
+            // 
+            this.cms_rawdata_addtopiechart.Name = "cms_rawdata_addtopiechart";
+            this.cms_rawdata_addtopiechart.Size = new System.Drawing.Size(168, 22);
+            this.cms_rawdata_addtopiechart.Text = "Add To Pie Chart";
+            // 
+            // ss_raw
+            // 
+            this.ss_raw.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ss_raw_mousepos});
+            this.ss_raw.Location = new System.Drawing.Point(3, 207);
+            this.ss_raw.Name = "ss_raw";
+            this.ss_raw.Size = new System.Drawing.Size(954, 22);
+            this.ss_raw.TabIndex = 1;
+            this.ss_raw.Text = "-";
+            // 
+            // dgv_raw
+            // 
+            this.dgv_raw.AllowUserToAddRows = false;
+            this.dgv_raw.AllowUserToDeleteRows = false;
+            this.dgv_raw.AllowUserToResizeColumns = false;
+            this.dgv_raw.AllowUserToResizeRows = false;
+            this.dgv_raw.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_raw.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            this.dgv_raw.ColumnHeadersHeight = 30;
+            this.dgv_raw.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv_raw.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_raw.Location = new System.Drawing.Point(3, 17);
+            this.dgv_raw.Name = "dgv_raw";
+            this.dgv_raw.RowHeadersVisible = false;
+            this.dgv_raw.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dgv_raw.RowTemplate.Height = 40;
+            this.dgv_raw.Size = new System.Drawing.Size(954, 190);
+            this.dgv_raw.TabIndex = 2;
+            // 
+            // ss_raw_mousepos
+            // 
+            this.ss_raw_mousepos.Name = "ss_raw_mousepos";
+            this.ss_raw_mousepos.Size = new System.Drawing.Size(12, 17);
+            this.ss_raw_mousepos.Text = "-";
             // 
             // DataBindingF
             // 
@@ -369,12 +439,19 @@ namespace game9
             this.ts_menu.PerformLayout();
             this.tabc_main.ResumeLayout(false);
             this.tab_auto.ResumeLayout(false);
-            this.lab_manual.ResumeLayout(false);
+            this.tab_manual.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).EndInit();
+            this.groupBox1.PerformLayout();
             this.sp_raw.Panel1.ResumeLayout(false);
+            this.sp_raw.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_raw)).EndInit();
             this.sp_raw.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sp_chart)).EndInit();
+            this.sp_chart.ResumeLayout(false);
+            this.cms_rawdata.ResumeLayout(false);
+            this.ss_raw.ResumeLayout(false);
+            this.ss_raw.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -402,9 +479,16 @@ namespace game9
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabc_main;
         private System.Windows.Forms.TabPage tab_auto;
-        private System.Windows.Forms.TabPage lab_manual;
+        private System.Windows.Forms.TabPage tab_manual;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dgv_raw;
         private System.Windows.Forms.SplitContainer sp_raw;
+        private System.Windows.Forms.SplitContainer sp_chart;
+        private System.Windows.Forms.ContextMenuStrip cms_rawdata;
+        private System.Windows.Forms.ToolStripMenuItem cms_rawdata_addtolinechart;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem cms_rawdata_addtopiechart;
+        private System.Windows.Forms.DataGridView dgv_raw;
+        private System.Windows.Forms.StatusStrip ss_raw;
+        private System.Windows.Forms.ToolStripStatusLabel ss_raw_mousepos;
     }
 }
