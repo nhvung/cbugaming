@@ -25,10 +25,16 @@ namespace game9.Models
        public string TotalRun { get { return _TotalRun; } set { _TotalRun = value; } }
        protected string _TotalPassed;
        public string TotalPassed { get { return _TotalPassed; } set { _TotalPassed = value; } }
+       protected string _PercentPass;
+       public string PercentPass { get { return _PercentPass; } set { _PercentPass = value; } }
        protected string _TotalFailed;
        public string TotalFailed { get { return _TotalFailed; } set { _TotalFailed = value; } }
+       protected string _PercentFail;
+       public string PercentFail { get { return _PercentFail; } set { _PercentFail = value; } }
        protected string _TotalError;
        public string TotalError { get { return _TotalError; } set { _TotalError = value; } }
+       protected string _PercentError;
+       public string PercentError { get { return _PercentError; } set { _PercentError = value; } }
         protected string _TotalWarning;
         public string TotalWarning { get { return _TotalWarning; } set { _TotalWarning = value; } }
         protected string _NoData;

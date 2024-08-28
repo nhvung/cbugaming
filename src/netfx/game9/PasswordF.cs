@@ -22,7 +22,8 @@ namespace game9
             _defaultPassword = $"{DateTime.Now.Date:MMddyyyy}7777";
 
 #if DEBUG
-            _defaultPassword = "777";
+            txt_password.Text = _defaultPassword = "777";
+            
 #endif
         }
 

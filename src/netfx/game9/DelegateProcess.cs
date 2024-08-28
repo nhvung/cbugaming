@@ -126,13 +126,13 @@ namespace game9
             else dgv.Columns.Add(columnName, headerText);
         }
 
-        delegate void dlgAddDataGridViewColumns(DataGridView dgv, Dictionary<string, string> columns);
-        public void AddDataGridViewColumns(DataGridView dgv, Dictionary<string, string> columns)
+        delegate void dlgAddDataGridViewColumns(DataGridView dgv, Dictionary<string, string> columns, DataGridViewCell cellTemplate);
+        public void AddDataGridViewColumns(DataGridView dgv, Dictionary<string, string> columns, DataGridViewCell cellTemplate)
         {
-            if (dgv.InvokeRequired) dgv.Invoke(new dlgAddDataGridViewColumns(AddDataGridViewColumns), dgv, columns);
+            if (dgv.InvokeRequired) dgv.Invoke(new dlgAddDataGridViewColumns(AddDataGridViewColumns), dgv, columns, cellTemplate);
             else
             {
-                DataGridViewColumn[] dcolumns = columns.Select(ite => new DataGridViewColumn() { Name = ite.Key, HeaderText = ite.Value }).ToArray();
+                DataGridViewColumn[] dcolumns = columns.Select(ite => new DataGridViewColumn(cellTemplate) { Name = ite.Key, HeaderText = ite.Value}).ToArray();
                 dgv.Columns.AddRange(dcolumns);
             }
         }
