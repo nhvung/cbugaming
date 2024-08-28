@@ -21,7 +21,7 @@ namespace game9
         DelegateProcess _dlg;
         string _title;
 
-        Color _runColor, _passedColor, _failedColor, _errorColor;
+        Color _runColor, _passedColor, _failedColor, _errorColor, _warningColor;
         public ViewChartF()
         {
             InitializeComponent();
@@ -41,6 +41,7 @@ namespace game9
             InitChart();
             but_apply_Click(null,null);
             sp_panel.SizeChanged += Sp_panel_SizeChanged;
+            sp_parent.Panel2Collapsed = true;
         }
 
         private void Sp_panel_SizeChanged(object sender, EventArgs e)
@@ -111,11 +112,12 @@ namespace game9
         {           
             try
             {
-                _runColor = Color.DeepSkyBlue;
-                _passedColor = Color.LightGreen;
-                _failedColor = Color.Orange;
-                _errorColor = Color.DarkRed;
-                main_chart.ChartAreas[0].AxisX.Interval = 1;               
+                _runColor = Color.FromArgb(91, 192, 222);
+                _passedColor = Color.FromArgb(34, 187, 51);
+                _failedColor = Color.FromArgb(170, 170, 170);
+                _errorColor = Color.FromArgb(187, 33, 36);
+                _warningColor = Color.FromArgb(240, 173, 78);
+                main_chart.ChartAreas[0].AxisX.Interval = 1;
                 //main_chart.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.White;
                 //main_chart.ChartAreas[0].AxisX.LabelStyle.ForeColor = Color.White;
                 
@@ -172,12 +174,17 @@ namespace game9
             }
         }
 
-        
+        private void chk_chartoptions_CheckedChanged(object sender, EventArgs e)
+        {
+            sp_parent.Panel2Collapsed = !chk_chartoptions.Checked;
+        }
+
         void LoadData()
         {
             try
             {
-                if(_dataObjs?.Count > 0)
+                Font defaultFont = new Font("Arial", 10, FontStyle.Bold);
+                if (_dataObjs?.Count > 0)
                 {
                     try
                     {
@@ -192,6 +199,7 @@ namespace game9
                             { "TotalFailed", new List<object>(){ "TotalFailed" } },
                             { "TotalError", new List<object>(){ "TotalError" } },
                             { "TotalRun", new List<object>(){ "TotalRun" } },
+                            { "TotalWarning", new List<object>(){ "TotalWarning" } },
                         };
                         foreach (var dataObj in _dataObjs)
                         {
@@ -200,6 +208,7 @@ namespace game9
                             rowObjs["TotalFailed"].Add(dataObj.TotalFailed);
                             rowObjs["TotalError"].Add(dataObj.TotalError);
                             rowObjs["TotalRun"].Add(dataObj.TotalRun);
+                            rowObjs["TotalWarning"].Add(dataObj.TotalWarning);
                         }
                         foreach(var rowObj in rowObjs)
                         {
@@ -225,26 +234,31 @@ namespace game9
                             totalErrorSeriesObj.LegendText = totalErrorSeriesObj.Name;
                             totalErrorSeriesObj.Color = _errorColor;
 
+                            //System.Windows.Forms.DataVisualization.Charting.Series totalWarningSeriesObj = main_chart.Series.Add("TotalWarning");
+                            //totalWarningSeriesObj.LegendText = totalWarningSeriesObj.Name;
+                            //totalWarningSeriesObj.Color = _warningColor;
+
                             foreach (var dataObj in _dataObjs)
                             {
                                 totalRunSeriesObj.Points.AddXY(dataObj.DateEnd, dataObj.TotalRun);
                                 totalPassedSeriesObj.Points.AddXY(dataObj.DateEnd, dataObj.TotalPassed);
                                 totalFailedSeriesObj.Points.AddXY(dataObj.DateEnd, dataObj.TotalFailed);
                                 totalErrorSeriesObj.Points.AddXY(dataObj.DateEnd, dataObj.TotalError);
-
+                                //totalWarningSeriesObj.Points.AddXY(dataObj.DateEnd, dataObj.TotalWarning);
                             }
 
                             totalRunSeriesObj.ChartType = totalPassedSeriesObj.ChartType = totalFailedSeriesObj.ChartType = totalErrorSeriesObj.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-                            totalRunSeriesObj.IsValueShownAsLabel = totalPassedSeriesObj.IsValueShownAsLabel = totalFailedSeriesObj.IsValueShownAsLabel = totalErrorSeriesObj.IsValueShownAsLabel = true;
-                            totalRunSeriesObj.BorderWidth = totalPassedSeriesObj.BorderWidth= totalFailedSeriesObj.BorderWidth= totalErrorSeriesObj.BorderWidth= 3;
+                            totalRunSeriesObj.IsValueShownAsLabel = totalPassedSeriesObj.IsValueShownAsLabel = totalFailedSeriesObj.IsValueShownAsLabel = totalErrorSeriesObj.IsValueShownAsLabel =  true;
+                            totalRunSeriesObj.BorderWidth = totalPassedSeriesObj.BorderWidth= totalFailedSeriesObj.BorderWidth= totalErrorSeriesObj.BorderWidth=  3;
                             totalRunSeriesObj.LabelForeColor= totalPassedSeriesObj.LabelForeColor= totalFailedSeriesObj.LabelForeColor= totalErrorSeriesObj.LabelForeColor = Color.White;
-
 
                             //main_chart.Series.Add(totalRunSeriesObj);
                             //main_chart.Series.Add(totalPassedSeriesObj);
                             //main_chart.Series.Add(totalFailedSeriesObj);
                             //main_chart.Series.Add(totalErrorSeriesObj);
                         });
+
+
 
                         _dlg.Execute(ratio_chart, () => {
 
@@ -264,17 +278,14 @@ namespace game9
                                         YValues = new double[] { total },
                                         Color = _passedColor,
                                         Label = $"Passed ({percent:0.00})%",
-                                        LabelForeColor = Color.Black
+                                        LabelForeColor = Color.White,
+                                        Font = defaultFont
                                     };
 
                                     ratioSeriesObj.Points.Add(pts);
-                                }
-                                
+                                }                                
                             }
-                            catch
-                            {
-                            }
-
+                            catch { }
 
                             try
                             {
@@ -287,15 +298,15 @@ namespace game9
                                         YValues = new double[] { total },
                                         Color =_errorColor,
                                         Label = $"Error ({percent:0.00})%",
-                                        LabelForeColor = Color.White
+                                        LabelForeColor = Color.White,
+                                        Font = defaultFont
                                     };
                                     ratioSeriesObj.Points.Add(pts);
                                 }
 
                             }
-                            catch
-                            {
-                            }
+                            catch { }
+
                             try
                             {
                                 double total = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalFailed, out iVal); return iVal; });
@@ -307,15 +318,32 @@ namespace game9
                                         YValues = new double[] { total },
                                         Color =_failedColor,
                                         Label = $"Failed ({percent:0.00})%",
-                                        LabelForeColor = Color.White
+                                        LabelForeColor = Color.White,
+                                        Font = defaultFont
                                     };
                                     ratioSeriesObj.Points.Add(pts);
                                 }
 
                             }
-                            catch
-                            {
-                            }
+                            catch { }
+
+                            //try
+                            //{
+                            //    double total = _dataObjs.Sum(ite => { int iVal; int.TryParse(ite.TotalWarning, out iVal); return iVal; });
+                            //    if (total > 0)
+                            //    {
+                            //        double percent = summaryTotal > 0 ? total * 100 / summaryTotal : 0;
+                            //        var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+                            //        {
+                            //            YValues = new double[] { total },
+                            //            Color = _warningColor,
+                            //            Label = $"Warning ({percent:0.00})%",
+                            //            LabelForeColor = Color.White
+                            //        };
+                            //        ratioSeriesObj.Points.Add(pts);
+                            //    }
+                            //}
+                            //catch { }
 
                             ratioSeriesObj.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
                             ratioSeriesObj.IsVisibleInLegend = false;

@@ -29,7 +29,9 @@ namespace game9.Models
        public string TotalFailed { get { return _TotalFailed; } set { _TotalFailed = value; } }
        protected string _TotalError;
        public string TotalError { get { return _TotalError; } set { _TotalError = value; } }
-       protected string _NoData;
+        protected string _TotalWarning;
+        public string TotalWarning { get { return _TotalWarning; } set { _TotalWarning = value; } }
+        protected string _NoData;
        public string NoData { get { return _NoData; } set { _NoData = value; } }
        protected string _TimeSearchMin;
        public string TimeSearchMin { get { return _TimeSearchMin; } set { _TimeSearchMin = value; } }
@@ -43,6 +45,7 @@ namespace game9.Models
        public string SummaryFolder { get { return _SummaryFolder; } set { _SummaryFolder = value; } }
        protected string _ReportRef;
        public string ReportRef { get { return _ReportRef; } set { _ReportRef = value; } }
+        
 
         public DataInfo() { }
     }
