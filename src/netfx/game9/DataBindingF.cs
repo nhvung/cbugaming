@@ -21,7 +21,7 @@ namespace game9
             _dlg = new DelegateProcess();
 
 #if DEBUG
-            ts_menu_txt_filepath.Text = @"c:\code\temp\cbu\Sample.xlsx";
+            ts_menu_txt_filepath.Text = @"c:\code\temp\cbu\Sample-2.xlsx";
 #endif
 
             dgv_summary.CellContentClick += Dgv_summary_CellContentClick;
@@ -89,6 +89,7 @@ namespace game9
                 if(!string.IsNullOrWhiteSpace(filePath))
                 {
                     Task.Run(()=> _ViewData(filePath));
+                    Task.Run(()=> _ViewDataRaw(filePath));
                 }
             }
             catch (Exception ex)
@@ -112,6 +113,30 @@ namespace game9
                     foreach(var grp in _groupDataObjs.OrderBy(ite=>ite.Key,StringComparer.InvariantCultureIgnoreCase))
                     {
                         _dlg.AddDataGridViewRow(dgv_summary, rowIdx + 1, grp.Key, grp.Value.Count, "View");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        void _ViewDataRaw(string filePath)
+        {
+            try
+            {
+                _dlg.ClearDataGridViewRows(dgv_raw);
+                var dataObj = ExcelExtension.LoadDataRaw(filePath);
+                if (dataObj?.IsValid()??false)
+                {
+                   foreach(var header in dataObj.Headers)
+                    {
+                        _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}", header.Key);
+                    }
+                    foreach(var row in dataObj.Rows)
+                    {
+                        _dlg.AddDataGridViewRow(dgv_raw, row.ToArray());
                     }
                 }
             }
