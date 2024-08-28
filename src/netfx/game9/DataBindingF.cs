@@ -72,6 +72,8 @@ namespace game9
                 {
                     ts_menu_txt_filepath.Text = ofd.FileName;
                 }
+
+                ts_menu_view_Click(sender, e);
             }
             catch (Exception ex)
             {
