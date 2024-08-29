@@ -55,11 +55,11 @@ namespace game9
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.sp_panel = new System.Windows.Forms.SplitContainer();
             this.ratio_chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgv_detail = new System.Windows.Forms.DataGridView();
             this.panel_overview = new System.Windows.Forms.Panel();
             this.chk_chartoptions = new System.Windows.Forms.CheckBox();
             this.sp_parent = new System.Windows.Forms.SplitContainer();
+            this.sp_overview = new System.Windows.Forms.SplitContainer();
             ((System.ComponentModel.ISupportInitialize)(this.main_chart)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -68,13 +68,16 @@ namespace game9
             this.sp_panel.Panel2.SuspendLayout();
             this.sp_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ratio_chart)).BeginInit();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_detail)).BeginInit();
             this.panel_overview.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.sp_parent)).BeginInit();
             this.sp_parent.Panel1.SuspendLayout();
             this.sp_parent.Panel2.SuspendLayout();
             this.sp_parent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sp_overview)).BeginInit();
+            this.sp_overview.Panel1.SuspendLayout();
+            this.sp_overview.Panel2.SuspendLayout();
+            this.sp_overview.SuspendLayout();
             this.SuspendLayout();
             // 
             // main_chart
@@ -94,7 +97,7 @@ namespace game9
             this.main_chart.Location = new System.Drawing.Point(0, 0);
             this.main_chart.Name = "main_chart";
             this.main_chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SemiTransparent;
-            this.main_chart.Size = new System.Drawing.Size(624, 262);
+            this.main_chart.Size = new System.Drawing.Size(636, 256);
             this.main_chart.TabIndex = 0;
             this.main_chart.Text = "chart1";
             // 
@@ -230,13 +233,11 @@ namespace game9
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.sp_panel);
-            this.groupBox2.Location = new System.Drawing.Point(6, 3);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(891, 282);
+            this.groupBox2.Size = new System.Drawing.Size(903, 276);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             // 
@@ -254,8 +255,8 @@ namespace game9
             // sp_panel.Panel2
             // 
             this.sp_panel.Panel2.Controls.Add(this.ratio_chart);
-            this.sp_panel.Size = new System.Drawing.Size(885, 262);
-            this.sp_panel.SplitterDistance = 624;
+            this.sp_panel.Size = new System.Drawing.Size(897, 256);
+            this.sp_panel.SplitterDistance = 636;
             this.sp_panel.TabIndex = 1;
             // 
             // ratio_chart
@@ -273,20 +274,9 @@ namespace game9
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.ratio_chart.Series.Add(series1);
-            this.ratio_chart.Size = new System.Drawing.Size(257, 262);
+            this.ratio_chart.Size = new System.Drawing.Size(257, 256);
             this.ratio_chart.TabIndex = 0;
             this.ratio_chart.Text = "chart1";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.dgv_detail);
-            this.groupBox3.Location = new System.Drawing.Point(3, 291);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(897, 258);
-            this.groupBox3.TabIndex = 10;
-            this.groupBox3.TabStop = false;
             // 
             // dgv_detail
             // 
@@ -315,7 +305,7 @@ namespace game9
             this.dgv_detail.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_detail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_detail.GridColor = System.Drawing.Color.White;
-            this.dgv_detail.Location = new System.Drawing.Point(3, 17);
+            this.dgv_detail.Location = new System.Drawing.Point(0, 0);
             this.dgv_detail.Name = "dgv_detail";
             this.dgv_detail.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -328,7 +318,7 @@ namespace game9
             this.dgv_detail.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_detail.RowHeadersVisible = false;
             this.dgv_detail.RowTemplate.Height = 40;
-            this.dgv_detail.Size = new System.Drawing.Size(891, 238);
+            this.dgv_detail.Size = new System.Drawing.Size(903, 272);
             this.dgv_detail.TabIndex = 0;
             // 
             // panel_overview
@@ -336,8 +326,7 @@ namespace game9
             this.panel_overview.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel_overview.Controls.Add(this.groupBox3);
-            this.panel_overview.Controls.Add(this.groupBox2);
+            this.panel_overview.Controls.Add(this.sp_overview);
             this.panel_overview.Location = new System.Drawing.Point(3, 3);
             this.panel_overview.Name = "panel_overview";
             this.panel_overview.Size = new System.Drawing.Size(903, 552);
@@ -375,6 +364,24 @@ namespace game9
             this.sp_parent.SplitterDistance = 558;
             this.sp_parent.TabIndex = 13;
             // 
+            // sp_overview
+            // 
+            this.sp_overview.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sp_overview.Location = new System.Drawing.Point(0, 0);
+            this.sp_overview.Name = "sp_overview";
+            this.sp_overview.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // sp_overview.Panel1
+            // 
+            this.sp_overview.Panel1.Controls.Add(this.groupBox2);
+            // 
+            // sp_overview.Panel2
+            // 
+            this.sp_overview.Panel2.Controls.Add(this.dgv_detail);
+            this.sp_overview.Size = new System.Drawing.Size(903, 552);
+            this.sp_overview.SplitterDistance = 276;
+            this.sp_overview.TabIndex = 11;
+            // 
             // ViewChartF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -399,13 +406,16 @@ namespace game9
             ((System.ComponentModel.ISupportInitialize)(this.sp_panel)).EndInit();
             this.sp_panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ratio_chart)).EndInit();
-            this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_detail)).EndInit();
             this.panel_overview.ResumeLayout(false);
             this.sp_parent.Panel1.ResumeLayout(false);
             this.sp_parent.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.sp_parent)).EndInit();
             this.sp_parent.ResumeLayout(false);
+            this.sp_overview.Panel1.ResumeLayout(false);
+            this.sp_overview.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sp_overview)).EndInit();
+            this.sp_overview.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,7 +437,6 @@ namespace game9
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox com_xaxislabelangle;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgv_detail;
         private System.Windows.Forms.Panel panel_overview;
         private System.Windows.Forms.Button but_setbackgroundcolor;
@@ -435,5 +444,6 @@ namespace game9
         private System.Windows.Forms.DataVisualization.Charting.Chart ratio_chart;
         private System.Windows.Forms.CheckBox chk_chartoptions;
         private System.Windows.Forms.SplitContainer sp_parent;
+        private System.Windows.Forms.SplitContainer sp_overview;
     }
 }

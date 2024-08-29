@@ -45,8 +45,28 @@ namespace game9
             dgv_config_linechart.CellMouseClick += Dgv_config_linechart_CellMouseClick;
 
             _lineChartConfigFile = new FileInfo($"{Application.StartupPath}/lineChartConfig.json");
+            _LoadRawConfig();
 
             dgv_raw_summary.CellContentClick += Dgv_raw_summary_CellContentClick;
+        }
+
+        void _LoadRawConfig()
+        {
+            try
+            {
+                if (_lineChartConfigFile.Exists)
+                {
+                    string json = File.ReadAllText(_lineChartConfigFile.FullName, Encoding.UTF8);
+                    if (!string.IsNullOrWhiteSpace(json))
+                    {
+                        _lineChartConfig = JsonConvert.DeserializeObject<LineChartConfig>(json);
+                    }
+                }
+            }
+            catch
+            {
+            }
+            
         }
 
         private void Dgv_raw_summary_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -58,9 +78,12 @@ namespace game9
                     if (e.ColumnIndex == 3)
                     {
                         string moduleName =dgv_raw_summary["dgv_raw_summary_col_modulename", e.RowIndex].Value.ToString();
-                        if (_rawDataObj?.IsValid() ?? false)
+                        if (_groupRawDataObjs?.ContainsKey(moduleName)??false)
                         {
-                            ViewChartF viewChartF = new ViewChartF(_rawDataObj, _lineChartConfig,  $"chart {moduleName}");
+
+                            var rawObjs = _groupRawDataObjs[moduleName];
+
+                            ViewChartF viewChartF = new ViewChartF(rawObjs, _lineChartConfig,  $"chart {moduleName}");
                             viewChartF.Show();
                         }
                     }
@@ -88,15 +111,65 @@ namespace game9
 
         private void Dgv_config_linechart_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            try
             {
-            }
-            else
-            {
-                if (e.ColumnIndex == 4)
+                if (e.Button == MouseButtons.Right)
                 {
-                    dgv_config_linechart.Rows.RemoveAt(e.RowIndex);
                 }
+                else
+                {
+                    _dlg.Execute(dgv_config_linechart, delegate {
+                        if (dgv_config_linechart.Columns[e.ColumnIndex].Name.Equals("dgv_config_linechart_col_remove", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            dgv_config_linechart.Rows.RemoveAt(e.RowIndex);
+                        }
+                        else if (dgv_config_linechart.Columns[e.ColumnIndex].Name.Equals("dgv_config_linechart_col_color", StringComparison.InvariantCultureIgnoreCase))
+                        {
+                            if (e.RowIndex > -1)
+                            {
+                                ColorDialog colorDialog = new ColorDialog();
+                                bool hasChanged = false;
+                                string header = dgv_config_linechart["dgv_config_linechart_col_header", e.RowIndex].Value.ToString();
+                                if (colorDialog.ShowDialog() == DialogResult.OK)
+                                {
+                                    var hexColor = $"#{colorDialog.Color.R:X2}{colorDialog.Color.G:X2}{colorDialog.Color.B:X2}";
+                                    var colorCell = new DataGridViewStatusCell.StatusCell(hexColor, colorDialog.Color, Color.White);
+                                    if (_lineChartConfig?.ValueColumns?.Count > 0)
+                                    {
+                                        foreach (var col in _lineChartConfig.ValueColumns)
+                                        {
+                                            if (col.Column.Equals(header, StringComparison.InvariantCultureIgnoreCase))
+                                            {
+                                                col.HexColor = hexColor;
+                                                hasChanged = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+
+                                    try
+                                    {
+                                        _dlg.SetDataGridViewValue(dgv_config_linechart, e.RowIndex, "dgv_config_linechart_col_color", colorCell);
+                                    }
+                                    catch
+                                    {
+
+                                    }
+                                }
+                                if (hasChanged)
+                                {
+                                    _SaveLineChartConfig();
+                                }
+                            }
+
+                        }
+                    });
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -163,7 +236,7 @@ namespace game9
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -187,7 +260,7 @@ namespace game9
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -196,14 +269,15 @@ namespace game9
         {
             try
             {
+                _dlg.ClearDataGridViewRows(dgv_config_linechart);
                 _dlg.ClearDataGridViewRows(dgv_raw);
                 _dlg.Execute(ts_raw, () => {
                     ts_raw_com_filtercolumn.Items.Clear();
-                    ts_raw_com_filtercolumn.Items.Add("ModuleName");
+                    ts_raw_com_filtercolumn.Items.Add(_lineChartConfig?.FilterColumn??"ModuleName");
                     ts_raw_com_filtercolumn.SelectedIndex = 0;
 
                     ts_raw_com_groupcolumn.Items.Clear();
-                    ts_raw_com_groupcolumn.Items.Add("DateStart");
+                    ts_raw_com_groupcolumn.Items.Add(_lineChartConfig?.GroupColumn ?? "DateStart");                    
                     ts_raw_com_groupcolumn.Items.Add("DateEnd");
                     ts_raw_com_groupcolumn.SelectedIndex = 0;
                 });
@@ -213,17 +287,7 @@ namespace game9
                     List<int> timeColIdxes = new List<int>();
                    foreach(var header in _rawDataObj.Headers)
                     {
-                        _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}", header.Key);
-                        if(header.Key.IndexOf("timestart",StringComparison.InvariantCultureIgnoreCase)>=0)
-                        {
-                            timeColIdxes.Add(header.Value);
-                            _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}_date", $"Date{header.Key.Substring(4)}");
-                        }
-                        else if (header.Key.IndexOf("timeend", StringComparison.InvariantCultureIgnoreCase) >= 0)
-                        {
-                            timeColIdxes.Add(header.Value);
-                            _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}_date", $"Date{header.Key.Substring(4)}");
-                        }
+                        _dlg.AddDataGridViewColumn(dgv_raw, $"dgv_raw_col_{header.Value}", header.Key);                       
                     }
                     foreach(var row in _rawDataObj.Rows)
                     {
@@ -231,21 +295,28 @@ namespace game9
                        for(int i =0;i<row.Count;i++)
                         {
                             objs.Add(row[i]);
-                            if(timeColIdxes.Contains(i))
-                            {
-                                objs.Add(row[i].Substring(0, 10).Trim());
-                            }
                         }
                         _dlg.AddDataGridViewRow(dgv_raw, objs.ToArray());
                     }
+                }
 
+                if(_lineChartConfig?.ValueColumns?.Count > 0)
+                {
+                    foreach(var valCol in _lineChartConfig.ValueColumns)
+                    {
+                        string colorValue = string.IsNullOrWhiteSpace(valCol.HexColor) ? "Set" : valCol.HexColor;
+                        Color color = ColorTranslator.FromHtml(colorValue);
 
-                   
+                        var colorCell = new DataGridViewStatusCell.StatusCell(colorValue, color, Color.White);
+
+                        var rowIdx = _dlg.AddDataGridViewRow(dgv_config_linechart, valCol.Column, valCol.NewColumn, valCol.DrawLine, valCol.DrawPie, colorCell, "Remove");
+                        
+                    }
                 }
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -261,7 +332,7 @@ namespace game9
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -270,11 +341,13 @@ namespace game9
             if(_dgv_raw_column_index>=0)
             {
                 var header = dgv_raw.Columns[_dgv_raw_column_index].HeaderText;
-                _dlg.AddDataGridViewRow(dgv_config_linechart, header, "", true, true, "Remove");
+                var colorCell = new DataGridViewStatusCell.StatusCell("Not Set", Color.White, Color.Black);
+                _dlg.AddDataGridViewRow(dgv_config_linechart, header, "", true, true, colorCell, "Remove");
             }
         }
 
         LineChartConfig _lineChartConfig;
+        Dictionary<string, List<dynamic>> _groupRawDataObjs;
         private void but_saveconfig_Click(object sender, EventArgs e)
         {
             try
@@ -290,13 +363,15 @@ namespace game9
                     {
                         string sColumn = rowObj.Cells["dgv_config_linechart_col_header"].Value.ToString();
                         string sNewColumn = rowObj.Cells["dgv_config_linechart_col_newheader"].Value.ToString();
+                        string sHexColor = rowObj.Cells["dgv_config_linechart_col_color"].Value?.ToString();
                         bool bDrawLine = Convert.ToBoolean(rowObj.Cells["dgv_config_linechart_col_drawline"].Value);
                         bool bDrawPie = Convert.ToBoolean(rowObj.Cells["dgv_config_linechart_col_drawpiechart"].Value);
                         DetailChartConfig detailObj = new DetailChartConfig { 
                             Column=sColumn,
                             NewColumn=sNewColumn,
                             DrawLine = bDrawLine,
-                            DrawPie=bDrawPie
+                            DrawPie=bDrawPie,
+                            HexColor= sHexColor
                         };
                         valueColumns.Add(detailObj);
                     }
@@ -307,17 +382,17 @@ namespace game9
                     ValueColumns= valueColumns
                     };
 
-                    var jsonConfig = JsonConvert.SerializeObject(_lineChartConfig, Formatting.Indented);
-                    File.WriteAllText(_lineChartConfigFile.FullName, jsonConfig, Encoding.UTF8);
+                    _SaveLineChartConfig();
 
                     if (_rawDataObj?.IsValid() ?? false)
                     {
                         var dynamicObjs = _rawDataObj.ToDynamicObjects();
-                        var groupObjs = dynamicObjs.GroupBy(ite => ite[filterColumn].ToString());
+                        _groupRawDataObjs = dynamicObjs.GroupBy(ite => $"{ite[filterColumn]}",StringComparer.InvariantCultureIgnoreCase)
+                            .ToDictionary(ite=>ite.Key, ite=>ite.ToList(),StringComparer.InvariantCultureIgnoreCase);
                         int rowIdx = 0;
-                        foreach(var groupObj in groupObjs.OrderBy(ite=>ite.Key))
+                        foreach(var groupObj in _groupRawDataObjs.OrderBy(ite=>ite.Key))
                         {
-                            _dlg.AddDataGridViewRow(dgv_raw_summary, ++rowIdx, groupObj.Key, groupObj.Count(), "View");                            
+                            _dlg.AddDataGridViewRow(dgv_raw_summary, ++rowIdx, groupObj.Key, groupObj.Value.Count, "View");                            
                         }
                     }
                 }
@@ -328,7 +403,24 @@ namespace game9
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
+        void _SaveLineChartConfig()
+        {
+            try
+            {
+                if(_lineChartConfig!=null)
+                {
+                    var jsonConfig = JsonConvert.SerializeObject(_lineChartConfig, Formatting.Indented);
+                    File.WriteAllText(_lineChartConfigFile.FullName, jsonConfig, Encoding.UTF8);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

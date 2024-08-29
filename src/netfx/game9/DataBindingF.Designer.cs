@@ -32,12 +32,15 @@ namespace game9
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataBindingF));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,6 +63,11 @@ namespace game9
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgv_config_linechart = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.dgv_raw_summary = new System.Windows.Forms.DataGridView();
+            this.dgv_raw_summary_col_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_raw_summary_col_modulename = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_raw_summary_col_totalrecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_raw_summary_col_chart = new System.Windows.Forms.DataGridViewButtonColumn();
             this.but_saveconfig = new System.Windows.Forms.Button();
             this.tab_auto = new System.Windows.Forms.TabPage();
             this.grp_summary = new System.Windows.Forms.GroupBox();
@@ -84,12 +92,8 @@ namespace game9
             this.dgv_config_linechart_col_newheader = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_config_linechart_col_drawline = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_config_linechart_col_drawpiechart = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgv_config_linechart_col_color = new System.Windows.Forms.DataGridViewStatusColumn();
             this.dgv_config_linechart_col_remove = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dgv_raw_summary = new System.Windows.Forms.DataGridView();
-            this.dgv_raw_summary_col_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_raw_summary_col_modulename = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_raw_summary_col_totalrecords = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_raw_summary_col_chart = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             this.panel5.SuspendLayout();
             this.tabc_main.SuspendLayout();
@@ -112,12 +116,12 @@ namespace game9
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_config_linechart)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw_summary)).BeginInit();
             this.tab_auto.SuspendLayout();
             this.grp_summary.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).BeginInit();
             this.ts_menu.SuspendLayout();
             this.cms_rawdata.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw_summary)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -340,6 +344,8 @@ namespace game9
             // 
             this.dgv_config_linechart.AllowUserToAddRows = false;
             this.dgv_config_linechart.AllowUserToDeleteRows = false;
+            this.dgv_config_linechart.AllowUserToResizeColumns = false;
+            this.dgv_config_linechart.AllowUserToResizeRows = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -355,11 +361,27 @@ namespace game9
             this.dgv_config_linechart_col_newheader,
             this.dgv_config_linechart_col_drawline,
             this.dgv_config_linechart_col_drawpiechart,
+            this.dgv_config_linechart_col_color,
             this.dgv_config_linechart_col_remove});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Ivory;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_config_linechart.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_config_linechart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_config_linechart.Location = new System.Drawing.Point(3, 17);
             this.dgv_config_linechart.Name = "dgv_config_linechart";
             this.dgv_config_linechart.RowHeadersVisible = false;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.LightGoldenrodYellow;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgv_config_linechart.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgv_config_linechart.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.White;
+            this.dgv_config_linechart.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black;
             this.dgv_config_linechart.RowTemplate.Height = 30;
             this.dgv_config_linechart.Size = new System.Drawing.Size(613, 181);
             this.dgv_config_linechart.TabIndex = 0;
@@ -375,6 +397,66 @@ namespace game9
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Summary";
             // 
+            // dgv_raw_summary
+            // 
+            this.dgv_raw_summary.AllowUserToAddRows = false;
+            this.dgv_raw_summary.AllowUserToDeleteRows = false;
+            this.dgv_raw_summary.AllowUserToResizeColumns = false;
+            this.dgv_raw_summary.AllowUserToResizeRows = false;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_raw_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgv_raw_summary.ColumnHeadersHeight = 30;
+            this.dgv_raw_summary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv_raw_summary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgv_raw_summary_col_no,
+            this.dgv_raw_summary_col_modulename,
+            this.dgv_raw_summary_col_totalrecords,
+            this.dgv_raw_summary_col_chart});
+            this.dgv_raw_summary.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_raw_summary.Location = new System.Drawing.Point(3, 17);
+            this.dgv_raw_summary.Name = "dgv_raw_summary";
+            this.dgv_raw_summary.RowHeadersVisible = false;
+            this.dgv_raw_summary.RowTemplate.Height = 30;
+            this.dgv_raw_summary.Size = new System.Drawing.Size(690, 181);
+            this.dgv_raw_summary.TabIndex = 1;
+            // 
+            // dgv_raw_summary_col_no
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_raw_summary_col_no.DefaultCellStyle = dataGridViewCellStyle7;
+            this.dgv_raw_summary_col_no.HeaderText = "No.";
+            this.dgv_raw_summary_col_no.MinimumWidth = 50;
+            this.dgv_raw_summary_col_no.Name = "dgv_raw_summary_col_no";
+            this.dgv_raw_summary_col_no.Width = 50;
+            // 
+            // dgv_raw_summary_col_modulename
+            // 
+            this.dgv_raw_summary_col_modulename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgv_raw_summary_col_modulename.HeaderText = "Module Name";
+            this.dgv_raw_summary_col_modulename.Name = "dgv_raw_summary_col_modulename";
+            // 
+            // dgv_raw_summary_col_totalrecords
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_raw_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgv_raw_summary_col_totalrecords.HeaderText = "Total Records";
+            this.dgv_raw_summary_col_totalrecords.MinimumWidth = 200;
+            this.dgv_raw_summary_col_totalrecords.Name = "dgv_raw_summary_col_totalrecords";
+            this.dgv_raw_summary_col_totalrecords.Width = 200;
+            // 
+            // dgv_raw_summary_col_chart
+            // 
+            this.dgv_raw_summary_col_chart.HeaderText = "Chart";
+            this.dgv_raw_summary_col_chart.MinimumWidth = 200;
+            this.dgv_raw_summary_col_chart.Name = "dgv_raw_summary_col_chart";
+            this.dgv_raw_summary_col_chart.Width = 200;
+            // 
             // but_saveconfig
             // 
             this.but_saveconfig.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -382,7 +464,7 @@ namespace game9
             this.but_saveconfig.Name = "but_saveconfig";
             this.but_saveconfig.Size = new System.Drawing.Size(136, 23);
             this.but_saveconfig.TabIndex = 0;
-            this.but_saveconfig.Text = "Save Config";
+            this.but_saveconfig.Text = "Save && Show";
             this.but_saveconfig.UseVisualStyleBackColor = true;
             this.but_saveconfig.Click += new System.EventHandler(this.but_saveconfig_Click);
             // 
@@ -413,14 +495,14 @@ namespace game9
             this.dgv_summary.AllowUserToDeleteRows = false;
             this.dgv_summary.AllowUserToResizeColumns = false;
             this.dgv_summary.AllowUserToResizeRows = false;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dgv_summary.ColumnHeadersHeight = 30;
             this.dgv_summary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_summary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -438,8 +520,8 @@ namespace game9
             // 
             // dgv_summary_col_no
             // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_no.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgv_summary_col_no.HeaderText = "No.";
             this.dgv_summary_col_no.MinimumWidth = 50;
             this.dgv_summary_col_no.Name = "dgv_summary_col_no";
@@ -453,8 +535,8 @@ namespace game9
             // 
             // dgv_summary_col_totalrecords
             // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgv_summary_col_totalrecords.HeaderText = "Total Records";
             this.dgv_summary_col_totalrecords.MinimumWidth = 200;
             this.dgv_summary_col_totalrecords.Name = "dgv_summary_col_totalrecords";
@@ -590,71 +672,26 @@ namespace game9
             this.dgv_config_linechart_col_drawpiechart.MinimumWidth = 100;
             this.dgv_config_linechart_col_drawpiechart.Name = "dgv_config_linechart_col_drawpiechart";
             // 
+            // dgv_config_linechart_col_color
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.NullValue = ((object)(resources.GetObject("dataGridViewCellStyle3.NullValue")));
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Transparent;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Transparent;
+            this.dgv_config_linechart_col_color.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_config_linechart_col_color.HeaderText = "Color";
+            this.dgv_config_linechart_col_color.MinimumWidth = 100;
+            this.dgv_config_linechart_col_color.Name = "dgv_config_linechart_col_color";
+            this.dgv_config_linechart_col_color.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
             // dgv_config_linechart_col_remove
             // 
             this.dgv_config_linechart_col_remove.HeaderText = "";
             this.dgv_config_linechart_col_remove.MinimumWidth = 100;
             this.dgv_config_linechart_col_remove.Name = "dgv_config_linechart_col_remove";
-            // 
-            // dgv_raw_summary
-            // 
-            this.dgv_raw_summary.AllowUserToAddRows = false;
-            this.dgv_raw_summary.AllowUserToDeleteRows = false;
-            this.dgv_raw_summary.AllowUserToResizeColumns = false;
-            this.dgv_raw_summary.AllowUserToResizeRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_raw_summary.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgv_raw_summary.ColumnHeadersHeight = 30;
-            this.dgv_raw_summary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            this.dgv_raw_summary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dgv_raw_summary_col_no,
-            this.dgv_raw_summary_col_modulename,
-            this.dgv_raw_summary_col_totalrecords,
-            this.dgv_raw_summary_col_chart});
-            this.dgv_raw_summary.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_raw_summary.Location = new System.Drawing.Point(3, 17);
-            this.dgv_raw_summary.Name = "dgv_raw_summary";
-            this.dgv_raw_summary.RowHeadersVisible = false;
-            this.dgv_raw_summary.RowTemplate.Height = 30;
-            this.dgv_raw_summary.Size = new System.Drawing.Size(690, 181);
-            this.dgv_raw_summary.TabIndex = 1;
-            // 
-            // dgv_raw_summary_col_no
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_raw_summary_col_no.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_raw_summary_col_no.HeaderText = "No.";
-            this.dgv_raw_summary_col_no.MinimumWidth = 50;
-            this.dgv_raw_summary_col_no.Name = "dgv_raw_summary_col_no";
-            this.dgv_raw_summary_col_no.Width = 50;
-            // 
-            // dgv_raw_summary_col_modulename
-            // 
-            this.dgv_raw_summary_col_modulename.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgv_raw_summary_col_modulename.HeaderText = "Module Name";
-            this.dgv_raw_summary_col_modulename.Name = "dgv_raw_summary_col_modulename";
-            // 
-            // dgv_raw_summary_col_totalrecords
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_raw_summary_col_totalrecords.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dgv_raw_summary_col_totalrecords.HeaderText = "Total Records";
-            this.dgv_raw_summary_col_totalrecords.MinimumWidth = 200;
-            this.dgv_raw_summary_col_totalrecords.Name = "dgv_raw_summary_col_totalrecords";
-            this.dgv_raw_summary_col_totalrecords.Width = 200;
-            // 
-            // dgv_raw_summary_col_chart
-            // 
-            this.dgv_raw_summary_col_chart.HeaderText = "Chart";
-            this.dgv_raw_summary_col_chart.MinimumWidth = 200;
-            this.dgv_raw_summary_col_chart.Name = "dgv_raw_summary_col_chart";
-            this.dgv_raw_summary_col_chart.Width = 200;
             // 
             // DataBindingF
             // 
@@ -698,13 +735,13 @@ namespace game9
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_config_linechart)).EndInit();
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw_summary)).EndInit();
             this.tab_auto.ResumeLayout(false);
             this.grp_summary.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_summary)).EndInit();
             this.ts_menu.ResumeLayout(false);
             this.ts_menu.PerformLayout();
             this.cms_rawdata.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_raw_summary)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -752,15 +789,16 @@ namespace game9
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem cms_rawdata_assignetofilter;
         private System.Windows.Forms.ToolStripMenuItem cms_rawdata_assigntogroup;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_header;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_newheader;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_config_linechart_col_drawline;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_config_linechart_col_drawpiechart;
-        private System.Windows.Forms.DataGridViewButtonColumn dgv_config_linechart_col_remove;
         private System.Windows.Forms.DataGridView dgv_raw_summary;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_raw_summary_col_no;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_raw_summary_col_modulename;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_raw_summary_col_totalrecords;
         private System.Windows.Forms.DataGridViewButtonColumn dgv_raw_summary_col_chart;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_header;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_config_linechart_col_newheader;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_config_linechart_col_drawline;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_config_linechart_col_drawpiechart;
+        private System.Windows.Forms.DataGridViewStatusColumn dgv_config_linechart_col_color;
+        private System.Windows.Forms.DataGridViewButtonColumn dgv_config_linechart_col_remove;
     }
 }
