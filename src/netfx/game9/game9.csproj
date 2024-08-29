@@ -87,6 +87,8 @@
     <Compile Include="Extensions\ExcelExtension.cs" />
     <Compile Include="Models\ChartConfig.cs" />
     <Compile Include="Models\DataInfo.cs" />
+    <Compile Include="Models\DetailChartConfig.cs" />
+    <Compile Include="Models\LineChartConfig.cs" />
     <Compile Include="Models\RawDataInfo.cs" />
     <Compile Include="PasswordF.cs">
       <SubType>Form</SubType>

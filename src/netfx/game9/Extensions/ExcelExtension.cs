@@ -133,6 +133,7 @@ namespace game9.Extensions
             {
                 errorAction?.Invoke(ex);
             }
+
             return result;
         }
     }
