@@ -1,5 +1,6 @@
 namespace game9.Models
-{
+{[Newtonsoft.Json.JsonObject(ItemNullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
     public class DetailChartConfig
     {
         protected string _Column;
@@ -10,5 +11,7 @@ namespace game9.Models
         public bool? DrawLine { get { return _DrawLine; } set { _DrawLine = value; } }
         protected bool? _DrawPie;
         public bool? DrawPie { get { return _DrawPie; } set { _DrawPie = value; } }
+        protected string _HexColor;
+        public string HexColor { get { return _HexColor; } set { _HexColor = value; } }
     }
 }

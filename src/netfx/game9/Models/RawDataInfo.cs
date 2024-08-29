@@ -7,7 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace game9.Models
-{
+{[Newtonsoft.Json.JsonObject(ItemNullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+
     public class RawDataInfo
     {
         protected Dictionary<string,int> _Headers;

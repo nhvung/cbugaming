@@ -18,7 +18,7 @@ namespace game9
         FileInfo _configFile;
         ChartConfig _chartConfig;
         List<DataInfo> _dataObjs;
-        RawDataInfo _rawObj;
+        List<dynamic> _rawDataObjs;
         LineChartConfig _rawChartConfig;
         DelegateProcess _dlg;
         string _title;
@@ -45,13 +45,13 @@ namespace game9
             sp_panel.SizeChanged += Sp_panel_SizeChanged;
             sp_parent.Panel2Collapsed = true;
         }
-        public ViewChartF(RawDataInfo rawObj, LineChartConfig chartConfig, string title = "")
+        public ViewChartF(List<dynamic> rawDataObjs, LineChartConfig chartConfig, string title = "")
         {
             InitializeComponent();
             _dlg = new DelegateProcess();
             _title = title;
             _configFile = new FileInfo($"{Application.StartupPath}/chart_config.json");
-            _rawObj = rawObj;
+            _rawDataObjs = rawDataObjs;
             _rawChartConfig = chartConfig;
             _fromRawData = true;
             LoadConfig();
@@ -395,16 +395,117 @@ namespace game9
             try
             {
                 Font defaultFont = new Font("Arial", 10, FontStyle.Bold);
-                if (_rawObj?.IsValid() ?? false)
+                if (_rawDataObjs?.Count > 0)
                 {
                     try
                     {
                         _dlg.ClearDataGridViewRows(dgv_detail);
                         _dlg.ClearDataGridViewColumns(dgv_detail);
-
                         int iCol = 0;
                         _dlg.AddDataGridViewColumn(dgv_detail, $"dgv_detail_col_date", $"Date");
-                        
+                        foreach (var dataObj in _rawDataObjs)
+                        {
+                            var colVal = $"{dataObj[_rawChartConfig.GroupColumn]}";
+                            _dlg.AddDataGridViewColumn(dgv_detail, $"dgv_detail_col_{++iCol}", $"{colVal}");
+                        }
+
+                        Dictionary<string, List<object>> rowObjs = new Dictionary<string, List<object>>();
+                        foreach (var rRowObj in _rawChartConfig.ValueColumns)
+                        {
+                            string label = !string.IsNullOrWhiteSpace(rRowObj.NewColumn) ? rRowObj.NewColumn : rRowObj.Column;
+                            rowObjs[rRowObj.Column] = new List<object> { label };
+                            foreach (var dataObj in _rawDataObjs)
+                            {
+                                string value = $"{dataObj[rRowObj.Column]}";
+                                rowObjs[rRowObj.Column].Add($"{value}");
+                            }                            
+                        }
+                        foreach (var rowObj in rowObjs)
+                        {
+                            _dlg.AddDataGridViewRow(dgv_detail, rowObj.Value.ToArray());
+                        }
+
+                        _dlg.Execute(main_chart, delegate { main_chart.Series.Clear(); });
+                        _dlg.Execute(ratio_chart, delegate { ratio_chart.Series.Clear(); });
+                        double summaryTotal = 0;
+                        foreach (var rRowObj in _rawChartConfig.ValueColumns)
+                        {
+                            string label = !string.IsNullOrWhiteSpace(rRowObj.NewColumn) ? rRowObj.NewColumn : rRowObj.Column;
+                            Color color = Color.White;
+                            try
+                            {
+                                color = ColorTranslator.FromHtml(rRowObj.HexColor);
+                            }
+                            catch { }
+
+
+                            if(rRowObj.DrawLine ?? false)
+                            {
+                                System.Windows.Forms.DataVisualization.Charting.Series totalSeriesObj = new System.Windows.Forms.DataVisualization.Charting.Series(label);
+                                totalSeriesObj.LegendText = totalSeriesObj.Name;
+                                totalSeriesObj.Color = color;
+                                totalSeriesObj.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+                                totalSeriesObj.IsValueShownAsLabel = true;
+                                totalSeriesObj.BorderWidth  = 3;
+                                totalSeriesObj.LabelForeColor = Color.White;
+
+                                foreach (var dataObj in _rawDataObjs)
+                                {
+                                    var xLabel = $"{dataObj[_rawChartConfig.GroupColumn]}";
+                                    double dValue;
+                                    double.TryParse($"{dataObj[rRowObj.Column]}", out dValue);
+                                    totalSeriesObj.Points.AddXY(xLabel, dValue);
+                                    summaryTotal += dValue;
+                                }
+                                main_chart.Series.Add(totalSeriesObj);
+                            }
+
+                            
+
+                        }
+
+
+                        System.Windows.Forms.DataVisualization.Charting.Series pieSeriesObj = new System.Windows.Forms.DataVisualization.Charting.Series("Pie")
+                        { 
+                            ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie,
+                            IsVisibleInLegend = false
+                        };
+                        foreach (var rRowObj in _rawChartConfig.ValueColumns)
+                        {
+                            string label = !string.IsNullOrWhiteSpace(rRowObj.NewColumn) ? rRowObj.NewColumn : rRowObj.Column;
+                            Color color = Color.White;
+                            try
+                            {
+                                color = ColorTranslator.FromHtml(rRowObj.HexColor);
+                            }
+                            catch { }
+                            if (rRowObj.DrawPie ?? false)
+                            {
+                                double partTotal = _rawDataObjs.Sum(ite => {
+                                    double dTotal;
+                                    double.TryParse($"{ite[rRowObj.Column]}", out dTotal);
+                                    return dTotal;
+                                });
+                                if(partTotal>0)
+                                {
+                                    double percent = summaryTotal > 0 ? partTotal * 100 / summaryTotal : 0;
+                                    var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
+                                    {
+                                        YValues = new double[] { partTotal },
+                                        Color = color,
+                                        Label = $"{label} ({percent:0.00}%)",
+                                        LabelForeColor = Color.White,
+                                        Font = defaultFont
+                                    };
+                                    pieSeriesObj.Points.Add(pts);
+                                }
+                                
+                            }
+                        }
+                        if(pieSeriesObj.Points.Count > 0)
+                        {
+                            ratio_chart.Series.Add(pieSeriesObj);
+                        }
                     }
                     catch (Exception ex)
                     {
