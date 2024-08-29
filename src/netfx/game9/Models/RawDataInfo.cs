@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +22,28 @@ namespace game9.Models
         public bool IsValid()
         {
             return _Headers?.Count > 0 && _Rows?.Count > 0;
+        }
+
+        public List<dynamic> ToDynamicObjects()
+        {
+            if(_Rows?.Count > 0 && _Headers?.Count > 0)
+            {
+                List<dynamic> dObjs = new List<dynamic>();
+                foreach(var row in Rows)
+                {
+                    List<string> jsonFieldsValues = new List<string>();
+                    foreach(var header in _Headers)
+                    {
+                        string jsonFieldValue = $"\"{header.Key}\": \"{row[header.Value]}\"";
+                        jsonFieldsValues.Add(jsonFieldValue);
+                    }
+                    string jsonObj = "{" + string.Join(",", jsonFieldsValues) + "}";
+                    dynamic dObj = JsonConvert.DeserializeObject<dynamic>(jsonObj);
+                    dObjs.Add(dObj);
+                }
+                return dObjs;
+            }
+            return null;
         }
     }
 }

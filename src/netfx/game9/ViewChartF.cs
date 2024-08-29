@@ -18,6 +18,8 @@ namespace game9
         FileInfo _configFile;
         ChartConfig _chartConfig;
         List<DataInfo> _dataObjs;
+        RawDataInfo _rawObj;
+        LineChartConfig _rawChartConfig;
         DelegateProcess _dlg;
         string _title;
 
@@ -40,6 +42,21 @@ namespace game9
             LoadConfig();
             InitChart();
             but_apply_Click(null,null);
+            sp_panel.SizeChanged += Sp_panel_SizeChanged;
+            sp_parent.Panel2Collapsed = true;
+        }
+        public ViewChartF(RawDataInfo rawObj, LineChartConfig chartConfig, string title = "")
+        {
+            InitializeComponent();
+            _dlg = new DelegateProcess();
+            _title = title;
+            _configFile = new FileInfo($"{Application.StartupPath}/chart_config.json");
+            _rawObj = rawObj;
+            _rawChartConfig = chartConfig;
+            _fromRawData = true;
+            LoadConfig();
+            InitChart();
+            but_apply_Click(null, null);
             sp_panel.SizeChanged += Sp_panel_SizeChanged;
             sp_parent.Panel2Collapsed = true;
         }
@@ -131,6 +148,7 @@ namespace game9
            
         }
 
+        bool _fromRawData;
         private void but_apply_Click(object sender, EventArgs e)
         {
             try
@@ -166,7 +184,15 @@ namespace game9
 
                 ratio_chart.BackColor = ratio_chart.ChartAreas[0].BackColor = Color.DimGray;
 
-                LoadData();
+                if(_fromRawData)
+                {
+                    LoadDataRaw();
+                }
+                else
+                {
+                    LoadData();
+                }
+                
             }
             catch (Exception ex)
             {
@@ -350,6 +376,35 @@ namespace game9
 
                             // ratio_chart.Series.Add(ratioSeriesObj);
                         });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        void LoadDataRaw()
+        {
+            try
+            {
+                Font defaultFont = new Font("Arial", 10, FontStyle.Bold);
+                if (_rawObj?.IsValid() ?? false)
+                {
+                    try
+                    {
+                        _dlg.ClearDataGridViewRows(dgv_detail);
+                        _dlg.ClearDataGridViewColumns(dgv_detail);
+
+                        int iCol = 0;
+                        _dlg.AddDataGridViewColumn(dgv_detail, $"dgv_detail_col_date", $"Date");
+                        
                     }
                     catch (Exception ex)
                     {
