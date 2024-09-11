@@ -427,7 +427,7 @@ namespace game9
 
                         _dlg.Execute(main_chart, delegate { main_chart.Series.Clear(); });
                         _dlg.Execute(ratio_chart, delegate { ratio_chart.Series.Clear(); });
-                        double summaryTotal = 0;
+                        double summaryTotal = 0, pieSummaryTotal = 0;
                         foreach (var rRowObj in _rawChartConfig.ValueColumns)
                         {
                             string label = !string.IsNullOrWhiteSpace(rRowObj.NewColumn) ? rRowObj.NewColumn : rRowObj.Column;
@@ -456,6 +456,10 @@ namespace game9
                                     double.TryParse($"{dataObj[rRowObj.Column]}", out dValue);
                                     totalSeriesObj.Points.AddXY(xLabel, dValue);
                                     summaryTotal += dValue;
+                                    if(rRowObj.DrawPie??false)
+                                    {
+                                        pieSummaryTotal += dValue;
+                                    }
                                 }
                                 main_chart.Series.Add(totalSeriesObj);
                             }
@@ -488,7 +492,7 @@ namespace game9
                                 });
                                 if(partTotal>0)
                                 {
-                                    double percent = summaryTotal > 0 ? partTotal * 100 / summaryTotal : 0;
+                                    double percent = pieSummaryTotal > 0 ? partTotal * 100 / pieSummaryTotal : 0;
                                     var pts = new System.Windows.Forms.DataVisualization.Charting.DataPoint()
                                     {
                                         YValues = new double[] { partTotal },
