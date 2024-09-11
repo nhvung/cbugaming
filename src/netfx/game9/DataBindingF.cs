@@ -33,7 +33,7 @@ namespace game9
             }
 
 #if DEBUG
-            ts_menu_txt_filepath.Text = @"c:\code\temp\cbu\Sample-2.xlsx";
+            ts_menu_txt_filepath.Text = @"c:\code\temp\cbu\Sample-3.xlsx";
 #endif
 
             dgv_summary.CellContentClick += Dgv_summary_CellContentClick;
@@ -356,6 +356,7 @@ namespace game9
                 var rowObjs = _dlg.GetDataGridViewRows(dgv_config_linechart);
                 if(rowObjs?.Count > 0)
                 {
+                    
                     string filterColumn = ts_raw_com_filtercolumn.Text;
                     string groupColumn = ts_raw_com_groupcolumn.Text;
                     List<DetailChartConfig> valueColumns = new List<DetailChartConfig>();
