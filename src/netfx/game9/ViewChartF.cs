@@ -497,7 +497,7 @@ namespace game9
                                     {
                                         YValues = new double[] { partTotal },
                                         Color = color,
-                                        Label = $"{label} ({percent:0.00}%)",
+                                        Label = $"{label}: {partTotal} ({percent:0.00}%)",
                                         LabelForeColor = Color.White,
                                         Font = defaultFont
                                     };
