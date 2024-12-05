@@ -153,7 +153,11 @@ namespace game8
         }
         public static string Hidden(string input, int hiddenCharacter = 0x6c)
         {
-            return string.Join("", input.Select(ite => $"{Convert.ToChar( hiddenCharacter)}"));
+            if(!string.IsNullOrWhiteSpace(input))
+            {
+                return string.Join("", input.Select(ite => $"{Convert.ToChar(hiddenCharacter)}"));
+            }
+            return string.Empty;
         }
         #endregion
     }

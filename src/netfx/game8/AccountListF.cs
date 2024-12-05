@@ -330,20 +330,20 @@ namespace game8
                 {
                     if (!string.IsNullOrWhiteSpace(urlLike))
                     {
-                        accountObjs = accountObjs?.Where(ite => ite.Url.IndexOf(urlLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                        accountObjs = accountObjs?.Where(ite => ite.Url?.IndexOf(urlLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                     }
                 }
                 if (!string.IsNullOrWhiteSpace(nameLike))
                 {
-                    accountObjs = accountObjs?.Where(ite => ite.Name.IndexOf(nameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                    accountObjs = accountObjs?.Where(ite => ite.Name?.IndexOf(nameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                 }
                 if (!string.IsNullOrWhiteSpace(userNameLike))
                 {
-                    accountObjs = accountObjs?.Where(ite => ite.Username.IndexOf(userNameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                    accountObjs = accountObjs?.Where(ite => ite.Username?.IndexOf(userNameLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                 }
                 if (!string.IsNullOrWhiteSpace(descriptionLike))
                 {
-                    accountObjs = accountObjs?.Where(ite => ite.Description.IndexOf(descriptionLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
+                    accountObjs = accountObjs?.Where(ite => ite.Description?.IndexOf(descriptionLike, StringComparison.InvariantCultureIgnoreCase) >= 0)?.ToList();
                 }
 
                 if (accountObjs?.Count > 0)
