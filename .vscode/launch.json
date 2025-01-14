@@ -67,6 +67,20 @@
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game6",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "game12",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame12",
+            "program": "${workspaceFolder}/src/netcore/consoles/game12/bin/net8.0/game12.dll",
+            "args": [
+                "-f",
+                "C:/custom-data/code/cbugaming/src/netcore/consoles/game12/input",
+                "-pLevel=2"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game12",
+            "console": "integratedTerminal"
         }
     ]
 }

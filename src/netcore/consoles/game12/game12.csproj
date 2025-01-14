@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>bin</OutputPath>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>game12</AssemblyName>
+    <FileVersion>1.0</FileVersion>
+  </PropertyGroup>  
+
+</Project>
