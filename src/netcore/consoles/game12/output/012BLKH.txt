@@ -1,0 +1,2 @@
+/game12/input/012BLKH_TN_TOYOTA_COROLLA_Red_Car_2_CAR.jpg
+/game12/input/012BLKH_TN_TOYOTA_COROLLA_Red_Car_2_PLATE.jpg

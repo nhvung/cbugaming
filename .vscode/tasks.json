@@ -40,5 +40,15 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "buildgame12",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game12/game12.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }
