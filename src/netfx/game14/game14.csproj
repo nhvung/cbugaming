@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2AE4CCA5-6397-4D66-BDB2-6B0BF606C014}</ProjectGuid>
+    <ProjectGuid>{1A4D86B1-991B-42B3-AD5C-11C24684212E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>game9</RootNamespace>
-    <AssemblyName>game9</AssemblyName>
+    <RootNamespace>game14</RootNamespace>
+    <AssemblyName>game14</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,29 +32,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <LangVersion>7.3</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
-    <Prefer32Bit>true</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>mainIcon.ico</ApplicationIcon>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
@@ -75,14 +52,12 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>mainIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,39 +69,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataBindingF.cs">
+    <Compile Include="CoordinatesExtension.cs" />
+    <Compile Include="MainF.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DataBindingF.Designer.cs">
-      <DependentUpon>DataBindingF.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataGridViewStatusColumn.cs" />
-    <Compile Include="DelegateProcess.cs" />
-    <Compile Include="Extensions\ExcelExtension.cs" />
-    <Compile Include="Models\ChartConfig.cs" />
-    <Compile Include="Models\DataInfo.cs" />
-    <Compile Include="Models\DetailChartConfig.cs" />
-    <Compile Include="Models\LineChartConfig.cs" />
-    <Compile Include="Models\RawDataInfo.cs" />
-    <Compile Include="PasswordF.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="PasswordF.Designer.cs">
-      <DependentUpon>PasswordF.cs</DependentUpon>
+    <Compile Include="MainF.Designer.cs">
+      <DependentUpon>MainF.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewChartF.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewChartF.Designer.cs">
-      <DependentUpon>ViewChartF.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="DataBindingF.resx">
-      <DependentUpon>DataBindingF.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PasswordF.resx">
-      <DependentUpon>PasswordF.cs</DependentUpon>
+    <EmbeddedResource Include="MainF.resx">
+      <DependentUpon>MainF.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -136,12 +89,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ViewChartF.resx">
-      <DependentUpon>ViewChartF.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,15 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BrowseData_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\View_16x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ViewFull_16x.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="mainIcon.ico" />
