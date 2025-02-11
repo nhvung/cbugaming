@@ -1,6 +1,13 @@
 {
     "configurations": [
         {
+            "command": "npm start",
+            "name": "game14",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game14",
+        },
+        {
             "name": "game2",
             "type": "coreclr",
             "request": "launch",
