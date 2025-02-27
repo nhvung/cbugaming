@@ -402,4 +402,5 @@ build/
 src/netcore/consoles/game7/drivers/
 src/netcore/consoles/game7/browsers/
 src/netcore/consoles/game7/screenshots/
+
 *.sln

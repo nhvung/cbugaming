@@ -76,6 +76,16 @@
             "console": "integratedTerminal"
         },
         {
+            "name": "game7",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame7",
+            "program": "${workspaceFolder}/src/netcore/consoles/game7/bin/net8.0/game7.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game7",
+            "console": "integratedTerminal"
+        },
+        {
             "name": "game12",
             "type": "coreclr",
             "request": "launch",
