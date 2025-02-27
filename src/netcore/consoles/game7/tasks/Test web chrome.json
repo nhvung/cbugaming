@@ -1,0 +1,35 @@
+{
+  "Name": "Test web chrome",
+  "Browser": "chrome",
+  "IsIncognito": true,
+  "IsHeadless": false,
+  "Sections": [
+    {
+      "Url": "https://vigilantvn.com:1087/vm8_am/"
+    },
+    {
+      "Props": {
+        "ID": "txtusername",
+        "Value": "hp_agencydemo"
+      }
+    },
+    {
+      "Props": {
+        "ID": "txtpassword",
+        "Value": "Password012345+"
+      }
+    },
+    {
+      "Props": {
+        "ID": "btnSubmit"
+      },
+      "Click": true
+    },
+    {
+      "Type": "ScreenShot",
+      "FileName": "C:\\custom-data\\code\\cbugaming\\src\\netcore\\consoles\\game7/temp/screenshots/02242025_041111291_07027145-a0ab-44d0-a737-2ba2c8f72ae5.png",
+      "DelaySeconds": 1.0
+    }
+  ],
+  "CreatedTicks": 0
+}

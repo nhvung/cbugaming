@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>bin</OutputPath>
     <OutputType>Exe</OutputType>
@@ -9,8 +9,8 @@
     <FileVersion>1.0</FileVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../../../../../share/src/Selenium/VSSystem.ThirdParty.Selenium/VSSystem.ThirdParty.Selenium.csproj" />
+  <ItemGroup>    
+    <ProjectReference Include="../../../../../selenium/VSSystem.ThirdParty.Selenium/VSSystem.ThirdParty.Selenium.csproj" />
   </ItemGroup>
 
 </Project>
