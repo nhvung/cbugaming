@@ -259,7 +259,7 @@ namespace game16
                         try
                         {
                             _dlg.AppendText(rtxt_logs, $"{destFolder.Name}...");
-                            VSSystem.IO.Extensions.DirectoryInfoExtension.CopyTo(srcFolder, destFolder);
+                            VSSystem.IO.Extensions.DirectoryInfoExtension.CopyTo(srcFolder, destFolder,null,log=>_dlg.AppendText(rtxt_logs, log));
                             ClonePathInfo cloneInfoObj = new ClonePathInfo
                             {
                                 Path = destFolder.FullName.Replace("\\", "/"),
@@ -268,8 +268,9 @@ namespace game16
                             _dlg.AppendText(rtxt_logs, $"{destFolder.Name} done.");
                             cloneInfoObjs.Add(cloneInfoObj);
                         }
-                        catch
+                        catch (Exception ex)
                         {
+                            MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     if (cloneInfoObjs.Count > 0)
@@ -393,6 +394,11 @@ namespace game16
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void but_clearlog_Click(object sender, EventArgs e)
+        {
+            _dlg.SetText(rtxt_logs, "");
         }
     }
 }

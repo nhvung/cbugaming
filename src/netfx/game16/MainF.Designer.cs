@@ -30,8 +30,8 @@ namespace game16
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_srcfolderpath = new System.Windows.Forms.TextBox();
             this.ts_menu = new System.Windows.Forms.ToolStrip();
             this.ts_menu_but_reloadconfig = new System.Windows.Forms.ToolStripButton();
@@ -59,6 +59,7 @@ namespace game16
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtxt_logs = new System.Windows.Forms.RichTextBox();
             this.but_removeallclones = new System.Windows.Forms.Button();
+            this.but_clearlog = new System.Windows.Forms.Button();
             this.ts_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_clone)).BeginInit();
@@ -151,7 +152,7 @@ namespace game16
             this.groupBox1.Controls.Add(this.dgv_clone);
             this.groupBox1.Location = new System.Drawing.Point(12, 173);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(903, 228);
+            this.groupBox1.Size = new System.Drawing.Size(903, 222);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Items";
@@ -160,14 +161,14 @@ namespace game16
             // 
             this.dgv_clone.AllowUserToAddRows = false;
             this.dgv_clone.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_clone.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_clone.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_clone.ColumnHeadersHeight = 30;
             this.dgv_clone.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_clone.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -181,7 +182,7 @@ namespace game16
             this.dgv_clone.Name = "dgv_clone";
             this.dgv_clone.RowHeadersVisible = false;
             this.dgv_clone.RowTemplate.Height = 30;
-            this.dgv_clone.Size = new System.Drawing.Size(897, 208);
+            this.dgv_clone.Size = new System.Drawing.Size(897, 202);
             this.dgv_clone.TabIndex = 0;
             // 
             // label3
@@ -255,7 +256,7 @@ namespace game16
             // but_runall
             // 
             this.but_runall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.but_runall.Location = new System.Drawing.Point(689, 425);
+            this.but_runall.Location = new System.Drawing.Point(686, 412);
             this.but_runall.Name = "but_runall";
             this.but_runall.Size = new System.Drawing.Size(110, 23);
             this.but_runall.TabIndex = 15;
@@ -266,7 +267,7 @@ namespace game16
             // but_killall
             // 
             this.but_killall.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.but_killall.Location = new System.Drawing.Point(805, 425);
+            this.but_killall.Location = new System.Drawing.Point(802, 412);
             this.but_killall.Name = "but_killall";
             this.but_killall.Size = new System.Drawing.Size(110, 23);
             this.but_killall.TabIndex = 16;
@@ -276,8 +277,8 @@ namespace game16
             // 
             // dgv_clone_no
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_clone_no.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_clone_no.DefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_clone_no.HeaderText = "No.";
             this.dgv_clone_no.Name = "dgv_clone_no";
             this.dgv_clone_no.ReadOnly = true;
@@ -317,9 +318,9 @@ namespace game16
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.rtxt_logs);
-            this.groupBox2.Location = new System.Drawing.Point(15, 470);
+            this.groupBox2.Location = new System.Drawing.Point(15, 461);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(900, 107);
+            this.groupBox2.Size = new System.Drawing.Size(900, 176);
             this.groupBox2.TabIndex = 17;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Logs";
@@ -332,14 +333,14 @@ namespace game16
             this.rtxt_logs.Location = new System.Drawing.Point(3, 17);
             this.rtxt_logs.Name = "rtxt_logs";
             this.rtxt_logs.ReadOnly = true;
-            this.rtxt_logs.Size = new System.Drawing.Size(894, 87);
+            this.rtxt_logs.Size = new System.Drawing.Size(894, 156);
             this.rtxt_logs.TabIndex = 0;
             this.rtxt_logs.Text = "";
             // 
             // but_removeallclones
             // 
             this.but_removeallclones.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.but_removeallclones.Location = new System.Drawing.Point(12, 425);
+            this.but_removeallclones.Location = new System.Drawing.Point(15, 412);
             this.but_removeallclones.Name = "but_removeallclones";
             this.but_removeallclones.Size = new System.Drawing.Size(110, 23);
             this.but_removeallclones.TabIndex = 18;
@@ -347,11 +348,23 @@ namespace game16
             this.but_removeallclones.UseVisualStyleBackColor = true;
             this.but_removeallclones.Click += new System.EventHandler(this.but_removeallclones_Click);
             // 
+            // but_clearlog
+            // 
+            this.but_clearlog.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.but_clearlog.Location = new System.Drawing.Point(15, 649);
+            this.but_clearlog.Name = "but_clearlog";
+            this.but_clearlog.Size = new System.Drawing.Size(110, 23);
+            this.but_clearlog.TabIndex = 19;
+            this.but_clearlog.Text = "Clear log";
+            this.but_clearlog.UseVisualStyleBackColor = true;
+            this.but_clearlog.Click += new System.EventHandler(this.but_clearlog_Click);
+            // 
             // MainF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 589);
+            this.ClientSize = new System.Drawing.Size(927, 684);
+            this.Controls.Add(this.but_clearlog);
             this.Controls.Add(this.but_removeallclones);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.but_killall);
@@ -416,6 +429,7 @@ namespace game16
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtxt_logs;
         private System.Windows.Forms.Button but_removeallclones;
+        private System.Windows.Forms.Button but_clearlog;
     }
 }
 

@@ -180,7 +180,7 @@ namespace VSSystem.IO.Extensions
 
                             file.Attributes = FileAttributes.Archive;
 
-                            executeFileLog?.Invoke(string.Format("Copy .../{0}/{2} to .../{1}/{2}", sourceFolder.Name, destinationFolder.Name, file.Name));
+                            executeFileLog?.Invoke(string.Format("Copying.../{0}/{2} to .../{1}/{2}", sourceFolder.Name, destinationFolder.Name, file.Name));
 
                             string destinationFileName = destinationFolder.FullName + "/" + file.Name;
 
