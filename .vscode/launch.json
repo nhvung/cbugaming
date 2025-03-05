@@ -98,6 +98,13 @@
             ],
             "cwd": "${workspaceFolder}/src/netcore/consoles/game12",
             "console": "integratedTerminal"
+        },
+        {
+            "command": "npm start",
+            "name": "game15",
+            "request": "launch",
+            "type": "node-terminal",
+            "cwd": "${workspaceFolder}/src/electron/game15",
         }
     ]
 }

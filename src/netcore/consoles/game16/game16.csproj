@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Platforms>AnyCPU;x64</Platforms>
+    <OutputPath>bin</OutputPath>
+    <OutputType>Exe</OutputType>
+    <AssemblyName>game16</AssemblyName>
+    <FileVersion>1.0.6</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../../../../share/src/netstd/VSSystem/VSSystem.csproj" />
+  </ItemGroup>
+
+</Project>
