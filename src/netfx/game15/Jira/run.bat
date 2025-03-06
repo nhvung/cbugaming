@@ -1,0 +1,1 @@
+jiraservice.exe --tlog=1 --open-url
