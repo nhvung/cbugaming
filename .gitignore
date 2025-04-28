@@ -404,3 +404,6 @@ src/netcore/consoles/game7/browsers/
 src/netcore/consoles/game7/screenshots/
 
 *.sln
+
+src/netfx/game8/browsers/
+src/netfx/game8/drivers/

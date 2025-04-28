@@ -52,7 +52,10 @@ namespace game8
         delegate void dlgExecute(Control ctrl, Action action);
         public void Execute(Control ctrl, Action action)
         {
-            if (ctrl.InvokeRequired) ctrl.Invoke(new dlgExecute(Execute), ctrl, action);
+            if (ctrl.InvokeRequired)
+            {
+                ctrl.Invoke(new dlgExecute(Execute), ctrl, action);
+            }
             else
             {
                 action();
