@@ -12,6 +12,13 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>true</SelfContained>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,10 +31,9 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -91,12 +97,52 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>9C27404646B147301651A41AA511FD4D7A0E2D98</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>game8_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\netstandard2.0\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp, Version=3.116.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>packages\SkiaSharp.3.116.1\lib\netstandard2.0\SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Encodings.Web.8.0.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Text.Json.8.0.5\lib\netstandard2.0\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -106,6 +152,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VSSystem.ThirdParty.Selenium">
+      <HintPath>..\..\..\..\selenium\VSSystem.ThirdParty.Selenium\bin\netstandard2.0\VSSystem.ThirdParty.Selenium.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.WebDriver.4.31.0\lib\netstandard2.0\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Selenium.Support.4.31.0\lib\netstandard2.0\WebDriver.Support.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountInfo.cs" />
@@ -115,6 +170,11 @@
     <Compile Include="AccountListF.Designer.cs">
       <DependentUpon>AccountListF.cs</DependentUpon>
     </Compile>
+    <Compile Include="actions\AAction.cs" />
+    <Compile Include="actions\AddHotPlatesAction.cs" />
+    <Compile Include="actions\AddVehicleInfoAction.cs" />
+    <Compile Include="actions\IAction.cs" />
+    <Compile Include="actions\LoginAction.cs" />
     <Compile Include="AddF.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +182,14 @@
       <DependentUpon>AddF.cs</DependentUpon>
     </Compile>
     <Compile Include="DelegateProcess.cs" />
+    <Compile Include="Extensions\TaskExtension.cs" />
+    <Compile Include="LogsF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LogsF.Designer.cs">
+      <DependentUpon>LogsF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="models\LoginInfo.cs" />
     <Compile Include="Modules.cs" />
     <Compile Include="PasswordF.cs">
       <SubType>Form</SubType>
@@ -138,6 +206,9 @@
     <EmbeddedResource Include="AddF.resx">
       <DependentUpon>AddF.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LogsF.resx">
+      <DependentUpon>LogsF.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PasswordF.resx">
       <DependentUpon>PasswordF.cs</DependentUpon>
     </EmbeddedResource>
@@ -151,8 +222,294 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="bin\browsers\chrome\129.0.6668.58.manifest" />
+    <None Include="bin\browsers\chrome\ABOUT" />
+    <None Include="bin\browsers\chrome\chrome_100_percent.pak" />
+    <None Include="bin\browsers\chrome\chrome_200_percent.pak" />
+    <None Include="bin\browsers\chrome\debug.log" />
+    <None Include="bin\browsers\chrome\First Run" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-af.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-as.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-be.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-bg.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-bn.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-cs.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-cu.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-cy.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-da.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-de-1901.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-de-1996.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-de-ch-1901.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-el.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-en-gb.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-en-us.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-es.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-et.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-eu.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-fr.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-ga.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-gl.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-gu.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-hi.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-hr.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-hu.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-hy.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-it.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-ka.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-kn.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-la.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-lt.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-lv.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-ml.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-mn-cyrl.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-mr.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-mul-ethi.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-nb.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-nl.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-nn.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-or.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-pa.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-pt.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-ru.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-sk.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-sl.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-sq.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-sv.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-ta.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-te.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-tk.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-uk.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\hyph-und-ethi.hyb" />
+    <None Include="bin\browsers\chrome\hyphen-data\manifest.json" />
+    <None Include="bin\browsers\chrome\icudtl.dat" />
+    <None Include="bin\browsers\chrome\locales\af.pak" />
+    <None Include="bin\browsers\chrome\locales\am.pak" />
+    <None Include="bin\browsers\chrome\locales\ar.pak" />
+    <None Include="bin\browsers\chrome\locales\bg.pak" />
+    <None Include="bin\browsers\chrome\locales\bn.pak" />
+    <None Include="bin\browsers\chrome\locales\ca.pak" />
+    <None Include="bin\browsers\chrome\locales\cs.pak" />
+    <None Include="bin\browsers\chrome\locales\da.pak" />
+    <None Include="bin\browsers\chrome\locales\de.pak" />
+    <None Include="bin\browsers\chrome\locales\el.pak" />
+    <None Include="bin\browsers\chrome\locales\en-GB.pak" />
+    <None Include="bin\browsers\chrome\locales\en-US.pak" />
+    <None Include="bin\browsers\chrome\locales\es-419.pak" />
+    <None Include="bin\browsers\chrome\locales\es.pak" />
+    <None Include="bin\browsers\chrome\locales\et.pak" />
+    <None Include="bin\browsers\chrome\locales\fa.pak" />
+    <None Include="bin\browsers\chrome\locales\fi.pak" />
+    <None Include="bin\browsers\chrome\locales\fil.pak" />
+    <None Include="bin\browsers\chrome\locales\fr.pak" />
+    <None Include="bin\browsers\chrome\locales\gu.pak" />
+    <None Include="bin\browsers\chrome\locales\he.pak" />
+    <None Include="bin\browsers\chrome\locales\hi.pak" />
+    <None Include="bin\browsers\chrome\locales\hr.pak" />
+    <None Include="bin\browsers\chrome\locales\hu.pak" />
+    <None Include="bin\browsers\chrome\locales\id.pak" />
+    <None Include="bin\browsers\chrome\locales\it.pak" />
+    <None Include="bin\browsers\chrome\locales\ja.pak" />
+    <None Include="bin\browsers\chrome\locales\kn.pak" />
+    <None Include="bin\browsers\chrome\locales\ko.pak" />
+    <None Include="bin\browsers\chrome\locales\lt.pak" />
+    <None Include="bin\browsers\chrome\locales\lv.pak" />
+    <None Include="bin\browsers\chrome\locales\ml.pak" />
+    <None Include="bin\browsers\chrome\locales\mr.pak" />
+    <None Include="bin\browsers\chrome\locales\ms.pak" />
+    <None Include="bin\browsers\chrome\locales\nb.pak" />
+    <None Include="bin\browsers\chrome\locales\nl.pak" />
+    <None Include="bin\browsers\chrome\locales\pl.pak" />
+    <None Include="bin\browsers\chrome\locales\pt-BR.pak" />
+    <None Include="bin\browsers\chrome\locales\pt-PT.pak" />
+    <None Include="bin\browsers\chrome\locales\ro.pak" />
+    <None Include="bin\browsers\chrome\locales\ru.pak" />
+    <None Include="bin\browsers\chrome\locales\sk.pak" />
+    <None Include="bin\browsers\chrome\locales\sl.pak" />
+    <None Include="bin\browsers\chrome\locales\sr.pak" />
+    <None Include="bin\browsers\chrome\locales\sv.pak" />
+    <None Include="bin\browsers\chrome\locales\sw.pak" />
+    <None Include="bin\browsers\chrome\locales\ta.pak" />
+    <None Include="bin\browsers\chrome\locales\te.pak" />
+    <None Include="bin\browsers\chrome\locales\th.pak" />
+    <None Include="bin\browsers\chrome\locales\tr.pak" />
+    <None Include="bin\browsers\chrome\locales\uk.pak" />
+    <None Include="bin\browsers\chrome\locales\ur.pak" />
+    <None Include="bin\browsers\chrome\locales\vi.pak" />
+    <None Include="bin\browsers\chrome\locales\zh-CN.pak" />
+    <None Include="bin\browsers\chrome\locales\zh-TW.pak" />
+    <None Include="bin\browsers\chrome\MEIPreload\manifest.json" />
+    <None Include="bin\browsers\chrome\MEIPreload\preloaded_data.pb" />
+    <None Include="bin\browsers\chrome\PrivacySandboxAttestationsPreloaded\manifest.json" />
+    <None Include="bin\browsers\chrome\PrivacySandboxAttestationsPreloaded\privacy-sandbox-attestations.dat" />
+    <None Include="bin\browsers\chrome\resources.pak" />
+    <None Include="bin\browsers\chrome\resources\accessibility\reading_mode_gdocs_helper_manifest.json" />
+    <None Include="bin\browsers\chrome\v8_context_snapshot.bin" />
+    <None Include="bin\browsers\chrome\vk_swiftshader_icd.json" />
+    <None Include="bin\browsers\firefox\application.ini" />
+    <None Include="bin\browsers\firefox\browser\features\formautofill%40mozilla.org.xpi" />
+    <None Include="bin\browsers\firefox\browser\features\pictureinpicture%40mozilla.org.xpi" />
+    <None Include="bin\browsers\firefox\browser\features\screenshots%40mozilla.org.xpi" />
+    <None Include="bin\browsers\firefox\browser\features\webcompat%40mozilla.org.xpi" />
+    <None Include="bin\browsers\firefox\browser\features\webcompat-reporter%40mozilla.org.xpi" />
+    <None Include="bin\browsers\firefox\browser\omni.ja" />
+    <None Include="bin\browsers\firefox\dependentlibs.list" />
+    <None Include="bin\browsers\firefox\firefox.exe.sig" />
+    <None Include="bin\browsers\firefox\fonts\TwemojiMozilla.ttf" />
+    <None Include="bin\browsers\firefox\gmp-clearkey\0.1\clearkey.dll.sig" />
+    <None Include="bin\browsers\firefox\gmp-clearkey\0.1\manifest.json" />
+    <None Include="bin\browsers\firefox\omni.ja" />
+    <None Include="bin\browsers\firefox\platform.ini" />
+    <None Include="bin\browsers\firefox\plugin-container.exe.sig" />
+    <None Include="bin\browsers\firefox\precomplete" />
+    <None Include="bin\browsers\firefox\removed-files" />
+    <None Include="bin\browsers\firefox\update-settings.ini" />
+    <None Include="bin\browsers\firefox\updater.ini" />
+    <None Include="bin\browsers\firefox\xul.dll.sig" />
     <None Include="bin\game8.exe.config" />
-    <None Include="bin\x86\Debug\accounts.json" />
+    <None Include="browsers\chrome\129.0.6668.58.manifest" />
+    <None Include="browsers\chrome\ABOUT" />
+    <None Include="browsers\chrome\chrome_100_percent.pak" />
+    <None Include="browsers\chrome\chrome_200_percent.pak" />
+    <None Include="browsers\chrome\debug.log" />
+    <None Include="browsers\chrome\First Run" />
+    <None Include="browsers\chrome\hyphen-data\hyph-af.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-as.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-be.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-bg.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-bn.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-cs.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-cu.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-cy.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-da.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-de-1901.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-de-1996.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-de-ch-1901.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-el.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-en-gb.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-en-us.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-es.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-et.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-eu.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-fr.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-ga.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-gl.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-gu.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-hi.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-hr.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-hu.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-hy.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-it.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-ka.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-kn.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-la.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-lt.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-lv.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-ml.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-mn-cyrl.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-mr.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-mul-ethi.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-nb.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-nl.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-nn.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-or.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-pa.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-pt.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-ru.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-sk.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-sl.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-sq.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-sv.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-ta.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-te.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-tk.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-uk.hyb" />
+    <None Include="browsers\chrome\hyphen-data\hyph-und-ethi.hyb" />
+    <None Include="browsers\chrome\hyphen-data\manifest.json" />
+    <None Include="browsers\chrome\icudtl.dat" />
+    <None Include="browsers\chrome\locales\af.pak" />
+    <None Include="browsers\chrome\locales\am.pak" />
+    <None Include="browsers\chrome\locales\ar.pak" />
+    <None Include="browsers\chrome\locales\bg.pak" />
+    <None Include="browsers\chrome\locales\bn.pak" />
+    <None Include="browsers\chrome\locales\ca.pak" />
+    <None Include="browsers\chrome\locales\cs.pak" />
+    <None Include="browsers\chrome\locales\da.pak" />
+    <None Include="browsers\chrome\locales\de.pak" />
+    <None Include="browsers\chrome\locales\el.pak" />
+    <None Include="browsers\chrome\locales\en-GB.pak" />
+    <None Include="browsers\chrome\locales\en-US.pak" />
+    <None Include="browsers\chrome\locales\es-419.pak" />
+    <None Include="browsers\chrome\locales\es.pak" />
+    <None Include="browsers\chrome\locales\et.pak" />
+    <None Include="browsers\chrome\locales\fa.pak" />
+    <None Include="browsers\chrome\locales\fi.pak" />
+    <None Include="browsers\chrome\locales\fil.pak" />
+    <None Include="browsers\chrome\locales\fr.pak" />
+    <None Include="browsers\chrome\locales\gu.pak" />
+    <None Include="browsers\chrome\locales\he.pak" />
+    <None Include="browsers\chrome\locales\hi.pak" />
+    <None Include="browsers\chrome\locales\hr.pak" />
+    <None Include="browsers\chrome\locales\hu.pak" />
+    <None Include="browsers\chrome\locales\id.pak" />
+    <None Include="browsers\chrome\locales\it.pak" />
+    <None Include="browsers\chrome\locales\ja.pak" />
+    <None Include="browsers\chrome\locales\kn.pak" />
+    <None Include="browsers\chrome\locales\ko.pak" />
+    <None Include="browsers\chrome\locales\lt.pak" />
+    <None Include="browsers\chrome\locales\lv.pak" />
+    <None Include="browsers\chrome\locales\ml.pak" />
+    <None Include="browsers\chrome\locales\mr.pak" />
+    <None Include="browsers\chrome\locales\ms.pak" />
+    <None Include="browsers\chrome\locales\nb.pak" />
+    <None Include="browsers\chrome\locales\nl.pak" />
+    <None Include="browsers\chrome\locales\pl.pak" />
+    <None Include="browsers\chrome\locales\pt-BR.pak" />
+    <None Include="browsers\chrome\locales\pt-PT.pak" />
+    <None Include="browsers\chrome\locales\ro.pak" />
+    <None Include="browsers\chrome\locales\ru.pak" />
+    <None Include="browsers\chrome\locales\sk.pak" />
+    <None Include="browsers\chrome\locales\sl.pak" />
+    <None Include="browsers\chrome\locales\sr.pak" />
+    <None Include="browsers\chrome\locales\sv.pak" />
+    <None Include="browsers\chrome\locales\sw.pak" />
+    <None Include="browsers\chrome\locales\ta.pak" />
+    <None Include="browsers\chrome\locales\te.pak" />
+    <None Include="browsers\chrome\locales\th.pak" />
+    <None Include="browsers\chrome\locales\tr.pak" />
+    <None Include="browsers\chrome\locales\uk.pak" />
+    <None Include="browsers\chrome\locales\ur.pak" />
+    <None Include="browsers\chrome\locales\vi.pak" />
+    <None Include="browsers\chrome\locales\zh-CN.pak" />
+    <None Include="browsers\chrome\locales\zh-TW.pak" />
+    <None Include="browsers\chrome\MEIPreload\manifest.json" />
+    <None Include="browsers\chrome\MEIPreload\preloaded_data.pb" />
+    <None Include="browsers\chrome\PrivacySandboxAttestationsPreloaded\manifest.json" />
+    <None Include="browsers\chrome\PrivacySandboxAttestationsPreloaded\privacy-sandbox-attestations.dat" />
+    <None Include="browsers\chrome\resources.pak" />
+    <None Include="browsers\chrome\resources\accessibility\reading_mode_gdocs_helper_manifest.json" />
+    <None Include="browsers\chrome\v8_context_snapshot.bin" />
+    <None Include="browsers\chrome\vk_swiftshader_icd.json" />
+    <None Include="browsers\firefox\application.ini" />
+    <None Include="browsers\firefox\browser\features\formautofill%40mozilla.org.xpi" />
+    <None Include="browsers\firefox\browser\features\pictureinpicture%40mozilla.org.xpi" />
+    <None Include="browsers\firefox\browser\features\screenshots%40mozilla.org.xpi" />
+    <None Include="browsers\firefox\browser\features\webcompat%40mozilla.org.xpi" />
+    <None Include="browsers\firefox\browser\features\webcompat-reporter%40mozilla.org.xpi" />
+    <None Include="browsers\firefox\browser\omni.ja" />
+    <None Include="browsers\firefox\dependentlibs.list" />
+    <None Include="browsers\firefox\firefox.exe.sig" />
+    <None Include="browsers\firefox\fonts\TwemojiMozilla.ttf" />
+    <None Include="browsers\firefox\gmp-clearkey\0.1\clearkey.dll.sig" />
+    <None Include="browsers\firefox\gmp-clearkey\0.1\manifest.json" />
+    <None Include="browsers\firefox\omni.ja" />
+    <None Include="browsers\firefox\platform.ini" />
+    <None Include="browsers\firefox\plugin-container.exe.sig" />
+    <None Include="browsers\firefox\precomplete" />
+    <None Include="browsers\firefox\removed-files" />
+    <None Include="browsers\firefox\update-settings.ini" />
+    <None Include="browsers\firefox\updater.ini" />
+    <None Include="browsers\firefox\xul.dll.sig" />
+    <None Include="game8_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -168,10 +525,132 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\browsers\chrome\chrome.dll" />
+    <Content Include="bin\browsers\chrome\chrome.exe" />
+    <Content Include="bin\browsers\chrome\chrome_elf.dll" />
+    <Content Include="bin\browsers\chrome\chrome_proxy.exe" />
+    <Content Include="bin\browsers\chrome\chrome_pwa_launcher.exe" />
+    <Content Include="bin\browsers\chrome\chrome_wer.dll" />
+    <Content Include="bin\browsers\chrome\D3DCompiler_47.dll" />
+    <Content Include="bin\browsers\chrome\dxcompiler.dll" />
+    <Content Include="bin\browsers\chrome\dxil.dll" />
+    <Content Include="bin\browsers\chrome\elevation_service.exe" />
+    <Content Include="bin\browsers\chrome\libEGL.dll" />
+    <Content Include="bin\browsers\chrome\libGLESv2.dll" />
+    <Content Include="bin\browsers\chrome\notification_helper.exe" />
+    <Content Include="bin\browsers\chrome\resources\accessibility\reading_mode_gdocs_helper\content.js" />
+    <Content Include="bin\browsers\chrome\resources\accessibility\reading_mode_gdocs_helper\gdocs_script.js" />
+    <Content Include="bin\browsers\chrome\setup.exe" />
+    <Content Include="bin\browsers\chrome\vk_swiftshader.dll" />
+    <Content Include="bin\browsers\chrome\vulkan-1.dll" />
+    <Content Include="bin\browsers\firefox\AccessibleMarshal.dll" />
+    <Content Include="bin\browsers\firefox\browser\VisualElements\PrivateBrowsing_150.png" />
+    <Content Include="bin\browsers\firefox\browser\VisualElements\PrivateBrowsing_70.png" />
+    <Content Include="bin\browsers\firefox\browser\VisualElements\VisualElements_150.png" />
+    <Content Include="bin\browsers\firefox\browser\VisualElements\VisualElements_70.png" />
+    <Content Include="bin\browsers\firefox\crashreporter.exe" />
+    <Content Include="bin\browsers\firefox\default-browser-agent.exe" />
+    <Content Include="bin\browsers\firefox\defaults\pref\channel-prefs.js" />
+    <Content Include="bin\browsers\firefox\firefox.exe" />
+    <Content Include="bin\browsers\firefox\firefox.VisualElementsManifest.xml" />
+    <Content Include="bin\browsers\firefox\freebl3.dll" />
+    <Content Include="bin\browsers\firefox\gkcodecs.dll" />
+    <Content Include="bin\browsers\firefox\gmp-clearkey\0.1\clearkey.dll" />
+    <Content Include="bin\browsers\firefox\ipcclientcerts.dll" />
+    <Content Include="bin\browsers\firefox\lgpllibs.dll" />
+    <Content Include="bin\browsers\firefox\libEGL.dll" />
+    <Content Include="bin\browsers\firefox\libGLESv2.dll" />
+    <Content Include="bin\browsers\firefox\maintenanceservice.exe" />
+    <Content Include="bin\browsers\firefox\maintenanceservice_installer.exe" />
+    <Content Include="bin\browsers\firefox\minidump-analyzer.exe" />
+    <Content Include="bin\browsers\firefox\mozavcodec.dll" />
+    <Content Include="bin\browsers\firefox\mozavutil.dll" />
+    <Content Include="bin\browsers\firefox\mozglue.dll" />
+    <Content Include="bin\browsers\firefox\mozwer.dll" />
+    <Content Include="bin\browsers\firefox\msvcp140.dll" />
+    <Content Include="bin\browsers\firefox\nmhproxy.exe" />
+    <Content Include="bin\browsers\firefox\notificationserver.dll" />
+    <Content Include="bin\browsers\firefox\nss3.dll" />
+    <Content Include="bin\browsers\firefox\nssckbi.dll" />
+    <Content Include="bin\browsers\firefox\osclientcerts.dll" />
+    <Content Include="bin\browsers\firefox\pingsender.exe" />
+    <Content Include="bin\browsers\firefox\plugin-container.exe" />
+    <Content Include="bin\browsers\firefox\private_browsing.exe" />
+    <Content Include="bin\browsers\firefox\private_browsing.VisualElementsManifest.xml" />
+    <Content Include="bin\browsers\firefox\softokn3.dll" />
+    <Content Include="bin\browsers\firefox\uninstall\helper.exe" />
+    <Content Include="bin\browsers\firefox\updater.exe" />
+    <Content Include="bin\browsers\firefox\vcruntime140.dll" />
+    <Content Include="bin\browsers\firefox\vcruntime140_1.dll" />
+    <Content Include="bin\browsers\firefox\wmfclearkey.dll" />
+    <Content Include="bin\browsers\firefox\xul.dll" />
+    <Content Include="bin\drivers\chromedriver.exe" />
+    <Content Include="bin\drivers\geckodriver.exe" />
     <Content Include="bin\game8.exe" />
     <Content Include="bin\game8.pdb" />
     <Content Include="bin\Newtonsoft.Json.dll" />
     <Content Include="bin\Newtonsoft.Json.xml" />
+    <Content Include="browsers\chrome\chrome.dll" />
+    <Content Include="browsers\chrome\chrome.exe" />
+    <Content Include="browsers\chrome\chrome_elf.dll" />
+    <Content Include="browsers\chrome\chrome_proxy.exe" />
+    <Content Include="browsers\chrome\chrome_pwa_launcher.exe" />
+    <Content Include="browsers\chrome\chrome_wer.dll" />
+    <Content Include="browsers\chrome\D3DCompiler_47.dll" />
+    <Content Include="browsers\chrome\dxcompiler.dll" />
+    <Content Include="browsers\chrome\dxil.dll" />
+    <Content Include="browsers\chrome\elevation_service.exe" />
+    <Content Include="browsers\chrome\libEGL.dll" />
+    <Content Include="browsers\chrome\libGLESv2.dll" />
+    <Content Include="browsers\chrome\notification_helper.exe" />
+    <Content Include="browsers\chrome\resources\accessibility\reading_mode_gdocs_helper\content.js" />
+    <Content Include="browsers\chrome\resources\accessibility\reading_mode_gdocs_helper\gdocs_script.js" />
+    <Content Include="browsers\chrome\setup.exe" />
+    <Content Include="browsers\chrome\vk_swiftshader.dll" />
+    <Content Include="browsers\chrome\vulkan-1.dll" />
+    <Content Include="browsers\firefox\AccessibleMarshal.dll" />
+    <Content Include="browsers\firefox\browser\VisualElements\PrivateBrowsing_150.png" />
+    <Content Include="browsers\firefox\browser\VisualElements\PrivateBrowsing_70.png" />
+    <Content Include="browsers\firefox\browser\VisualElements\VisualElements_150.png" />
+    <Content Include="browsers\firefox\browser\VisualElements\VisualElements_70.png" />
+    <Content Include="browsers\firefox\crashreporter.exe" />
+    <Content Include="browsers\firefox\default-browser-agent.exe" />
+    <Content Include="browsers\firefox\defaults\pref\channel-prefs.js" />
+    <Content Include="browsers\firefox\firefox.exe" />
+    <Content Include="browsers\firefox\firefox.VisualElementsManifest.xml" />
+    <Content Include="browsers\firefox\freebl3.dll" />
+    <Content Include="browsers\firefox\gkcodecs.dll" />
+    <Content Include="browsers\firefox\gmp-clearkey\0.1\clearkey.dll" />
+    <Content Include="browsers\firefox\ipcclientcerts.dll" />
+    <Content Include="browsers\firefox\lgpllibs.dll" />
+    <Content Include="browsers\firefox\libEGL.dll" />
+    <Content Include="browsers\firefox\libGLESv2.dll" />
+    <Content Include="browsers\firefox\maintenanceservice.exe" />
+    <Content Include="browsers\firefox\maintenanceservice_installer.exe" />
+    <Content Include="browsers\firefox\minidump-analyzer.exe" />
+    <Content Include="browsers\firefox\mozavcodec.dll" />
+    <Content Include="browsers\firefox\mozavutil.dll" />
+    <Content Include="browsers\firefox\mozglue.dll" />
+    <Content Include="browsers\firefox\mozwer.dll" />
+    <Content Include="browsers\firefox\msvcp140.dll" />
+    <Content Include="browsers\firefox\nmhproxy.exe" />
+    <Content Include="browsers\firefox\notificationserver.dll" />
+    <Content Include="browsers\firefox\nss3.dll" />
+    <Content Include="browsers\firefox\nssckbi.dll" />
+    <Content Include="browsers\firefox\osclientcerts.dll" />
+    <Content Include="browsers\firefox\pingsender.exe" />
+    <Content Include="browsers\firefox\plugin-container.exe" />
+    <Content Include="browsers\firefox\private_browsing.exe" />
+    <Content Include="browsers\firefox\private_browsing.VisualElementsManifest.xml" />
+    <Content Include="browsers\firefox\softokn3.dll" />
+    <Content Include="browsers\firefox\uninstall\helper.exe" />
+    <Content Include="browsers\firefox\updater.exe" />
+    <Content Include="browsers\firefox\vcruntime140.dll" />
+    <Content Include="browsers\firefox\vcruntime140_1.dll" />
+    <Content Include="browsers\firefox\wmfclearkey.dll" />
+    <Content Include="browsers\firefox\xul.dll" />
+    <Content Include="drivers\chromedriver.exe" />
+    <Content Include="drivers\geckodriver.exe" />
     <Content Include="mainIcon.ico" />
     <None Include="Resources\Path_16x.png" />
     <None Include="Resources\UpdateAnimation_16x.png" />
@@ -184,11 +663,7 @@
     <None Include="Resources\ASX_Edit_grey_16x.png" />
     <None Include="Resources\AddFriend_16x.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="bin\Debug\" />
-    <Folder Include="bin\Release\" />
-    <Folder Include="bin\x86\Release\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
@@ -202,4 +677,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Selenium.WebDriver.4.31.0\build\Selenium.WebDriver.targets" Condition="Exists('packages\Selenium.WebDriver.4.31.0\build\Selenium.WebDriver.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Selenium.WebDriver.4.31.0\build\Selenium.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Selenium.WebDriver.4.31.0\build\Selenium.WebDriver.targets'))" />
+  </Target>
 </Project>

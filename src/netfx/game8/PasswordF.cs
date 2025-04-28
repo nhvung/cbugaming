@@ -28,9 +28,14 @@ namespace game8
 
         private void but_ok_Click(object sender, EventArgs e)
         {
+
             _password = txt_password.Text;
             if(string.IsNullOrWhiteSpace(_password))
             {
+#if DEBUG
+                DialogResult = DialogResult.OK;
+                return;
+#endif
                 MessageBox.Show("Password can not be empty.");
             }
             else

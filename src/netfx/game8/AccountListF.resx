@@ -120,9 +120,33 @@
   <metadata name="ts_status.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
+  <metadata name="ts_status.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>114, 17</value>
+  </metadata>
   <metadata name="ts_menu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <metadata name="ts_account.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>212, 17</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ts_account_run_selected.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACeSURBVDhPY/j27dt/cjEDCIAYTk5OYAFSabgB5GKsLiCE
+        kdXT1wXIGunjAhC/ra3t/+bNmzFcQbQLQApBhqCLwzCGC9AxzGZ0Q0hyAS5DUAxADgN0GpshRLsgMjIS
+        HognT57EkAcbgAtAFb3//Pnz/aqqKpjt69HV4QRfv35teP/+vcD3798TQK7w9fUF2woSQ1eLF4A0IDsb
+        ZCCyPACCgLlprhfmQAAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="ts_account_logging.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABcSURBVDhP7Y6xDcAgDAR/Nu+/S5LGbRCRSPF+GUIosXQF
+        whwHAHD3e4b69pl6MLNPBEGTnMfVRQqamZcVUsAFnMx3QaCWmFTABRlSwL9kSMEuWFgwShDM8Ar+TAGR
+        xKfDfyh7BgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="dgv_account_col_chk.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -159,7 +183,9 @@
   <metadata name="dgv_account_col_description_hidden.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <metadata name="dgv_account_col_action.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAoAAAAAAAEAIABsHgAApgAAAAAAAAABACAA+A0AABIfAACAgAAAAQAgACgIAQAKLQAAYGAAAAEA

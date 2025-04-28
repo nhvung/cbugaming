@@ -17,6 +17,7 @@ namespace game8
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            
             var form = new AccountListF();
             form.Show();
             Application.Run();

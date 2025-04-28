@@ -29,11 +29,11 @@ namespace game8
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AccountListF));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -63,6 +63,8 @@ namespace game8
             this.ts_menu_but_delete = new System.Windows.Forms.ToolStripButton();
             this.ts_menu_but_view = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ts_account = new System.Windows.Forms.ToolStrip();
+            this.ts_account_run_selected = new System.Windows.Forms.ToolStripButton();
             this.dgv_account = new System.Windows.Forms.DataGridView();
             this.dgv_account_col_chk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dgv_account_col_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,6 +78,7 @@ namespace game8
             this.dgv_account_col_password_hidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_account_col_description = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_account_col_description_hidden = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_account_col_action = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txt_qs_description = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -86,11 +89,13 @@ namespace game8
             this.label3 = new System.Windows.Forms.Label();
             this.txt_qs_name = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.ts_account_logging = new System.Windows.Forms.ToolStripButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.ts_status.SuspendLayout();
             this.ts_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.ts_account.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_account)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -363,6 +368,7 @@ namespace game8
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.ts_account);
             this.groupBox1.Controls.Add(this.dgv_account);
             this.groupBox1.Location = new System.Drawing.Point(10, 258);
             this.groupBox1.Name = "groupBox1";
@@ -371,20 +377,44 @@ namespace game8
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Account List - If the PASSWORD is INCORRECT, the list has been hidden";
             // 
+            // ts_account
+            // 
+            this.ts_account.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.ts_account.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ts_account_run_selected,
+            this.ts_account_logging});
+            this.ts_account.Location = new System.Drawing.Point(3, 17);
+            this.ts_account.Name = "ts_account";
+            this.ts_account.Size = new System.Drawing.Size(1210, 25);
+            this.ts_account.TabIndex = 1;
+            this.ts_account.Text = "toolStrip1";
+            // 
+            // ts_account_run_selected
+            // 
+            this.ts_account_run_selected.Image = ((System.Drawing.Image)(resources.GetObject("ts_account_run_selected.Image")));
+            this.ts_account_run_selected.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_account_run_selected.Name = "ts_account_run_selected";
+            this.ts_account_run_selected.Size = new System.Drawing.Size(89, 22);
+            this.ts_account_run_selected.Text = "Run Seleted";
+            this.ts_account_run_selected.Click += new System.EventHandler(this.ts_account_run_selected_Click);
+            // 
             // dgv_account
             // 
             this.dgv_account.AllowUserToAddRows = false;
             this.dgv_account.AllowUserToDeleteRows = false;
+            this.dgv_account.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_account.BackgroundColor = System.Drawing.Color.White;
             this.dgv_account.ClipboardCopyMode = System.Windows.Forms.DataGridViewClipboardCopyMode.EnableWithoutHeaderText;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_account.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_account.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_account.ColumnHeadersHeight = 30;
             this.dgv_account.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_account.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -399,15 +429,15 @@ namespace game8
             this.dgv_account_col_password,
             this.dgv_account_col_password_hidden,
             this.dgv_account_col_description,
-            this.dgv_account_col_description_hidden});
-            this.dgv_account.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgv_account.Location = new System.Drawing.Point(3, 17);
+            this.dgv_account_col_description_hidden,
+            this.dgv_account_col_action});
+            this.dgv_account.Location = new System.Drawing.Point(6, 58);
             this.dgv_account.MultiSelect = false;
             this.dgv_account.Name = "dgv_account";
             this.dgv_account.RowHeadersVisible = false;
             this.dgv_account.RowTemplate.Height = 30;
             this.dgv_account.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgv_account.Size = new System.Drawing.Size(1210, 366);
+            this.dgv_account.Size = new System.Drawing.Size(1204, 322);
             this.dgv_account.TabIndex = 0;
             // 
             // dgv_account_col_chk
@@ -419,8 +449,8 @@ namespace game8
             // 
             // dgv_account_col_no
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_account_col_no.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_account_col_no.DefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_account_col_no.HeaderText = "No.";
             this.dgv_account_col_no.MinimumWidth = 50;
             this.dgv_account_col_no.Name = "dgv_account_col_no";
@@ -471,8 +501,8 @@ namespace game8
             // 
             // dgv_account_col_password
             // 
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Wingdings", 8F);
-            this.dgv_account_col_password.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Wingdings", 8F);
+            this.dgv_account_col_password.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_account_col_password.HeaderText = "Password";
             this.dgv_account_col_password.MinimumWidth = 200;
             this.dgv_account_col_password.Name = "dgv_account_col_password";
@@ -488,8 +518,8 @@ namespace game8
             // dgv_account_col_description
             // 
             this.dgv_account_col_description.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_account_col_description.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_account_col_description.DefaultCellStyle = dataGridViewCellStyle8;
             this.dgv_account_col_description.HeaderText = "Description";
             this.dgv_account_col_description.MinimumWidth = 200;
             this.dgv_account_col_description.Name = "dgv_account_col_description";
@@ -500,6 +530,13 @@ namespace game8
             this.dgv_account_col_description_hidden.HeaderText = "Description-Hidden";
             this.dgv_account_col_description_hidden.Name = "dgv_account_col_description_hidden";
             this.dgv_account_col_description_hidden.Visible = false;
+            // 
+            // dgv_account_col_action
+            // 
+            this.dgv_account_col_action.HeaderText = "Action";
+            this.dgv_account_col_action.MinimumWidth = 80;
+            this.dgv_account_col_action.Name = "dgv_account_col_action";
+            this.dgv_account_col_action.Width = 80;
             // 
             // groupBox2
             // 
@@ -598,6 +635,16 @@ namespace game8
             this.label2.TabIndex = 0;
             this.label2.Text = "Name:";
             // 
+            // ts_account_logging
+            // 
+            this.ts_account_logging.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ts_account_logging.Image = ((System.Drawing.Image)(resources.GetObject("ts_account_logging.Image")));
+            this.ts_account_logging.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_account_logging.Name = "ts_account_logging";
+            this.ts_account_logging.Size = new System.Drawing.Size(52, 22);
+            this.ts_account_logging.Text = "Logs";
+            this.ts_account_logging.Click += new System.EventHandler(this.ts_account_logging_Click);
+            // 
             // AccountListF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -626,6 +673,9 @@ namespace game8
             this.ts_menu.ResumeLayout(false);
             this.ts_menu.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.ts_account.ResumeLayout(false);
+            this.ts_account.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_account)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -658,18 +708,6 @@ namespace game8
         private System.Windows.Forms.ToolStripButton ts_menu_but_retypepassword;
         private System.Windows.Forms.ToolStripButton ts_menu_but_showhide;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_account_col_chk;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_url;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_name_hidden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_username;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_username_hidden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_password;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_password_hidden;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description_hidden;
         private System.Windows.Forms.ToolStripButton ts_menu_but_clone;
         private System.Windows.Forms.ToolStripButton ts_menu_but_updatepassword;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -688,6 +726,22 @@ namespace game8
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txt_qs_url;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dgv_account_col_chk;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_url;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_name_hidden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_username;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_username_hidden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_password;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_password_hidden;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_account_col_description_hidden;
+        private System.Windows.Forms.DataGridViewButtonColumn dgv_account_col_action;
+        private System.Windows.Forms.ToolStrip ts_account;
+        private System.Windows.Forms.ToolStripButton ts_account_run_selected;
+        private System.Windows.Forms.ToolStripButton ts_account_logging;
     }
 }
 
