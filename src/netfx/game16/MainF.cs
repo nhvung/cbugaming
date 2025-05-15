@@ -19,26 +19,32 @@ namespace game16
         FileInfo _configFile;
         ConfigInfo _configObj;
         DelegateProcess _dlg;
-        Dictionary<int, Process> _mProcess;
+        Dictionary<string, Process> _mProcess;
         readonly object _lockObj = new object();
         public MainF()
         {
             InitializeComponent();
+            _mProcess = new Dictionary<string, Process>(StringComparer.InvariantCultureIgnoreCase);
+
             FormClosed += MainF_FormClosed;
+            FormClosing += MainF_FormClosing;
             _configFile = new FileInfo($"{Application.StartupPath}/configs.json");
             _dlg = new DelegateProcess();
             _loadConfig();
             _loadUI();
 
             dgv_clone.CellContentClick += Dgv_clone_CellContentClick;
-            _mProcess = new Dictionary<int, Process>();
+           
         }
+
+        
 
         private void Dgv_clone_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 4)
+            if (e.ColumnIndex == 5)
             {
                 string cValue = dgv_clone["dgv_clone_run", e.RowIndex].Value.ToString();
+                string cGuid = dgv_clone["dgv_clone_guid", e.RowIndex].Value.ToString();
                 if (cValue?.Equals("Run", StringComparison.InvariantCultureIgnoreCase) ?? false)
                 {
                     string folderPath = dgv_clone["dgv_clone_path", e.RowIndex].Value.ToString();
@@ -51,7 +57,8 @@ namespace game16
                         {
                             lock (_lockObj)
                             {
-                                _mProcess[e.RowIndex] = _createProcess(exeFile);
+                                
+                                _mProcess[cGuid] = _createProcess(exeFile);
                             }
                             _dlg.SetDataGridViewValue(dgv_clone, e.RowIndex, "dgv_clone_run", "Kill");
                         });
@@ -65,14 +72,14 @@ namespace game16
                 else if (cValue?.Equals("Kill", StringComparison.InvariantCultureIgnoreCase) ?? false)
                 {
                     Process p;
-                    _mProcess.TryGetValue(e.RowIndex, out p);
+                    _mProcess.TryGetValue(cGuid, out p);
                     if (p != null)
                     {
                         try { p.Kill(); } catch { }
                         _dlg.SetDataGridViewValue(dgv_clone, e.RowIndex, "dgv_clone_run", "Run");
                         lock (_lockObj)
                         {
-                            _mProcess.Remove(e.RowIndex);
+                            _mProcess.Remove(cGuid);
                         }
                     }
                 }
@@ -83,10 +90,23 @@ namespace game16
         {
             return Process.Start(file.FullName);
         }
-
+        private void MainF_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_mProcess.Count > 0)
+            {
+                foreach (var p in _mProcess)
+                {
+                    try
+                    {
+                        p.Value.Kill();
+                    }
+                    catch { }
+                }
+            }
+        }
         private void MainF_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Environment.Exit(0);
+            Environment.Exit(0);           
         }
         void _loadConfig()
         {
@@ -136,7 +156,17 @@ namespace game16
                             DirectoryInfo folder = new DirectoryInfo(cloneItem.Path);
                             if(folder.Exists)
                             {
-                                _dlg.AddDataGridViewRow(dgv_clone, rIdx++, folder.Name, folder.FullName.Replace("\\", "/"), cloneItem.ExecuteFile,"Run");
+                                string guid = cloneItem.Guid;
+                                if(string.IsNullOrWhiteSpace(guid))
+                                {
+                                    guid = cloneItem.Guid = Guid.NewGuid().ToString().ToLower();
+                                }
+                                string buttonText = "Run";
+                                if(_mProcess.ContainsKey(guid))
+                                {
+                                    buttonText = "Kill";
+                                }
+                                _dlg.AddDataGridViewRow(dgv_clone, rIdx++, guid, folder.Name, folder.FullName.Replace("\\", "/"), cloneItem.ExecuteFile, buttonText);
                                
                             }
                            
@@ -149,6 +179,51 @@ namespace game16
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
            
+        }
+
+        void _loadCloneFolder(string cloneFolderPath, string defaultExeFileName)
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(cloneFolderPath))
+                {
+                    DirectoryInfo rootFolder = new DirectoryInfo(cloneFolderPath);
+                    if (rootFolder.Exists && _configObj != null)
+                    {
+                        bool hasChanged = false;
+                        if (_configObj.CloneItems == null)
+                        {
+                            _configObj.CloneItems = new List<ClonePathInfo>();
+                        }
+                        var subFolders = rootFolder.GetDirectories();
+                        foreach (var subFolder in subFolders)
+                        {
+                            string folderPath = subFolder.FullName.Replace("\\", "/");
+                            FileInfo exeFile = new FileInfo($"{subFolder.FullName}/{defaultExeFileName}");
+                            if (exeFile.Exists)
+                            {
+                                ClonePathInfo pathObj = _configObj.CloneItems.FirstOrDefault(ite => ite.Path.Equals(folderPath, StringComparison.InvariantCultureIgnoreCase));
+                                if (pathObj == null)
+                                {
+                                    pathObj = new ClonePathInfo(Guid.NewGuid().ToString().ToLower(), folderPath, defaultExeFileName);
+                                    _configObj.CloneItems.Add(pathObj);
+                                    hasChanged = true;
+                                }
+                            }
+                        }
+                        if(hasChanged)
+                        {
+                            _configObj.DefaultExecuteFileName = defaultExeFileName;
+                            _updateConfig();
+                            _loadUI();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void ts_menu_but_reloadconfig_Click(object sender, EventArgs e)
@@ -263,7 +338,8 @@ namespace game16
                             ClonePathInfo cloneInfoObj = new ClonePathInfo
                             {
                                 Path = destFolder.FullName.Replace("\\", "/"),
-                                ExecuteFile = defaultExeFileName
+                                ExecuteFile = defaultExeFileName,
+                                Guid = Guid.NewGuid().ToString().ToLower()
                             };
                             _dlg.AppendText(rtxt_logs, $"{destFolder.Name} done.");
                             cloneInfoObjs.Add(cloneInfoObj);
@@ -298,6 +374,7 @@ namespace game16
                     foreach (var rowObj in rowObjs)
                     {
                         string cValue = rowObj.Cells["dgv_clone_run"].Value.ToString();
+                        string cGuid = rowObj.Cells["dgv_clone_guid"].Value.ToString();
                         if (cValue?.Equals("Run", StringComparison.InvariantCultureIgnoreCase) ?? false)
                         {
                             string folderPath = rowObj.Cells["dgv_clone_path"].Value.ToString();
@@ -308,7 +385,7 @@ namespace game16
                                 Task.Run(delegate {
                                     lock (_lockObj)
                                     {
-                                        _mProcess[rowObj.Index] = _createProcess(exeFile);
+                                        _mProcess[cGuid] = _createProcess(exeFile);
                                     }
                                     _dlg.SetDataGridViewValue(dgv_clone, rowObj.Index, "dgv_clone_run", "Kill");
                                 });
@@ -342,16 +419,17 @@ namespace game16
                     foreach (var rowObj in rowObjs)
                     {
                         string cValue = rowObj.Cells["dgv_clone_run"].Value.ToString();
+                        string cGuid = rowObj.Cells["dgv_clone_guid"].Value.ToString();
                         if (cValue?.Equals("Kill", StringComparison.InvariantCultureIgnoreCase) ?? false)
                         {
                             Process p;
-                            _mProcess.TryGetValue(rowObj.Index, out p);
+                            _mProcess.TryGetValue(cGuid, out p);
                             if (p != null)
                             {
                                 try { p.Kill(); } catch { }
                                 lock (_lockObj)
                                 {
-                                    _mProcess.Remove(rowObj.Index);
+                                    _mProcess.Remove(cGuid);
                                 }
                                 _dlg.SetDataGridViewValue(dgv_clone, rowObj.Index, "dgv_clone_run", "Run");
                             }                        
@@ -399,6 +477,28 @@ namespace game16
         private void but_clearlog_Click(object sender, EventArgs e)
         {
             _dlg.SetText(rtxt_logs, "");
+        }
+
+        private void but_reloadclonefolder_Click(object sender, EventArgs e)
+        {
+            string cloneFolderPath = txt_clonefolderpath.Text;
+            string defaultExeFileName = txt_defaultexefilename.Text;
+            if (string.IsNullOrWhiteSpace(defaultExeFileName))
+            {
+                defaultExeFileName = _configObj?.DefaultExecuteFileName;
+            }
+            if (string.IsNullOrWhiteSpace(defaultExeFileName))
+            {
+                defaultExeFileName = "FunctionCheck.exe";
+            }
+            if (!string.IsNullOrWhiteSpace(cloneFolderPath) && !string.IsNullOrWhiteSpace(defaultExeFileName))
+            {
+                if(MessageBox.Show("By action, the configuration of clone folder can be changed. Do you want to do this?", "RELOAD WARNING", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)== DialogResult.Yes)
+                {
+                    Task.Run(delegate { _loadCloneFolder(cloneFolderPath, defaultExeFileName); });
+                }
+            }
+           
         }
     }
 }

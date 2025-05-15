@@ -29,12 +29,11 @@ namespace game16
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainF));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txt_srcfolderpath = new System.Windows.Forms.TextBox();
             this.ts_menu = new System.Windows.Forms.ToolStrip();
-            this.ts_menu_but_reloadconfig = new System.Windows.Forms.ToolStripButton();
             this.label1 = new System.Windows.Forms.Label();
             this.but_srcfolderpathbrowse = new System.Windows.Forms.Button();
             this.but_clonefolderpathbrowse = new System.Windows.Forms.Button();
@@ -42,6 +41,12 @@ namespace game16
             this.txt_clonefolderpath = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dgv_clone = new System.Windows.Forms.DataGridView();
+            this.dgv_clone_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_clone_guid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_clone_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_clone_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_clone_executefile = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_clone_run = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.txt_clonenameformat = new System.Windows.Forms.TextBox();
             this.but_clone = new System.Windows.Forms.Button();
@@ -51,15 +56,12 @@ namespace game16
             this.txt_defaultexefilename = new System.Windows.Forms.TextBox();
             this.but_runall = new System.Windows.Forms.Button();
             this.but_killall = new System.Windows.Forms.Button();
-            this.dgv_clone_no = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_clone_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_clone_path = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_clone_executefile = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_clone_run = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.rtxt_logs = new System.Windows.Forms.RichTextBox();
             this.but_removeallclones = new System.Windows.Forms.Button();
             this.but_clearlog = new System.Windows.Forms.Button();
+            this.ts_menu_but_reloadconfig = new System.Windows.Forms.ToolStripButton();
+            this.but_reloadclonefolder = new System.Windows.Forms.Button();
             this.ts_menu.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_clone)).BeginInit();
@@ -85,15 +87,6 @@ namespace game16
             this.ts_menu.Size = new System.Drawing.Size(927, 25);
             this.ts_menu.TabIndex = 1;
             this.ts_menu.Text = "toolStrip1";
-            // 
-            // ts_menu_but_reloadconfig
-            // 
-            this.ts_menu_but_reloadconfig.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_but_reloadconfig.Image")));
-            this.ts_menu_but_reloadconfig.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ts_menu_but_reloadconfig.Name = "ts_menu_but_reloadconfig";
-            this.ts_menu_but_reloadconfig.Size = new System.Drawing.Size(107, 22);
-            this.ts_menu_but_reloadconfig.Text = "Reload Configs";
-            this.ts_menu_but_reloadconfig.Click += new System.EventHandler(this.ts_menu_but_reloadconfig_Click);
             // 
             // label1
             // 
@@ -161,18 +154,20 @@ namespace game16
             // 
             this.dgv_clone.AllowUserToAddRows = false;
             this.dgv_clone.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_clone.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_clone.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_clone.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_clone.ColumnHeadersHeight = 30;
             this.dgv_clone.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_clone.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_clone_no,
+            this.dgv_clone_guid,
             this.dgv_clone_name,
             this.dgv_clone_path,
             this.dgv_clone_executefile,
@@ -184,6 +179,50 @@ namespace game16
             this.dgv_clone.RowTemplate.Height = 30;
             this.dgv_clone.Size = new System.Drawing.Size(897, 202);
             this.dgv_clone.TabIndex = 0;
+            // 
+            // dgv_clone_no
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dgv_clone_no.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dgv_clone_no.HeaderText = "No.";
+            this.dgv_clone_no.Name = "dgv_clone_no";
+            this.dgv_clone_no.ReadOnly = true;
+            this.dgv_clone_no.Width = 50;
+            // 
+            // dgv_clone_guid
+            // 
+            this.dgv_clone_guid.HeaderText = "Guid";
+            this.dgv_clone_guid.Name = "dgv_clone_guid";
+            this.dgv_clone_guid.Visible = false;
+            // 
+            // dgv_clone_name
+            // 
+            this.dgv_clone_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgv_clone_name.HeaderText = "Name";
+            this.dgv_clone_name.Name = "dgv_clone_name";
+            this.dgv_clone_name.ReadOnly = true;
+            // 
+            // dgv_clone_path
+            // 
+            this.dgv_clone_path.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dgv_clone_path.HeaderText = "Path";
+            this.dgv_clone_path.Name = "dgv_clone_path";
+            this.dgv_clone_path.ReadOnly = true;
+            this.dgv_clone_path.Visible = false;
+            // 
+            // dgv_clone_executefile
+            // 
+            this.dgv_clone_executefile.HeaderText = "EXE File";
+            this.dgv_clone_executefile.MinimumWidth = 150;
+            this.dgv_clone_executefile.Name = "dgv_clone_executefile";
+            this.dgv_clone_executefile.Visible = false;
+            this.dgv_clone_executefile.Width = 150;
+            // 
+            // dgv_clone_run
+            // 
+            this.dgv_clone_run.HeaderText = "";
+            this.dgv_clone_run.Name = "dgv_clone_run";
+            this.dgv_clone_run.Width = 80;
             // 
             // label3
             // 
@@ -275,44 +314,6 @@ namespace game16
             this.but_killall.UseVisualStyleBackColor = true;
             this.but_killall.Click += new System.EventHandler(this.but_killall_Click);
             // 
-            // dgv_clone_no
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dgv_clone_no.DefaultCellStyle = dataGridViewCellStyle4;
-            this.dgv_clone_no.HeaderText = "No.";
-            this.dgv_clone_no.Name = "dgv_clone_no";
-            this.dgv_clone_no.ReadOnly = true;
-            this.dgv_clone_no.Width = 50;
-            // 
-            // dgv_clone_name
-            // 
-            this.dgv_clone_name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgv_clone_name.HeaderText = "Name";
-            this.dgv_clone_name.Name = "dgv_clone_name";
-            this.dgv_clone_name.ReadOnly = true;
-            // 
-            // dgv_clone_path
-            // 
-            this.dgv_clone_path.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dgv_clone_path.HeaderText = "Path";
-            this.dgv_clone_path.Name = "dgv_clone_path";
-            this.dgv_clone_path.ReadOnly = true;
-            this.dgv_clone_path.Visible = false;
-            // 
-            // dgv_clone_executefile
-            // 
-            this.dgv_clone_executefile.HeaderText = "EXE File";
-            this.dgv_clone_executefile.MinimumWidth = 150;
-            this.dgv_clone_executefile.Name = "dgv_clone_executefile";
-            this.dgv_clone_executefile.Visible = false;
-            this.dgv_clone_executefile.Width = 150;
-            // 
-            // dgv_clone_run
-            // 
-            this.dgv_clone_run.HeaderText = "";
-            this.dgv_clone_run.Name = "dgv_clone_run";
-            this.dgv_clone_run.Width = 80;
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -359,11 +360,31 @@ namespace game16
             this.but_clearlog.UseVisualStyleBackColor = true;
             this.but_clearlog.Click += new System.EventHandler(this.but_clearlog_Click);
             // 
+            // ts_menu_but_reloadconfig
+            // 
+            this.ts_menu_but_reloadconfig.Image = ((System.Drawing.Image)(resources.GetObject("ts_menu_but_reloadconfig.Image")));
+            this.ts_menu_but_reloadconfig.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ts_menu_but_reloadconfig.Name = "ts_menu_but_reloadconfig";
+            this.ts_menu_but_reloadconfig.Size = new System.Drawing.Size(107, 22);
+            this.ts_menu_but_reloadconfig.Text = "Reload Configs";
+            this.ts_menu_but_reloadconfig.Click += new System.EventHandler(this.ts_menu_but_reloadconfig_Click);
+            // 
+            // but_reloadclonefolder
+            // 
+            this.but_reloadclonefolder.Location = new System.Drawing.Point(771, 65);
+            this.but_reloadclonefolder.Name = "but_reloadclonefolder";
+            this.but_reloadclonefolder.Size = new System.Drawing.Size(75, 23);
+            this.but_reloadclonefolder.TabIndex = 20;
+            this.but_reloadclonefolder.Text = "Reload";
+            this.but_reloadclonefolder.UseVisualStyleBackColor = true;
+            this.but_reloadclonefolder.Click += new System.EventHandler(this.but_reloadclonefolder_Click);
+            // 
             // MainF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(927, 684);
+            this.Controls.Add(this.but_reloadclonefolder);
             this.Controls.Add(this.but_clearlog);
             this.Controls.Add(this.but_removeallclones);
             this.Controls.Add(this.groupBox2);
@@ -404,7 +425,6 @@ namespace game16
 
         private System.Windows.Forms.TextBox txt_srcfolderpath;
         private System.Windows.Forms.ToolStrip ts_menu;
-        private System.Windows.Forms.ToolStripButton ts_menu_but_reloadconfig;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button but_srcfolderpathbrowse;
         private System.Windows.Forms.Button but_clonefolderpathbrowse;
@@ -421,15 +441,18 @@ namespace game16
         private System.Windows.Forms.TextBox txt_defaultexefilename;
         private System.Windows.Forms.Button but_runall;
         private System.Windows.Forms.Button but_killall;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_no;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_path;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_executefile;
-        private System.Windows.Forms.DataGridViewButtonColumn dgv_clone_run;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RichTextBox rtxt_logs;
         private System.Windows.Forms.Button but_removeallclones;
         private System.Windows.Forms.Button but_clearlog;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_no;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_guid;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_path;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_clone_executefile;
+        private System.Windows.Forms.DataGridViewButtonColumn dgv_clone_run;
+        private System.Windows.Forms.ToolStripButton ts_menu_but_reloadconfig;
+        private System.Windows.Forms.Button but_reloadclonefolder;
     }
 }
 
