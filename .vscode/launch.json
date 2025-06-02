@@ -105,6 +105,20 @@
             "request": "launch",
             "type": "node-terminal",
             "cwd": "${workspaceFolder}/src/electron/game15",
-        }
+        },
+        {
+            "name": "game18",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame18",
+            "program": "${workspaceFolder}/src/netcore/consoles/game18/bin/net8.0/game18.dll",
+            "args": [
+                "--sample-file=c:/code/temp/cbu/game18/sample.csv",
+                "--result-file=c:/code/temp/cbu/game18/result.csv",
+                "--output-file=c:/code/temp/cbu/game18/output.csv",
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game18",
+            "console": "integratedTerminal"
+        },
     ]
 }
