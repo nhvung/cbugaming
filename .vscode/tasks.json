@@ -60,5 +60,15 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "buildgame18",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game18/game18.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }
