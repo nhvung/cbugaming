@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,10 +16,36 @@ namespace game18
 {
     public partial class MainF : Form
     {
+        ToolConfig _toolConfig;
 
         public MainF()
         {
             InitializeComponent();
+
+            try
+            {
+                FileInfo toolConfigFile = new FileInfo($"{Application.StartupPath}/config.json");
+                if (!toolConfigFile.Exists)
+                {
+                    _toolConfig = new ToolConfig();
+                    string jsonConfig = JsonConvert.SerializeObject(_toolConfig, Formatting.Indented);
+                    File.WriteAllText(toolConfigFile.FullName, jsonConfig, Encoding.UTF8);
+                }
+                else
+                {
+                    string jsonConfig = File.ReadAllText(toolConfigFile.FullName, Encoding.UTF8);
+                    _toolConfig = JsonConvert.DeserializeObject<ToolConfig>(jsonConfig);
+                }
+
+                if(_toolConfig!=null)
+                {
+                    this.Text = _toolConfig.Title;
+                }
+            }
+            catch
+            {
+
+            }
 
 #if DEBUG
             txt_samplefilepath.Text = @"c:\code\temp\cbu\game18\sample.csv";
@@ -89,24 +116,39 @@ namespace game18
                 string[] headers = VSSystem.IO.CsvFile.ReadHeader(sampleFilePath);
                 if (headers == null||headers.Length == 0)
                 {
-                    headers = new string[] { "VerhicleType", "Plate", "RegState", "Make", "Model", "Color" };
+                    headers = new string[] { "Plate", "Make", "Model", "Color", "VerhicleType", "RegState"};
 
                 }
 
-                var comparer = CsvDataInfo.Comparer;
-                var sampleData = CsvFile.ReadData<CsvDataInfo>(sampleFilePath, headers,1);
-                var resultData = CsvFile.ReadData<CsvDataInfo>(resultFilePath, headers,1);
+                var sampleObjs = CsvFile.ReadData<CsvDataInfo>(sampleFilePath, headers,1);
+                var samplePlates = sampleObjs.Select(ite => ite.Plate).Distinct(StringComparer.InvariantCultureIgnoreCase).ToList();
+                var resultObjs = CsvFile.ReadData<CsvDataInfo>(resultFilePath, headers,1);
 
-                var innerData = resultData.Join(sampleData, ite => ite, ite => ite, (ite1, ite2) => ite1, comparer)?.ToList()??new List<CsvDataInfo>();
+                var diffObjs = new List<CsvDataInfo>();
 
-                List<CsvDataInfo> diffData = new List<CsvDataInfo>();
-                diffData.AddRange(sampleData.Where(ite => !innerData.Contains(ite, comparer)));
-                diffData.AddRange(resultData.Where(ite => !innerData.Contains(ite, comparer)));
+                foreach (var resultObj in resultObjs)
+                {
+                    if (samplePlates.Contains(resultObj.Plate, StringComparer.InvariantCultureIgnoreCase))
+                    {
+                        var sampleObj = sampleObjs.FirstOrDefault(ite => ite.Plate.Equals(resultObj.Plate, StringComparison.InvariantCultureIgnoreCase));
+                        var diffObj = resultObj.GetDiff(sampleObj);
+                        if(diffObj!=null)
+                        {
+                            diffObjs.Add(diffObj);
+                        }
+                    }
+                    else
+                    {
+                        diffObjs.Add(resultObj);
+                    }
+                }
 
-                if(diffData.Count > 0)
+                
+
+                if(diffObjs.Count > 0)
                 {
                     string outputFilePath = $"{resultFile.Directory.FullName}/output.csv";
-                    CsvFile.WriteData<CsvDataInfo>(outputFilePath, headers, diffData, true);
+                    CsvFile.WriteData(outputFilePath, headers, diffObjs, true);
                     MessageBox.Show("Finish.");
                 }
                 else
