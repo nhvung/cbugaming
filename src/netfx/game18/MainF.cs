@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -150,6 +151,11 @@ namespace game18
                     string outputFilePath = $"{resultFile.Directory.FullName}/output.csv";
                     CsvFile.WriteData(outputFilePath, headers, diffObjs, true);
                     MessageBox.Show("Finish.");
+
+                    if (MessageBox.Show("Do you want to view the output?", "Open Output", MessageBoxButtons.YesNo, MessageBoxIcon.Question)== DialogResult.Yes)
+                    {
+                        Process.Start(outputFilePath);
+                    }
                 }
                 else
                 {
