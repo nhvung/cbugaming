@@ -1,0 +1,17 @@
+<PlateUpload CDType="CDF" Client="Load Test L6Q 291025_Alabama" Version="6.3.217.1.202303310946" TimeZone="CST" ImageType="Amazon">
+  <InfoCar>
+    <Record>
+      <EventID>4A16C032-FE69-44C9-8BE4-27E88345ED25</EventID>
+      <Datetime>2025-10-28T17:00:16</Datetime>
+      <GMTDateTimeID>814986016</GMTDateTimeID>
+      <NTP_Delta>400</NTP_Delta>
+      <Longitude>32.806671</Longitude>
+      <Latitude>-86.79113</Latitude>
+      <CameraName>Load Test L6Q 291025_Alabama</CameraName>
+      <MissingPlate>
+      </MissingPlate>
+      <Speed>101</Speed>
+      <TotalImages>1</TotalImages>
+      </Record>
+    </InfoCar>
+</PlateUpload>
