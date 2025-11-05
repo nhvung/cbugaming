@@ -1,0 +1,6 @@
+{
+    "TemplateFilePath": "template.xml",
+    "NumberOfSamples": 1,
+    "OutputFolderPath": "temp/samples",
+    "FileNameFormat": "{0}_188535_269057.xml"
+}

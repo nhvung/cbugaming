@@ -70,5 +70,15 @@
             ],
             "problemMatcher": "$msCompile"
         },
+        {
+            "label": "buildgame19",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/netcore/consoles/game19/game19.csproj",
+            ],
+            "problemMatcher": "$msCompile"
+        },
     ]
 }

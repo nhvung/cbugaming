@@ -120,5 +120,17 @@
             "cwd": "${workspaceFolder}/src/netcore/consoles/game18",
             "console": "integratedTerminal"
         },
+        {
+            "name": "game19",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "buildgame19",
+            "program": "${workspaceFolder}/src/netcore/consoles/game19/bin/net8.0/game19.dll",
+            "args": [
+                "-configs-file=configs.json"
+            ],
+            "cwd": "${workspaceFolder}/src/netcore/consoles/game19",
+            "console": "integratedTerminal"
+        },
     ]
 }
