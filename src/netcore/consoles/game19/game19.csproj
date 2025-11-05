@@ -5,7 +5,7 @@
     <Platforms>AnyCPU;x64</Platforms>
     <OutputPath>bin</OutputPath>
     <OutputType>Exe</OutputType>
-    <AssemblyName>game18</AssemblyName>
+    <AssemblyName>game19</AssemblyName>
     <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
 

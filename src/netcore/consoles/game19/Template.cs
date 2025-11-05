@@ -30,6 +30,17 @@ namespace game19
                 node.InnerText = value;
             }
         }
+        public void SetValues(string xpath, string value)
+        {
+            XmlNodeList nodes = _xmlDocument.SelectNodes(xpath);
+            if (nodes != null)
+            {
+                foreach (XmlNode node in nodes)
+                {
+                    node.InnerText = value;
+                }
+            }
+        }
         public void Save(string fileName)
         {
             _xmlDocument.Save(fileName);
