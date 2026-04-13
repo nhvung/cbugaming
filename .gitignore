@@ -411,3 +411,6 @@ src/netfx/game8/drivers/
 temp/
 
 *.pak
+
+build/
+dist/
