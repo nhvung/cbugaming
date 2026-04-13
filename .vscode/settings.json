@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^cd c:\\\\Users\\\\eiq\\\\custom-data\\\\code\\\\cbugaming\\\\src\\\\electron\\\\game20; cmd /c \"npm install\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^cd c:\\\\Users\\\\eiq\\\\custom-data\\\\code\\\\cbugaming\\\\src\\\\electron\\\\game20; cmd /c \"npx electron-packager \\. ps1-runner --platform=win32 --arch=x64 --out=dist --overwrite --ignore=dist --ignore=node_modules\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

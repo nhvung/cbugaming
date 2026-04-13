@@ -409,3 +409,5 @@ src/netfx/game8/browsers/
 src/netfx/game8/drivers/
 
 temp/
+
+*.pak

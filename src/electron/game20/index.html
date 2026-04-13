@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS1 Runner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e1e1e;
+            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: #2d2d2d;
+            border-bottom: 1px solid #444;
+        }
+
+        header h1 {
+            font-size: 16px;
+            flex: 1;
+            color: #eee;
+        }
+
+        button {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .btn-browse {
+            background: #0e639c;
+            color: #fff;
+        }
+
+        .btn-browse:hover {
+            background: #1177bb;
+        }
+
+        .btn-run {
+            background: #388a34;
+            color: #fff;
+        }
+
+        .btn-run:hover {
+            background: #46a641;
+        }
+
+        .btn-run:disabled {
+            background: #555;
+            color: #888;
+            cursor: default;
+        }
+
+        .btn-select-all {
+            background: #555;
+            color: #ddd;
+        }
+
+        .btn-select-all:hover {
+            background: #666;
+        }
+
+        .script-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 16px;
+        }
+
+        .script-list .empty {
+            color: #777;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        .script-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 4px;
+            margin-bottom: 4px;
+        }
+
+        .script-item:hover {
+            background: #2a2a2a;
+        }
+
+        .script-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            accent-color: #0e639c;
+            cursor: pointer;
+        }
+
+        .script-item .info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .script-item .name {
+            font-size: 14px;
+            color: #eee;
+        }
+
+        .script-item .path {
+            font-size: 11px;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .script-item .btn-remove {
+            background: transparent;
+            color: #c44;
+            font-size: 18px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            line-height: 1;
+        }
+
+        .script-item .btn-remove:hover {
+            background: #3a2020;
+        }
+
+        .output-panel {
+            height: 200px;
+            min-height: 80px;
+            overflow-y: auto;
+            background: #181818;
+            border-top: 1px solid #444;
+            padding: 10px 16px;
+            font-family: 'Cascadia Code', 'Consolas', monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .output-panel .run-header {
+            color: #569cd6;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .output-panel .run-header:first-child {
+            margin-top: 0;
+        }
+
+        .output-panel .run-ok {
+            color: #6a9955;
+        }
+
+        .output-panel .run-err {
+            color: #f44747;
+        }
+
+        .status-bar {
+            padding: 4px 16px;
+            background: #007acc;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .status-bar.idle {
+            background: #2d2d2d;
+            color: #888;
+        }
+
+        .status-bar.running {
+            background: #c27d00;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PS1 Runner</h1>
+        <button class="btn-select-all" id="btnSelectAll">Select All</button>
+        <button class="btn-browse" id="btnBrowse">+ Add Scripts</button>
+        <button class="btn-run" id="btnRun" disabled>Run Selected</button>
+    </header>
+
+    <div class="script-list" id="scriptList">
+        <div class="empty">No scripts added yet. Click <b>+ Add Scripts</b> to browse .ps1 files.</div>
+    </div>
+
+    <div class="output-panel" id="outputPanel"></div>
+
+    <div class="status-bar idle" id="statusBar">Ready</div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
