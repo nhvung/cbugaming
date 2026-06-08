@@ -81,9 +81,6 @@ namespace VSSystem.ThirdParty.Google.Maps.Geocode
             GMapGeocode gMapResult = null;
             try
             {
-#if DEBUG
-                key = "AIzaSyBYOgqZ4JqRxMjxl6erXprF_JgBgaMvnU0";
-#endif
                 if (string.IsNullOrEmpty(address)) return null;
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                 var en = System.Web.HttpUtility.UrlEncode(address);
