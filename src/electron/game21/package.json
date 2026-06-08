@@ -1,0 +1,34 @@
+{
+    "name": "platesearch-comparison",
+    "version": "1.0.1",
+    "description": "Visualize and compare PlateSearch performance test results from Excel spreadsheets",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "build": "electron-builder --win portable"
+    },
+    "dependencies": {
+        "chart.js": "^4.4.0",
+        "chartjs-plugin-datalabels": "^2.2.0",
+        "xlsx": "^0.18.5"
+    },
+    "devDependencies": {
+        "electron": "^28.0.0",
+        "electron-builder": "^24.6.4",
+        "playwright-core": "^1.60.0"
+    },
+    "build": {
+        "appId": "com.eiq.platesearch-comparison",
+        "productName": "PlateSearch Comparison",
+        "win": {
+            "target": "portable"
+        },
+        "files": [
+            "main.js",
+            "preload.js",
+            "renderer.js",
+            "index.html",
+            "node_modules/**"
+        ]
+    }
+}

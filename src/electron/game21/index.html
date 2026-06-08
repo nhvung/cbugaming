@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="blue">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlateSearch Comparison</title>
+    <script src="./node_modules/chart.js/dist/chart.umd.js"></script>
+    <script src="./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
+    <style>
+        /* ── Theme variables ── */
+        :root,
+        [data-theme="blue"] {
+            --bg:               #162240;
+            --bg-header:        #1d2d50;
+            --bg-input:         #253560;
+            --bg-toggle:        #1a2a50;
+            --bg-td:            #1a2a50;
+            --bg-th:            #1d3060;
+            --border:           #2e4070;
+            --border-input:     #3a4f80;
+            --border-td:        #203060;
+            --text:             #dddddd;
+            --text-muted:       #6a8ab0;
+            --text-th:          #aac0e0;
+            --text-td:          #ccd8f0;
+            --text-vm:          #c8d8f0;
+            --accent:           #1a5fa8;
+            --accent-hover:     #2070c0;
+            --accent-border:    #2070c0;
+            --row-hover:        #243570;
+            --success:          #2d6a2d;
+            --success-hover:    #3a863a;
+            --success-dis:      #1e3d1e;
+            --success-dis-text: #4a6a4a;
+            --empty-icon:       #4a7aaa;
+            --empty-text:       #3a5a80;
+            --chart-text:       #cccccc;
+            --chart-title:      #ffffff;
+            --chart-grid:       rgba(255,255,255,0.07);
+            --chart-scale:      rgba(255,255,255,0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg:               #141414;
+            --bg-header:        #202020;
+            --bg-input:         #2a2a2a;
+            --bg-toggle:        #1a1a1a;
+            --bg-td:            #1a1a1a;
+            --bg-th:            #252525;
+            --border:           #333333;
+            --border-input:     #444444;
+            --border-td:        #2a2a2a;
+            --text:             #e0e0e0;
+            --text-muted:       #888888;
+            --text-th:          #aaaaaa;
+            --text-td:          #cccccc;
+            --text-vm:          #cccccc;
+            --accent:           #2563a8;
+            --accent-hover:     #2d74c0;
+            --accent-border:    #2d74c0;
+            --row-hover:        #2e2e2e;
+            --success:          #2d6a2d;
+            --success-hover:    #3a863a;
+            --success-dis:      #1c2e1c;
+            --success-dis-text: #4a6a4a;
+            --empty-icon:       #555555;
+            --empty-text:       #555555;
+            --chart-text:       #bbbbbb;
+            --chart-title:      #eeeeee;
+            --chart-grid:       rgba(255,255,255,0.06);
+            --chart-scale:      rgba(255,255,255,0.12);
+        }
+
+        [data-theme="light"] {
+            --bg:               #f0f4f8;
+            --bg-header:        #ffffff;
+            --bg-input:         #e4eaf4;
+            --bg-toggle:        #e8edf5;
+            --bg-td:            #ffffff;
+            --bg-th:            #dce6f5;
+            --border:           #b8c8e0;
+            --border-input:     #98aece;
+            --border-td:        #c4d4ec;
+            --text:             #1a2a40;
+            --text-muted:       #506080;
+            --text-th:          #304060;
+            --text-td:          #203050;
+            --text-vm:          #203050;
+            --accent:           #1a5fa8;
+            --accent-hover:     #2070c0;
+            --accent-border:    #2070c0;
+            --row-hover:        #d4e2f4;
+            --success:          #2a6e2a;
+            --success-hover:    #357a35;
+            --success-dis:      #c0d8c0;
+            --success-dis-text: #6a9a6a;
+            --empty-icon:       #7090b8;
+            --empty-text:       #6080a0;
+            --chart-text:       #444444;
+            --chart-title:      #1a2a40;
+            --chart-grid:       rgba(0,0,0,0.07);
+            --chart-scale:      rgba(0,0,0,0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* ── Toolbar ── */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 18px;
+            background: var(--bg-header);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        header h1 {
+            font-size: 15px;
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        #chartTitle {
+            flex: 1;
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            color: var(--text);
+            padding: 5px 10px;
+            font-size: 13px;
+            min-width: 0;
+        }
+
+        #chartTitle::placeholder {
+            color: var(--text-muted);
+        }
+
+        button {
+            padding: 6px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        #btnOpen {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        #btnOpen:hover {
+            background: var(--accent-hover);
+        }
+
+        #btnSaveCSV {
+            background: var(--success);
+            color: #fff;
+        }
+
+        #btnSaveCSV:hover:not(:disabled) {
+            background: var(--success-hover);
+        }
+
+        #btnSaveCSV:disabled {
+            background: var(--success-dis);
+            color: var(--success-dis-text);
+            cursor: default;
+        }
+
+        /* ── Theme picker ── */
+        #themeWrap {
+            position: relative;
+        }
+
+        #btnTheme {
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            color: var(--text-th);
+            padding: 5px 12px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        #btnTheme:hover {
+            background: var(--accent);
+            border-color: var(--accent-border);
+            color: #fff;
+        }
+
+        #themeDropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
+            background: var(--bg-header);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+            z-index: 100;
+            min-width: 140px;
+            overflow: hidden;
+        }
+
+        #themeDropdown.open {
+            display: block;
+        }
+
+        .theme-opt {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 14px;
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            color: var(--text);
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .theme-opt:hover {
+            background: var(--bg-toggle);
+        }
+
+        .theme-opt.active {
+            color: var(--accent-hover);
+            font-weight: 700;
+        }
+
+        .theme-swatch {
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            border: 1px solid rgba(0,0,0,0.2);
+            flex-shrink: 0;
+        }
+
+        /* ── File info ── */
+        #infoBar {
+            padding: 5px 18px;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg);
+            flex-shrink: 0;
+            min-height: 22px;
+        }
+
+        #statusMsg {
+            color: #e07533;
+        }
+
+        /* ── Empty state ── */
+        #emptyState {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            color: var(--empty-text);
+        }
+
+        #emptyState svg {
+            opacity: 0.3;
+            stroke: var(--empty-icon);
+        }
+
+        #emptyState p {
+            font-size: 15px;
+        }
+
+        /* ── Result ── */
+        #resultSection {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-wrapper {
+            overflow-y: auto;
+            max-height: calc(100vh - 220px);
+            padding: 12px 20px 6px;
+        }
+
+        #chartCanvas {
+            width: 100% !important;
+            display: block;
+        }
+
+        /* ── Stats table ── */
+        .table-wrapper {
+            flex-shrink: 0;
+            overflow-x: auto;
+            padding: 6px 20px 14px;
+        }
+
+        #statsTable {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        #statsTable th {
+            background: var(--bg-th);
+            color: var(--text-th);
+            padding: 7px 12px;
+            text-align: center;
+            font-weight: 600;
+            white-space: nowrap;
+            border: 1px solid var(--border);
+        }
+
+        #statsTable th:first-child {
+            text-align: left;
+            min-width: 160px;
+        }
+
+        #statsTable td {
+            padding: 7px 12px;
+            text-align: center;
+            border: 1px solid var(--border-td);
+            color: var(--text-td);
+            background: var(--bg-td);
+        }
+
+        #statsTable td.vm-cell {
+            text-align: left;
+            background: var(--bg-th);
+        }
+
+        #statsTable tr:hover td {
+            background: var(--row-hover);
+        }
+
+        .swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            margin-right: 8px;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+
+        input.swatch[type="color"] {
+            -webkit-appearance: none;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            outline: none;
+        }
+
+        input.swatch[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input.swatch[type="color"]::-webkit-color-swatch { border: none; border-radius: 2px; }
+
+        .vm-cell {
+            display: flex;
+            align-items: flex-start;
+            gap: 0;
+        }
+
+        .vm-name {
+            line-height: 1.4;
+            font-size: 11px;
+            color: var(--text-vm);
+        }
+
+        /* ── Toggle bar ── */
+        #toggleBar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            padding: 8px 20px;
+            background: var(--bg-toggle);
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        #toggleBar label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 10px;
+            border-radius: 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            color: var(--text-th);
+            font-size: 11px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s, border-color 0.15s;
+        }
+
+        #toggleBar label:has(input:checked) {
+            background: var(--accent);
+            border-color: var(--accent-border);
+            color: #fff;
+        }
+
+        #toggleBar input[type="checkbox"] {
+            accent-color: #4a9fdf;
+            width: 12px;
+            height: 12px;
+        }
+
+        .rm-p {
+            margin-left: 4px;
+            font-size: 12px;
+            line-height: 1;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+
+        .rm-p:hover {
+            color: #e07070;
+        }
+
+        .add-p-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: 4px;
+        }
+
+        #addPInput {
+            width: 60px;
+            padding: 3px 7px;
+            background: var(--bg);
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            color: var(--text-td);
+            font-size: 11px;
+        }
+
+        #addPInput::-webkit-inner-spin-button,
+        #addPInput::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+        #addPBtn {
+            padding: 3px 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            color: var(--text-th);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        #addPBtn:hover { background: var(--accent); color: #fff; border-color: var(--accent-border); }
+
+        .row-h-group {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+            padding-left: 10px;
+            border-left: 1px solid var(--border-input);
+        }
+
+        .row-h-group label {
+            background: none;
+            border: none;
+            padding: 0;
+            font-size: 11px;
+            color: var(--text-muted);
+            cursor: default;
+            user-select: none;
+        }
+
+        #rowHeightInput {
+            width: 52px;
+            padding: 3px 7px;
+            background: var(--bg);
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            color: var(--text-td);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        #rowHeightInput::-webkit-inner-spin-button,
+        #rowHeightInput::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+        /* ── Color panel ── */
+        #colorPanel {
+            position: fixed;
+            top: 0; right: 0;
+            width: 290px; height: 100vh;
+            background: var(--bg-header);
+            border-left: 1px solid var(--border);
+            box-shadow: -6px 0 24px rgba(0,0,0,0.4);
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.25s ease;
+        }
+
+        #colorPanel.open { transform: translateX(0); }
+
+        #colorPanelHead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 11px 14px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        #colorPanelHead > span {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .ph-actions { display: flex; gap: 6px; }
+
+        #btnResetColors {
+            padding: 4px 10px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-input);
+            color: var(--text-th);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 4px;
+        }
+
+        #btnResetColors:hover { background: var(--accent); color: #fff; border-color: var(--accent-border); }
+
+        #btnClosePanel {
+            padding: 3px 9px;
+            background: transparent;
+            border: 1px solid var(--border-input);
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        #btnClosePanel:hover { color: #e07070; border-color: #e07070; }
+
+        #colorPanelBody {
+            flex: 1;
+            overflow-y: auto;
+            padding: 4px 14px 14px;
+        }
+
+        .cg-title {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            padding: 12px 0 5px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 4px;
+        }
+
+        .color-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 5px 0;
+            gap: 8px;
+        }
+
+        .color-row label {
+            font-size: 11px;
+            color: var(--text-td);
+            flex: 1;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .color-row input[type="color"] {
+            width: 38px;
+            height: 24px;
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            padding: 1px 2px;
+            background: var(--bg-input);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .row-h-standalone {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 20px;
+            background: var(--bg-toggle);
+            border-bottom: 1px solid var(--border);
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .row-h-standalone input[type="number"] {
+            width: 52px;
+            padding: 3px 7px;
+            background: var(--bg);
+            border: 1px solid var(--border-input);
+            border-radius: 4px;
+            color: var(--text-td);
+            font-size: 11px;
+            text-align: center;
+        }
+
+        .row-h-standalone input::-webkit-inner-spin-button,
+        .row-h-standalone input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+        /* Customize option at bottom of theme dropdown */
+        .theme-sep { height: 1px; background: var(--border); margin: 4px 0; }
+
+        #btnCustomizeColors {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        #btnCustomizeColors:hover { color: var(--text); background: var(--bg-toggle); }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>PlateSearch Comparison</h1>
+        <input id="chartTitle" type="text" value="Comparision PlateSearch" placeholder="Chart title">
+        <button id="btnSaveCSV" disabled>Save</button>
+        <button id="btnOpen">Open File</button>
+
+        <div id="themeWrap">
+            <button id="btnTheme">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a10 10 0 0 1 0 20"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                Theme
+            </button>
+            <div id="themeDropdown">
+                <button class="theme-opt active" data-theme="blue">
+                    <span class="theme-swatch" style="background:linear-gradient(135deg,#162240 50%,#1a5fa8 50%)"></span>
+                    Blue
+                </button>
+                <button class="theme-opt" data-theme="dark">
+                    <span class="theme-swatch" style="background:linear-gradient(135deg,#141414 50%,#2563a8 50%)"></span>
+                    Dark
+                </button>
+                <button class="theme-opt" data-theme="light">
+                    <span class="theme-swatch" style="background:linear-gradient(135deg,#f0f4f8 50%,#1a5fa8 50%)"></span>
+                    Light
+                </button>
+                <div class="theme-sep"></div>
+                <button class="theme-opt" id="btnCustomizeColors">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                    </svg>
+                    Customize colors…
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="colorPanel">
+        <div id="colorPanelHead">
+            <span>Customize Colors</span>
+            <div class="ph-actions">
+                <button id="btnResetColors">Reset</button>
+                <button id="btnClosePanel">✕</button>
+            </div>
+        </div>
+        <div id="colorPanelBody"></div>
+    </div>
+
+    <div id="infoBar">
+        <span id="filePath"></span>
+        <span id="statusMsg"></span>
+    </div>
+
+    <div id="emptyState">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <path d="M3 9h18M9 3v18" />
+        </svg>
+        <p>Open an Excel or CSV file to generate the comparison chart</p>
+    </div>
+
+    <div id="resultSection" style="display:none">
+        <div id="toggleBar"></div>
+        <div class="chart-wrapper">
+            <canvas id="chartCanvas"></canvas>
+        </div>
+        <div class="table-wrapper">
+            <table id="statsTable">
+                <thead>
+                    <tr><th></th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
